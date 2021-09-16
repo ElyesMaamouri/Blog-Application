@@ -1,0 +1,19 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "Blog application",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "blog",
+    "application",
+    "node",
+    "js",
+    "react",
+    "mongodb"
+  ],
+  "author": "Elyes Maamouri",
+  "license": "ISC"
+}
