@@ -1,18 +1,38 @@
 const express = require("express");
-const session = require("express-session");
 const dotenv = require("dotenv");
 const app = express();
 const http = require("http");
 const cors = require("cors");
 const errorHandler = require("errorhandler");
 const helmet = require("helmet");
+const session = require("express-session");
 const xss = require("xss");
-const server = http.Server(app);
 const logger = require("./config/logger");
+const passport = require("passport");
+const server = http.Server(app);
 const port = process.env.PORT || 4000;
+
 // Connecting to the database
-const connectDB = require("./config/database")();
+require("./config/database")();
+
+// Load config
 dotenv.config();
+
+// Passport config
+//require("./src/middleware/passport")(passport);
+
+//Session
+app.use(
+  session({
+    secret: process.env.KEY_SESSION,
+    resave: false,
+    saveUninitialized: false,
+  })
+);
+//Passport Middleware
+// app.use(passport.initialize());
+// app.use(passport.session());
+
 app.use(function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header(
@@ -30,13 +50,11 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(helmet());
 app.use(errorHandler());
-app.use(
-  session({
-    resave: true,
-    saveUninitialized: true,
-    secret: process.env.SECRETKEY,
-  })
-);
+
+//Route API
+
+require("./src/routes/auth")(app, process.env.PATH_API);
+require("./src/routes/client")(app, process.env.PATH_API);
 //app.use(xss());
 server.listen(port, (err) => {
   if (err)
