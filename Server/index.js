@@ -11,7 +11,7 @@ const server = http.Server(app);
 const logger = require("./config/logger");
 const port = process.env.PORT || 4000;
 // Connecting to the database
-const mongoose = require("./config/database")();
+const connectDB = require("./config/database")();
 dotenv.config();
 app.use(function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
