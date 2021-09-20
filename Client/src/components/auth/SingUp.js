@@ -5,6 +5,9 @@ import { signUp } from "../store/actions/authActions";
 const SignUp = () => {
   const dispatch = useDispatch();
   const registerInfo = useSelector((state) => state.auth.registerInfo);
+  const [nameFile, setNameFile] = useState();
+  const [sizeFile, setSizeFile] = useState();
+
   const [user, setUser] = useState({
     userName: "",
     email: "",
@@ -15,12 +18,13 @@ const SignUp = () => {
   const [selectedFile, setSelectedFile] = useState({});
 
   const handleChange = (e) => {
-    if (e.target.files[0])
-      setUser({ ...user, [e.target.name]: e.target.value });
+    setUser({ ...user, [e.target.name]: e.target.value });
     // setSelectedFile([...selectedFile, e.target.files[0]]);
   };
   const handleChangeFile = (e) => {
     setSelectedFile(e.target.files[0]);
+    setNameFile(e.target.files[0].name);
+    setSizeFile(e.target.files[0].size);
   };
 
   useEffect(() => {
@@ -32,11 +36,12 @@ const SignUp = () => {
   const handelSbmit = (e) => {
     e.preventDefault();
     const formData = new FormData();
+    console.log("nameFile", nameFile);
     formData.append("file", selectedFile);
     formData.append("password", user.password);
     formData.append("userName", user.userName);
     formData.append("email", user.email);
-    console.log("formData", formData);
+
     dispatch(signUp(formData));
   };
 
@@ -75,6 +80,8 @@ const SignUp = () => {
         <button>Sign Up</button>
       </form>
       {registerInfo}
+      {nameFile}
+      {sizeFile}
     </div>
   );
 };
