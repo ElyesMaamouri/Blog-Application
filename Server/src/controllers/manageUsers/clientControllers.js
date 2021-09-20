@@ -12,7 +12,7 @@ exports.signup_post = async (req, res) => {
   const { error } = userValidateForm(req.body);
   if (error) {
     logger.error("Error Schema user", error.details[0].message);
-    return res.status(404).send(error.details[0].message);
+    return res.status(400).send(error.details[0].message);
   }
 
   const client = new User(
@@ -41,10 +41,7 @@ exports.signup_post = async (req, res) => {
       req.fileValidationError,
       res
     );
-    console.log(
-      "avatar ===>",
-      fileUpload.getPicture(req.file, req.fileValidationError, res)
-    );
+
     //Crypt password
     client.password = await cryptPassword(client.password);
     // Generate key activation
