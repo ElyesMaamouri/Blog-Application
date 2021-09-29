@@ -2,6 +2,7 @@ import axios from "axios";
 const baseURL = "http://localhost:4000/api/signup";
 
 export const signUp = (user) => {
+  console.log("user api", user);
   return (dispatch, getState) => {
     axios
       .post(baseURL, user)

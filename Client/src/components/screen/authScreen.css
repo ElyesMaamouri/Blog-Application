@@ -1,0 +1,44 @@
+@font-face {
+  font-family: Poppins-SemiBold;
+  src: url("../../assets/font/Poppins-SemiBold.ttf");
+}
+
+.auth {
+  display: flex;
+}
+.auth h1 {
+  font-family: Poppins-SemiBold;
+}
+
+.leftside,
+.rightside {
+  height: 100vh;
+  width: 50%;
+}
+
+.leftside {
+  background-image: url("../../assets/work.jpg");
+  background-size: cover;
+}
+
+.rightside {
+  text-align: center;
+}
+
+.user {
+  width: 20%;
+  margin-top: 25px;
+}
+
+.pp {
+  border: 2px solid black;
+}
+@media (max-width: 860px) {
+  .leftside {
+    display: none;
+  }
+  .rightside {
+    width: 100%;
+    height: 98vh;
+  }
+}

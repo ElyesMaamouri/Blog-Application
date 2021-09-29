@@ -1,0 +1,9 @@
+.signup {
+  display: block;
+}
+
+@media (max-width: 450px) {
+  .makeStyles-filed-1.MuiFormControl-root {
+    width: 300px;
+  }
+}

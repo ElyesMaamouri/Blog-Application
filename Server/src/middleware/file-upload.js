@@ -27,7 +27,7 @@ const upload = multer({
     }
     callback(null, true);
   },
-}).single("file");
+}).single("fileUpload");
 
 // return file name & display error extension or send default avatar
 const getPicture = (file, fileValidationError, res, req) => {

@@ -11,7 +11,28 @@ const logger = require("./config/logger");
 const passport = require("passport");
 const server = http.Server(app);
 const port = process.env.PORT || 4000;
+const swaggerUI = require("swagger-ui-express");
+const swaggerJSDoc = require("swagger-jsdoc");
 
+// Config Swagger
+const options = {
+  definition: {
+    openapi: "3.0.0",
+    info: {
+      title: "Blog API",
+      version: "1.0.0",
+      description: "Blog applcation",
+    },
+    servers: [
+      {
+        url: "http://localhost:4000",
+      },
+    ],
+  },
+  apis: ["./src/routes/*.js"],
+};
+const specs = swaggerJSDoc(options);
+app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(specs));
 // Connecting to the database
 require("./config/database")();
 

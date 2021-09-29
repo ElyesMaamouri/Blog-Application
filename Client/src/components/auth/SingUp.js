@@ -3,26 +3,32 @@ import { useDispatch, useSelector } from "react-redux";
 import TextField from "@mui/material/TextField";
 import { signUp } from "../store/actions/authActions";
 import Button from "@mui/material/Button";
+import Snackbar from "@mui/material/Snackbar";
+import MuiAlert from "@mui/material/Alert";
 import { makeStyles } from "@mui/styles";
+import "./singup.css";
 
 const useStyles = makeStyles({
-  btn: {
-    "&.MuiButton-root:hover": {
-      fontSize: 50,
-      backgroundColor: "violet",
-      cursor: "pointer",
-    },
-  },
   filed: {
     "&.MuiFormControl-root": {
-      marginTop: 20,
-      marginBottom: 20,
-      display: "block",
+      marginBottom: 15,
+      marginLeft: 15,
+      marginRight: 15,
+      width: 400,
+    },
+  },
+  buttonSubmit: {
+    "&.MuiButton-root": {
+      paddingTop: 10,
+      paddingBottom: 10,
+      paddingRight: 50,
+      paddingLeft: 50,
     },
   },
 });
 
-const SignUp = () => {
+const SignUp = (operation) => {
+  console.log("opera", operation);
   const classes = useStyles();
   const dispatch = useDispatch();
   const registerInfo = useSelector((state) => state.auth.registerInfo);
@@ -38,6 +44,17 @@ const SignUp = () => {
   const [passwordError, setPasswordError] = useState(false);
   const [confirmPasswordError, setConfirmPasswordError] = useState(false);
   const [selectedFile, setSelectedFile] = useState({});
+  const [message, setMessage] = useState("");
+  const [open, setOpen] = useState(false);
+
+  //   Snackbar
+  const Alert = React.forwardRef(function Alert(props, ref) {
+    return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+  });
+
+  // Position Snackbar
+  const vertical = "top";
+  const horizontal = "right";
 
   //  Handel & test all inputs
   const handleChange = (e) => {
@@ -86,7 +103,15 @@ const SignUp = () => {
   };
 
   useEffect(() => {
-    if (registerInfo) {
+    if (registerInfo === "Your account has been successfully created") {
+      setMessage("success");
+      setTimeout(() => {
+        operation.client.history.push("/signin");
+      }, 4000);
+      return registerInfo;
+    } else if (registerInfo === "Sorry! email already exists") {
+      setMessage("warning");
+      console.log("messs", message);
       return registerInfo;
     }
   }, [registerInfo]);
@@ -98,8 +123,9 @@ const SignUp = () => {
     formData.append("password", user.password);
     formData.append("userName", user.userName);
     formData.append("email", user.email);
-
+    setOpen(true);
     // Send all values inputs to api
+
     dispatch(signUp(formData));
   };
 
@@ -107,89 +133,113 @@ const SignUp = () => {
     handleChangeFile(e);
     handleChange(e);
   };
+
   return (
     <div>
-      <form noValidate autoComplete="off" onSubmit={handelSbmit}>
+      <form
+        className="signup"
+        noValidate
+        autoComplete="off"
+        onSubmit={handelSbmit}
+      >
+        <h1>Signup </h1>
         <TextField
           className={classes.filed}
           onChange={handleChange}
           label="Name"
+          size="medium"
           name="userName"
           variant="outlined"
-          color="secondary"
           required
-          fullWidth
           error={userNameError}
           helperText={
-            userNameError ? "Account name must be at least 3 characters " : ""
+            userNameError ? "Account name must be at least 3 characters" : ""
           }
         />
         <TextField
           className={classes.filed}
           onChange={handleChange}
+          size="medium"
           label="Email"
           name="email"
           variant="outlined"
-          color="secondary"
           required
           placeholder="email@eamil.com"
-          fullWidth
           error={emailError}
           helperText={emailError ? "Invalid format email" : ""}
         />
+
         <TextField
           className={classes.filed}
           onChange={handleChange}
+          size="medium"
           label="Password"
           name="password"
           variant="outlined"
-          color="secondary"
           required
+          type="password"
           placeholder="Enter password"
-          fullWidth
           error={passwordError}
           helperText={
-            passwordError ? "Password should be minimum 8 characters long" : " "
+            passwordError ? "Password should be minimum 8 characters" : ""
           }
         />
         <TextField
           className={classes.filed}
           onChange={handleChange}
           label="Confirm password "
+          size="medium"
           name="confirmPassword"
           variant="outlined"
-          color="secondary"
           required
+          type="password"
           placeholder="Confirm password"
-          fullWidth
           error={confirmPasswordError}
           helperText={
-            confirmPasswordError ? "Those passwords didn’t match" : " "
+            confirmPasswordError ? "Those passwords didn’t match" : ""
           }
         />
-
         <TextField
           className={classes.filed}
-          id="raised-button-file"
           name="avatar"
           type="file"
           onChange={handelInputs}
-        />
-        <Button
-          type="submit"
-          variant="outlined"
-          disabled={
-            !user.userName ||
-            !user.email ||
-            !user.password ||
-            !user.confirmPassword ||
-            !user.avatar
-          }
-        >
-          Submit
-        </Button>
+        ></TextField>
+        {/* <TextField
+              className={classes.filedFile}
+              name="avatar"
+              type="file"
+              onChange={handelInputs}
+            /> */}
+
+        <div>
+          <Button
+            className={classes.buttonSubmit}
+            variant="contained"
+            type="submit"
+            color="success"
+            disabled={
+              !user.userName ||
+              !user.email ||
+              !user.password ||
+              !user.confirmPassword ||
+              !user.avatar
+            }
+          >
+            Signup
+          </Button>
+        </div>
       </form>
-      {registerInfo}
+
+      <Snackbar
+        open={open}
+        autoHideDuration={6000}
+        anchorOrigin={{ vertical, horizontal }}
+      >
+        <Alert severity={message} sx={{ width: "100%" }}>
+          {registerInfo}
+        </Alert>
+      </Snackbar>
     </div>
   );
 };
