@@ -43,7 +43,7 @@ const SignUp = (operation) => {
   const [passwordError, setPasswordError] = useState(false);
   const [confirmPasswordError, setConfirmPasswordError] = useState(false);
   const [selectedFile, setSelectedFile] = useState({});
-  const [message, setMessage] = useState("");
+  const [message, setMessage] = useState("info");
   const [open, setOpen] = useState(false);
 
   //   Snackbar
@@ -118,7 +118,7 @@ const SignUp = (operation) => {
   const handelSbmit = (e) => {
     e.preventDefault();
     const formData = new FormData();
-    formData.append("file", selectedFile);
+    formData.append("fileUpload", selectedFile);
     formData.append("password", user.password);
     formData.append("userName", user.userName);
     formData.append("email", user.email);

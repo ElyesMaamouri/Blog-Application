@@ -29,7 +29,7 @@ exports.signup_post = async (req, res) => {
   try {
     const user = await User.findOne({ email: client.email });
     if (user) {
-      return res.status(403).send({
+      return res.status(200).send({
         message: "Sorry! email already exists",
         success: false,
       });

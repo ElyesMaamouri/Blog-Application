@@ -1,5 +1,6 @@
 const initState = {
   registerInfo: null,
+  loginInfo: null,
 };
 
 const authReducer = (state = initState, action) => {
@@ -14,6 +15,16 @@ const authReducer = (state = initState, action) => {
         ...state,
 
         registerInfo: action.payload,
+      };
+    case "LOGIN_SUCCESS":
+      return {
+        ...state,
+        loginInfo: action.payload,
+      };
+    case "LOGIN_ERROR":
+      return {
+        ...state,
+        loginInfo: action.payload,
       };
     default:
       return state;

@@ -47,7 +47,7 @@ module.exports = (app, pathApi) => {
 
   /**
    * @swagger
-   * /api/sigin:
+   * /api/signin:
    *   post:
    *     summary: Login user
    *     tags: [User]
@@ -61,11 +61,11 @@ module.exports = (app, pathApi) => {
    *     responses:
    *       200 :
    *         description: Successful authentication
-   *       404 :
+   *       403 :
    *         description: Invalid email or password
    *       500 :
    *         description: Error occurred login
    */
 
-  app.post(pathApi + "/sigin", clientControl.login_post);
+  app.post(pathApi + "/signin", clientControl.login_post);
 };

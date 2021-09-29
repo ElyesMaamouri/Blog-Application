@@ -20,10 +20,10 @@ exports.login_post = async (req, res) => {
     console.log("user email ==>", client.email);
     let user = await User.findOne({ email: client.email });
 
-    // Test if customer find
+    // Test if customer
     if (!user) {
       logger.error("Invalid email : " + client.email);
-      return res.status(404).send({
+      return res.status(403).send({
         message: "Invalid email or password",
         success: false,
       });
@@ -36,7 +36,7 @@ exports.login_post = async (req, res) => {
     );
     if (!checkPassword) {
       logger.error("Invalid password : " + user.email);
-      return res.status(404).send({
+      return res.status(403).send({
         message: "Invalid email or password",
         success: false,
       });

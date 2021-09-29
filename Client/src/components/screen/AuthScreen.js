@@ -14,7 +14,7 @@ const AuthScreen = (props) => {
     console.log("operation", operation);
     data = <SignUp client={props} />;
   } else if (operation === "/signin") {
-    data = <SignIn client={operation} />;
+    data = <SignIn client={props} />;
   }
   return (
     <div className="auth">

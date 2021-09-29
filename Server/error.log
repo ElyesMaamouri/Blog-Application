@@ -317,3 +317,161 @@
 {"message":"Invalid email : 55kelyes@gmail.com","level":"error","timestamp":"2021-09-29T10:43:33.962Z"}
 {"message":"Invalid password : 55elyes@gmail.com","level":"error","timestamp":"2021-09-29T10:43:43.658Z"}
 {"message":"Invalid password : 55elyes@gmail.com","level":"error","timestamp":"2021-09-29T10:44:04.107Z"}
+{"errors":{"userName":{"name":"ValidatorError","message":"Path `userName` is required.","properties":{"message":"Path `userName` is required.","type":"required","path":"userName"},"kind":"required","path":"userName"}},"_message":"User validation failed","level":"error","message":"error occurred Register : User validation failed: userName: Path `userName` is required.","stack":"ValidationError: User validation failed: userName: Path `userName` is required.\n    at model.Document.invalidate (C:\\Users\\DevPoint\\Desktop\\Elyes\\personal__project\\Blog__Application\\Server\\node_modules\\mongoose\\lib\\document.js:2879:32)\n    at C:\\Users\\DevPoint\\Desktop\\Elyes\\personal__project\\Blog__Application\\Server\\node_modules\\mongoose\\lib\\document.js:2670:17\n    at C:\\Users\\DevPoint\\Desktop\\Elyes\\personal__project\\Blog__Application\\Server\\node_modules\\mongoose\\lib\\schematype.js:1267:9\n    at processTicksAndRejections (internal/process/task_queues.js:77:11)","timestamp":"2021-09-29T11:32:02.924Z"}
+{"message":"Invalid email : vr@ggt.gt","level":"error","timestamp":"2021-09-29T12:26:33.578Z"}
+{"message":"Invalid email : vr@ggt.gt","level":"error","timestamp":"2021-09-29T12:27:16.743Z"}
+{"message":"Invalid email : vr@ggt.gt","level":"error","timestamp":"2021-09-29T12:27:31.647Z"}
+{"message":"Invalid email : vr@ggt.gt","level":"error","timestamp":"2021-09-29T12:28:26.099Z"}
+{"message":"Invalid email : fr@fr.gt","level":"error","timestamp":"2021-09-29T12:28:33.460Z"}
+{"message":"Invalid email : fr@rdd.fr","level":"error","timestamp":"2021-09-29T12:29:47.697Z"}
+{"message":"Invalid password : 55elyes@gmail.com","level":"error","timestamp":"2021-09-29T12:50:23.126Z"}
+{"message":"Invalid password : 55elyes@gmail.com","level":"error","timestamp":"2021-09-29T12:50:32.021Z"}
+{"message":"Invalid password : 55elyes@gmail.com","level":"error","timestamp":"2021-09-29T12:54:37.944Z"}
+{"message":"Invalid password : 55elyes@gmail.com","level":"error","timestamp":"2021-09-29T12:55:20.998Z"}
+{"message":"Invalid password : 55elyes@gmail.com","level":"error","timestamp":"2021-09-29T12:55:50.395Z"}
+{"message":"Invalid password : 55elyes@gmail.com","level":"error","timestamp":"2021-09-29T12:55:57.493Z"}
+{"message":"Invalid password : 55elyes@gmail.com","level":"error","timestamp":"2021-09-29T12:56:17.892Z"}
+{"message":"Invalid password : 55elyes@gmail.com","level":"error","timestamp":"2021-09-29T12:56:58.643Z"}
+{"message":"Invalid password : 55elyes@gmail.com","level":"error","timestamp":"2021-09-29T12:57:20.598Z"}
+{"message":"error floder user created","level":"error","timestamp":"2021-09-29T13:04:22.640Z"}
+{"message":"error floder user created","level":"error","timestamp":"2021-09-29T13:10:11.573Z"}
+{"message":"Invalid password : 66elyes@gmail.com","level":"error","timestamp":"2021-09-29T13:13:03.654Z"}
+{"message":"Invalid password : 66elyes@gmail.com","level":"error","timestamp":"2021-09-29T13:19:06.937Z"}
+{"message":"Invalid password : 66elyes@gmail.com","level":"error","timestamp":"2021-09-29T13:19:26.504Z"}
+{"message":"Invalid password : 66elyes@gmail.com","level":"error","timestamp":"2021-09-29T13:20:15.285Z"}
+{"message":"Invalid password : 66elyes@gmail.com","level":"error","timestamp":"2021-09-29T13:20:28.305Z"}
+{"message":"Invalid password : 66elyes@gmail.com","level":"error","timestamp":"2021-09-29T13:21:36.625Z"}
+{"message":"Invalid password : 66elyes@gmail.com","level":"error","timestamp":"2021-09-29T13:21:57.920Z"}
+{"message":"Account not activated : 66elyes@gmail.com","level":"error","timestamp":"2021-09-29T13:22:06.581Z"}
+{"message":"Account not activated : 66elyes@gmail.com","level":"error","timestamp":"2021-09-29T13:24:25.351Z"}
+{"message":"Account not activated : 66elyes@gmail.com","level":"error","timestamp":"2021-09-29T13:24:27.047Z"}
+{"message":"Account not activated : 66elyes@gmail.com","level":"error","timestamp":"2021-09-29T13:24:27.943Z"}
+{"message":"Account not activated : 66elyes@gmail.com","level":"error","timestamp":"2021-09-29T13:24:29.117Z"}
+{"message":"Account not activated : 66elyes@gmail.com","level":"error","timestamp":"2021-09-29T13:25:06.057Z"}
+{"message":"Account not activated : 66elyes@gmail.com","level":"error","timestamp":"2021-09-29T13:25:31.001Z"}
+{"message":"Invalid password : 66elyes@gmail.com","level":"error","timestamp":"2021-09-29T13:25:51.486Z"}
+{"message":"Invalid email : 66elyes@gmuail.com","level":"error","timestamp":"2021-09-29T13:25:55.443Z"}
+{"message":"Invalid email : 66elyes@gmuail.com","level":"error","timestamp":"2021-09-29T13:27:42.557Z"}
+{"message":"Invalid email : 66elyes@gmuail.com","level":"error","timestamp":"2021-09-29T13:27:47.861Z"}
+{"message":"Invalid email : 66elyes@gmuail.com","level":"error","timestamp":"2021-09-29T13:27:59.777Z"}
+{"message":"Invalid email : fer@fr.gt","level":"error","timestamp":"2021-09-29T13:29:15.606Z"}
+{"message":"Invalid email : fer@fr.gt","level":"error","timestamp":"2021-09-29T13:30:24.669Z"}
+{"message":"Invalid email : fer@fr.gt","level":"error","timestamp":"2021-09-29T13:30:51.770Z"}
+{"message":"Invalid email : fer@fr.gt","level":"error","timestamp":"2021-09-29T13:31:14.397Z"}
+{"message":"Invalid email : fer@fr.gt","level":"error","timestamp":"2021-09-29T13:32:07.931Z"}
+{"message":"Invalid email : fer@fr.gt","level":"error","timestamp":"2021-09-29T13:32:46.502Z"}
+{"message":"Invalid email : fer@fr.gt","level":"error","timestamp":"2021-09-29T13:33:02.658Z"}
+{"message":"Invalid email : fer@fr.gt","level":"error","timestamp":"2021-09-29T13:33:04.769Z"}
+{"message":"Invalid email : fer@fr.gt","level":"error","timestamp":"2021-09-29T13:34:38.755Z"}
+{"message":"Invalid email : fer@fr.gt","level":"error","timestamp":"2021-09-29T13:34:42.137Z"}
+{"message":"Invalid email : fer@fr.gt","level":"error","timestamp":"2021-09-29T13:34:42.944Z"}
+{"message":"Invalid email : fer@fr.gt","level":"error","timestamp":"2021-09-29T13:35:14.150Z"}
+{"message":"Account not activated : 66elyes@gmail.com","level":"error","timestamp":"2021-09-29T13:36:27.103Z"}
+{"message":"Account not activated : 66elyes@gmail.com","level":"error","timestamp":"2021-09-29T13:36:31.669Z"}
+{"message":"Account not activated : 66elyes@gmail.com","level":"error","timestamp":"2021-09-29T13:37:08.563Z"}
+{"message":"Account not activated : 66elyes@gmail.com","level":"error","timestamp":"2021-09-29T13:37:42.055Z"}
+{"message":"Invalid password : 66elyes@gmail.com","level":"error","timestamp":"2021-09-29T13:39:40.670Z"}
+{"message":"Invalid password : 66elyes@gmail.com","level":"error","timestamp":"2021-09-29T13:39:45.220Z"}
+{"message":"Invalid password : 66elyes@gmail.com","level":"error","timestamp":"2021-09-29T13:40:09.297Z"}
+{"message":"Invalid password : 66elyes@gmail.com","level":"error","timestamp":"2021-09-29T13:40:18.059Z"}
+{"message":"Invalid password : 66elyes@gmail.com","level":"error","timestamp":"2021-09-29T13:41:02.416Z"}
+{"message":"Invalid password : 66elyes@gmail.com","level":"error","timestamp":"2021-09-29T13:41:32.901Z"}
+{"message":"Invalid password : 66elyes@gmail.com","level":"error","timestamp":"2021-09-29T13:42:42.911Z"}
+{"message":"Invalid password : 66elyes@gmail.com","level":"error","timestamp":"2021-09-29T13:43:13.627Z"}
+{"message":"Invalid password : 66elyes@gmail.com","level":"error","timestamp":"2021-09-29T13:43:44.182Z"}
+{"message":"Invalid password : 66elyes@gmail.com","level":"error","timestamp":"2021-09-29T13:44:07.416Z"}
+{"message":"Invalid password : 66elyes@gmail.com","level":"error","timestamp":"2021-09-29T13:45:16.598Z"}
+{"message":"Invalid email : datainfo@gt.gt","level":"error","timestamp":"2021-09-29T13:48:38.819Z"}
+{"message":"Invalid email : dsdd@fr.fr","level":"error","timestamp":"2021-09-29T13:50:29.195Z"}
+{"message":"Invalid email : dsdd@fr.fr","level":"error","timestamp":"2021-09-29T13:50:50.513Z"}
+{"message":"Invalid email : dsdd@fr.fr","level":"error","timestamp":"2021-09-29T13:51:07.330Z"}
+{"message":"Invalid email : dsdd@fr.fr","level":"error","timestamp":"2021-09-29T13:51:13.848Z"}
+{"message":"Invalid email : dsdd@fr.fr","level":"error","timestamp":"2021-09-29T13:51:35.321Z"}
+{"message":"Invalid email : dzfr@fr.fr","level":"error","timestamp":"2021-09-29T13:51:44.004Z"}
+{"message":"Invalid email : dzfr@fr.fr","level":"error","timestamp":"2021-09-29T13:52:21.505Z"}
+{"message":"Invalid email : dsfr@fr.fr","level":"error","timestamp":"2021-09-29T13:52:33.869Z"}
+{"message":"Invalid email : dsfr@fr.fr","level":"error","timestamp":"2021-09-29T13:53:37.022Z"}
+{"message":"Invalid email : dsfr@fr.fr","level":"error","timestamp":"2021-09-29T13:54:01.122Z"}
+{"message":"Invalid email : dsfr@fr.fr","level":"error","timestamp":"2021-09-29T13:54:12.787Z"}
+{"message":"Invalid email : dsfr@fr.fr","level":"error","timestamp":"2021-09-29T13:54:38.848Z"}
+{"message":"Invalid email : fred@gt.gt","level":"error","timestamp":"2021-09-29T13:54:50.400Z"}
+{"message":"Invalid email : fred@gt.gt","level":"error","timestamp":"2021-09-29T13:56:20.471Z"}
+{"message":"Invalid email : fred@gt.gt","level":"error","timestamp":"2021-09-29T13:56:45.404Z"}
+{"message":"Invalid email : fred@gt.gt","level":"error","timestamp":"2021-09-29T13:57:04.944Z"}
+{"message":"Invalid email : cdc@gt.fr","level":"error","timestamp":"2021-09-29T13:58:26.959Z"}
+{"message":"Invalid email : cdc@gt.fr","level":"error","timestamp":"2021-09-29T13:58:45.082Z"}
+{"message":"Invalid email : cdc@gt.fr","level":"error","timestamp":"2021-09-29T13:59:23.890Z"}
+{"message":"Invalid email : cdc@gt.fr","level":"error","timestamp":"2021-09-29T13:59:39.640Z"}
+{"message":"Invalid email : dsd@fr.fr","level":"error","timestamp":"2021-09-29T14:00:25.910Z"}
+{"message":"Invalid email : dqs@gt.gt","level":"error","timestamp":"2021-09-29T14:00:52.790Z"}
+{"message":"Invalid email : cd@gt.gt","level":"error","timestamp":"2021-09-29T14:01:25.238Z"}
+{"message":"Invalid email : cd@gt.gt","level":"error","timestamp":"2021-09-29T14:01:47.224Z"}
+{"message":"Invalid email : cd@gt.gt","level":"error","timestamp":"2021-09-29T14:02:18.286Z"}
+{"message":"Invalid email : cd@gt.gt","level":"error","timestamp":"2021-09-29T14:02:19.264Z"}
+{"message":"Invalid email : cd@gt.gt","level":"error","timestamp":"2021-09-29T14:02:20.128Z"}
+{"message":"Invalid email : cd@gt.gt","level":"error","timestamp":"2021-09-29T14:02:20.754Z"}
+{"message":"Invalid email : cd@gt.gt","level":"error","timestamp":"2021-09-29T14:02:51.805Z"}
+{"message":"Invalid email : dsdd@frt.fr","level":"error","timestamp":"2021-09-29T14:06:34.924Z"}
+{"message":"Invalid email : ddddddddddd@frt.fr","level":"error","timestamp":"2021-09-29T14:06:55.305Z"}
+{"message":"Invalid email : 78998d@frt.fr","level":"error","timestamp":"2021-09-29T14:07:03.312Z"}
+{"message":"Invalid email : 78998d@frt.fr","level":"error","timestamp":"2021-09-29T14:07:50.847Z"}
+{"message":"Invalid email : 78998d@frt.fr","level":"error","timestamp":"2021-09-29T14:08:21.976Z"}
+{"message":"Invalid email : xdsd@frf.fr","level":"error","timestamp":"2021-09-29T14:11:21.967Z"}
+{"message":"Invalid email : fd@gt.gt","level":"error","timestamp":"2021-09-29T14:13:32.286Z"}
+{"message":"Invalid email : fd@gt.gt","level":"error","timestamp":"2021-09-29T14:14:48.665Z"}
+{"message":"Invalid email : ferfr@fr.fr","level":"error","timestamp":"2021-09-29T14:21:33.671Z"}
+{"message":"Invalid email : ferfr@fr.fr","level":"error","timestamp":"2021-09-29T14:21:45.908Z"}
+{"message":"Invalid email : sqs@fg.tr","level":"error","timestamp":"2021-09-29T14:22:29.136Z"}
+{"message":"Invalid email : sqs@fg.tr","level":"error","timestamp":"2021-09-29T14:23:03.562Z"}
+{"message":"Invalid email : fe@gt.gt","level":"error","timestamp":"2021-09-29T14:23:16.475Z"}
+{"message":"Invalid email : fe@gt.gt","level":"error","timestamp":"2021-09-29T14:24:00.790Z"}
+{"message":"Invalid email : fe@gt.gt","level":"error","timestamp":"2021-09-29T14:24:02.466Z"}
+{"message":"Invalid email : fe@gt.gt","level":"error","timestamp":"2021-09-29T14:24:03.382Z"}
+{"message":"Invalid email : fe@gt.gt","level":"error","timestamp":"2021-09-29T14:25:53.279Z"}
+{"message":"Invalid email : fe@gt.gt","level":"error","timestamp":"2021-09-29T14:30:55.595Z"}
+{"message":"Invalid email : fe@gt.gt","level":"error","timestamp":"2021-09-29T15:06:07.278Z"}
+{"message":"Invalid email : fe@gt.gt","level":"error","timestamp":"2021-09-29T15:06:09.950Z"}
+{"message":"Invalid email : fgd@gt.gt","level":"error","timestamp":"2021-09-29T15:06:31.067Z"}
+{"message":"Invalid email : fgd@gt.gt","level":"error","timestamp":"2021-09-29T15:06:51.495Z"}
+{"message":"Invalid email : sqd@rt.gt","level":"error","timestamp":"2021-09-29T15:06:59.067Z"}
+{"message":"Invalid email : sqd@rt.gt","level":"error","timestamp":"2021-09-29T15:07:50.289Z"}
+{"message":"Invalid email : sqd@rt.gt","level":"error","timestamp":"2021-09-29T15:08:02.871Z"}
+{"message":"Invalid email : dsfdfd@gt21gt.gt","level":"error","timestamp":"2021-09-29T15:11:03.495Z"}
+{"message":"Invalid email : dsfdfd@gt21gt.gt","level":"error","timestamp":"2021-09-29T15:11:40.351Z"}
+{"message":"Invalid email : dsfdfd@gt21gt.gt","level":"error","timestamp":"2021-09-29T15:11:43.797Z"}
+{"message":"Invalid email : dsfdfd@gt21gt.gt","level":"error","timestamp":"2021-09-29T15:11:44.245Z"}
+{"message":"Invalid email : dsfdfd@gt21gt.gt","level":"error","timestamp":"2021-09-29T15:11:44.434Z"}
+{"message":"Invalid email : dsfdfd@gt21gt.gt","level":"error","timestamp":"2021-09-29T15:11:44.637Z"}
+{"message":"Invalid email : hgt@yded.com","level":"error","timestamp":"2021-09-29T15:15:08.783Z"}
+{"message":"Invalid email : hgt@yded.com","level":"error","timestamp":"2021-09-29T15:15:46.647Z"}
+{"message":"Invalid email : hgt@yded.com","level":"error","timestamp":"2021-09-29T15:15:48.574Z"}
+{"message":"Invalid email : hgt@yded.com","level":"error","timestamp":"2021-09-29T15:15:49.809Z"}
+{"message":"Invalid email : hgt@yded.com","level":"error","timestamp":"2021-09-29T15:15:55.019Z"}
+{"message":"Invalid email : hgt@yded.com","level":"error","timestamp":"2021-09-29T15:16:25.874Z"}
+{"message":"Account not activated : 66elyes@gmail.com","level":"error","timestamp":"2021-09-29T15:16:44.989Z"}
+{"message":"Invalid email : 66eylyes@gmail.com","level":"error","timestamp":"2021-09-29T15:17:06.145Z"}
+{"message":"Invalid email : fdsf@gt.gt","level":"error","timestamp":"2021-09-29T15:18:06.920Z"}
+{"message":"Invalid email : fdsf@gt.gt","level":"error","timestamp":"2021-09-29T15:18:23.203Z"}
+{"message":"Invalid email : dsd@fr.fr","level":"error","timestamp":"2021-09-29T15:18:35.372Z"}
+{"message":"Invalid email : gfd@yff.com","level":"error","timestamp":"2021-09-29T15:20:57.024Z"}
+{"message":"Invalid email : gfd@yff.com","level":"error","timestamp":"2021-09-29T15:20:59.714Z"}
+{"message":"Invalid email : gfd@yff.com","level":"error","timestamp":"2021-09-29T15:21:00.356Z"}
+{"message":"Invalid email : dsds@gt.gt","level":"error","timestamp":"2021-09-29T15:23:30.787Z"}
+{"message":"Invalid email : dsf@gt.gt","level":"error","timestamp":"2021-09-29T15:24:19.353Z"}
+{"message":"Invalid email : dsd@fr.fr","level":"error","timestamp":"2021-09-29T15:24:59.272Z"}
+{"message":"Invalid email : gfg@hy.gg","level":"error","timestamp":"2021-09-29T15:25:35.578Z"}
+{"message":"Invalid email : ggff@hy.gg","level":"error","timestamp":"2021-09-29T15:25:42.999Z"}
+{"message":"Account not activated : 66elyes@gmail.com","level":"error","timestamp":"2021-09-29T15:25:52.943Z"}
+{"message":"Account not activated : 66elyes@gmail.com","level":"error","timestamp":"2021-09-29T15:26:22.030Z"}
+{"message":"Invalid email : dsd@fr.fr","level":"error","timestamp":"2021-09-29T15:31:43.149Z"}
+{"message":"Invalid email : dsd@fr.fr","level":"error","timestamp":"2021-09-29T15:31:50.741Z"}
+{"message":"Invalid email : dsd@fr.fr","level":"error","timestamp":"2021-09-29T15:31:51.334Z"}
+{"message":"Invalid email : dsds@gt.gt","level":"error","timestamp":"2021-09-29T15:33:36.428Z"}
+{"message":"Account not activated : 66elyes@gmail.com","level":"error","timestamp":"2021-09-29T15:35:03.739Z"}
+{"message":"Invalid email : 55eldyes@gmail.com","level":"error","timestamp":"2021-09-29T15:52:25.844Z"}
+{"message":"Invalid email : 55eldyes@gmail.com","level":"error","timestamp":"2021-09-29T15:52:35.695Z"}
+{"message":"Invalid email : dede@gt.gt","level":"error","timestamp":"2021-09-29T15:53:41.354Z"}
+{"message":"Invalid email : dede@gt.gt","level":"error","timestamp":"2021-09-29T15:54:27.252Z"}
+{"message":"Invalid email : ds@gt.gt","level":"error","timestamp":"2021-09-29T16:05:49.217Z"}
+{"message":"Invalid email : de@gt.gt","level":"error","timestamp":"2021-09-29T17:53:07.373Z"}
+{"message":"Invalid password : 55elyes@gmail.com","level":"error","timestamp":"2021-09-29T19:01:33.940Z"}
