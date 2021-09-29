@@ -11,3 +11,12 @@ exports.userValidateForm = (user) => {
   });
   return schema.validate(user);
 };
+
+// Validation login schema
+exports.loginValidationForm = (user) => {
+  const schema = Joi.object({
+    email: Joi.string().min(3).max(255).email(),
+    password: Joi.string().min(8).max(255),
+  });
+  return schema.validate(user);
+};

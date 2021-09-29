@@ -29,7 +29,7 @@ exports.signup_post = async (req, res) => {
   try {
     const user = await User.findOne({ email: client.email });
     if (user) {
-      return res.status(200).send({
+      return res.status(403).send({
         message: "Sorry! email already exists",
         success: false,
       });
@@ -67,7 +67,7 @@ exports.signup_post = async (req, res) => {
   } catch (err) {
     logger.error("error occurred Register :", err);
     return res.status(500).send({
-      message: "error occurred Register" + err,
+      message: "Error occurred register" + err,
       success: false,
     });
   }

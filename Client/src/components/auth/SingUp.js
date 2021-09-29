@@ -28,7 +28,6 @@ const useStyles = makeStyles({
 });
 
 const SignUp = (operation) => {
-  console.log("opera", operation);
   const classes = useStyles();
   const dispatch = useDispatch();
   const registerInfo = useSelector((state) => state.auth.registerInfo);

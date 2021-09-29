@@ -56,6 +56,10 @@ module.exports = (app, pathApi) => {
    *     responses:
    *       201:
    *         description: The user was successfully created
+   *       403 :
+   *         description: Sorry ! email already exists
+   *       500 :
+   *         description: Error occurred register
    */
 
   app.post(
