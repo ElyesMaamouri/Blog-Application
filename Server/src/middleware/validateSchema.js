@@ -20,3 +20,19 @@ exports.loginValidationForm = (user) => {
   });
   return schema.validate(user);
 };
+
+//Valid form reset password : input email
+exports.validateEmailResetPassword = (email) => {
+  const schema = Joi.object({
+    email: Joi.string().min(3).max(255).email(),
+  });
+  return schema.validate(email);
+};
+
+//Valid new reset password : input password
+exports.validateResetPassword = (password) => {
+  const schema = Joi.object({
+    password: Joi.string().min(8).max(255),
+  });
+  return schema.validate(password);
+};

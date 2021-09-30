@@ -22,7 +22,7 @@ module.exports = (app, pathApi) => {
    * @swagger
    * components:
    *   schemas:
-   *     User Login:
+   *     Login User:
    *       type: object
    *       required:
    *         - email
@@ -37,6 +37,36 @@ module.exports = (app, pathApi) => {
    *       example:
    *         email: email@email.co
    *         password: azertyuiop
+   */
+  /**
+   * @swagger
+   * components:
+   *   schemas:
+   *     Change Password:
+   *       type: object
+   *       required:
+   *         - password
+   *       properties:
+   *         password:
+   *           type: string
+   *           description: New password of user
+   *       example:
+   *         password : azerty123
+   */
+  /**
+   * @swagger
+   * components:
+   *   schemas:
+   *     Reset Password:
+   *       type: object
+   *       required:
+   *         - email
+   *       properties:
+   *         email:
+   *           type: string
+   *           description: Email of user
+   *       example:
+   *         email: email@email.co
    */
   /**
    * @swagger
@@ -68,4 +98,58 @@ module.exports = (app, pathApi) => {
    */
 
   app.post(pathApi + "/signin", clientControl.login_post);
+
+  /**
+   * @swagger
+   * /api/recoverpassword:
+   *   post:
+   *     summary: Recover Password User
+   *     tags: [User]
+   *     requestBody:
+   *       required: true
+   *       content:
+   *         application/json:
+   *           schema:
+   *             email : string
+   *             $ref: '#/components/schemas/Reset Password'
+   *     responses:
+   *       404 :
+   *         description: The email address is not associated with any account. Double-check your email address and try again.
+   *       200 :
+   *         description: Password reset instructions will be sent to this email
+   *       500 :
+   *         description: Error occurred reset password
+   */
+  app.post(pathApi + "/recoverpassword", clientControl.recoverPassword_post);
+
+  /**
+   * @swagger
+   * /api/reset-password/{token}:
+   *  put:
+   *    summary: Reset password account client
+   *    tags: [User]
+   *    parameters:
+   *      - in: path
+   *        name: token
+   *        schema:
+   *          type: string
+   *        required: true
+   *        description: Reset password account client
+   *    requestBody:
+   *      required: true
+   *      content:
+   *        application/json:
+   *          schema:
+   *            $ref: '#/components/schemas/Change Password'
+   *    responses:
+   *      200:
+   *        description: Token Expired ...
+   *      204:
+   *        description: Your password has been changed successfully
+   *      404:
+   *        description: User not found or Token expired ..
+   *      500:
+   *        description: Error occurred reset password
+   */
+  app.put(pathApi + "/reset-password/:token", clientControl.resetPassword_put);
 };

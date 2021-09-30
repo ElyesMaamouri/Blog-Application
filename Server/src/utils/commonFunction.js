@@ -3,6 +3,7 @@ const key = require("../utils/keys");
 const jwt = require("jsonwebtoken");
 const CryptoJS = require("crypto-js");
 const nodemailer = require("nodemailer");
+const jwtDecode = require("jwt-decode");
 const logger = require("../../config/logger");
 const dotenv = require("dotenv");
 dotenv.config();
@@ -26,6 +27,11 @@ exports.generateTokens = (payload) => {
     expiresIn: key.tokenExprire,
   });
   return token;
+};
+
+exports.decodeTokens = (token) => {
+  const tokenUser = jwtDecode(token);
+  return tokenUser;
 };
 
 // Crypt data
