@@ -9,4 +9,6 @@ module.exports = {
   secretKey: "blogapp",
   secretToken: "#rsopMJ78~é",
   tokenExprire: "6h",
+  messageActivation: "confirm your email address",
+  messageResetPassword: "Password change request",
 };

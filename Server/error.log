@@ -475,3 +475,31 @@
 {"message":"Invalid email : ds@gt.gt","level":"error","timestamp":"2021-09-29T16:05:49.217Z"}
 {"message":"Invalid email : de@gt.gt","level":"error","timestamp":"2021-09-29T17:53:07.373Z"}
 {"message":"Invalid password : 55elyes@gmail.com","level":"error","timestamp":"2021-09-29T19:01:33.940Z"}
+{"message":"error floder user created","level":"error","timestamp":"2021-09-30T08:28:59.736Z"}
+{"message":"error floder user created","level":"error","timestamp":"2021-09-30T08:30:18.354Z"}
+{"message":"error floder user created","level":"error","timestamp":"2021-09-30T08:32:25.915Z"}
+{"message":"error floder user created","level":"error","timestamp":"2021-09-30T08:33:01.095Z"}
+{"message":"error floder user created","level":"error","timestamp":"2021-09-30T08:33:48.197Z"}
+{"message":"error floder user created","level":"error","timestamp":"2021-09-30T08:41:47.881Z"}
+{"message":"error floder user created","level":"error","timestamp":"2021-09-30T09:04:30.101Z"}
+{"message":"error occurred activation account :TypeError: Cannot read property 'key' of undefined","level":"error","timestamp":"2021-09-30T09:05:42.663Z"}
+{"message":"error occurred activation account :ObjectParameterError: Parameter \"obj\" to Document() must be an object, got c2daa29b-503f-4f32-878e-afc81a5b3606\n","level":"error","timestamp":"2021-09-30T09:07:45.230Z"}
+{"message":"error occurred activation account :ObjectParameterError: Parameter \"obj\" to Document() must be an object, got c2daa29b-503f-4f32-878e-afc81a5b3606\n","level":"error","timestamp":"2021-09-30T09:08:31.904Z"}
+{"message":"error occurred activation account :TypeError: Cannot read property 'keyActivation' of null","level":"error","timestamp":"2021-09-30T09:11:20.802Z"}
+{"message":"error floder user created","level":"error","timestamp":"2021-09-30T09:16:02.339Z"}
+{"message":"error occurred activation account :TypeError: Cannot read property 'keyActivation' of null","level":"error","timestamp":"2021-09-30T09:20:12.610Z"}
+{"message":"error floder user created","level":"error","timestamp":"2021-09-30T09:20:53.846Z"}
+{"message":"error floder user created","level":"error","timestamp":"2021-09-30T09:22:31.411Z"}
+{"message":"error occurred activation account :TypeError: Cannot read property 'keyActivation' of null","level":"error","timestamp":"2021-09-30T09:23:00.828Z"}
+{"message":"error occurred activation account :TypeError: Cannot read property 'keyActivation' of null","level":"error","timestamp":"2021-09-30T09:24:19.089Z"}
+{"message":"error floder user created","level":"error","timestamp":"2021-09-30T09:39:38.420Z"}
+{"message":"error occurred activation account :TypeError: Cannot read property 'keyActivation' of null","level":"error","timestamp":"2021-09-30T09:40:00.423Z"}
+{"message":"error occurred activation account :TypeError: Cannot read property 'keyActivation' of null","level":"error","timestamp":"2021-09-30T09:40:46.781Z"}
+{"message":"error occurred activation account :TypeError: Cannot read property 'keyActivation' of null","level":"error","timestamp":"2021-09-30T09:40:48.914Z"}
+{"message":"error occurred activation account :TypeError: Cannot read property 'keyActivation' of null","level":"error","timestamp":"2021-09-30T09:40:49.902Z"}
+{"message":"error occurred activation account :TypeError: Cannot read property 'keyActivation' of null","level":"error","timestamp":"2021-09-30T09:40:59.978Z"}
+{"message":"error occurred activation account :TypeError: Cannot read property 'isActive' of null","level":"error","timestamp":"2021-09-30T09:41:14.177Z"}
+{"message":"error occurred activation account :TypeError: Cannot read property 'isActive' of null","level":"error","timestamp":"2021-09-30T09:41:43.744Z"}
+{"message":"error floder user created","level":"error","timestamp":"2021-09-30T09:43:42.496Z"}
+{"message":"error floder user created","level":"error","timestamp":"2021-09-30T09:45:31.505Z"}
+{"message":"error floder user created","level":"error","timestamp":"2021-09-30T09:53:09.862Z"}

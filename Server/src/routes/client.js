@@ -30,7 +30,7 @@ module.exports = (app, pathApi) => {
    *       example:
    *         userName: elyes
    *         email: email@email.co
-   *         password: azertyuiop
+   *         password: 12345678
    *         avatar : user.png
    */
   /**
@@ -67,4 +67,29 @@ module.exports = (app, pathApi) => {
     configUploadAvatar.upload,
     clientControl.signup_post
   );
+
+  /**
+   * @swagger
+   * /api/confirmation/{key}:
+   *   get:
+   *     summary: Confirmation Account client with email
+   *     tags: [User]
+   *     parameters:
+   *       - in: path
+   *         name: key
+   *         schema:
+   *           type: string
+   *         required: true
+   *         description: Confirmation Account client with email
+   *     responses:
+   *       200:
+   *         description: Your account has been activated successfully. You can now login.
+   *         contens:
+   *           application/json:
+   *             schema:
+   *               $ref: '#/components/schemas/User'
+   *       404:
+   *         description: Error Key Activation
+   */
+  app.get(pathApi + "/confirmation/:key", clientControl.confirmAccount_get);
 };

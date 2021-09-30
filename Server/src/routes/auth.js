@@ -22,7 +22,7 @@ module.exports = (app, pathApi) => {
    * @swagger
    * components:
    *   schemas:
-   *     UserLogin:
+   *     User Login:
    *       type: object
    *       required:
    *         - email
