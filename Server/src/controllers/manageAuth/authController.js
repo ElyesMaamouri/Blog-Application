@@ -101,10 +101,7 @@ exports.recoverPassword_post = async (req, res) => {
     console.log(user);
     if (!user) {
       return res.status(404).send({
-        message:
-          "The email address " +
-          client.email +
-          " is not associated with any account. Double-check your email address and try again.",
+        message: "The email address is not associated with any account.",
         success: false,
       });
     }
@@ -130,14 +127,11 @@ exports.recoverPassword_post = async (req, res) => {
 };
 
 exports.resetPassword_put = async (req, res) => {
-  const { error } = validateResetPassword(req.body);
-  if (error) {
-    return res.status(404).send(error.details[0].message);
-  }
-  const client = new User(_.pick(req.body, ["password"]));
+  const client = new User(_.pick(req.body, ["password", "resetPasswordToken"]));
+
   client.password = await cryptPassword(client.password);
-  console.log(client.password);
-  const tokenUser = decodeTokens(req.params.token);
+
+  const tokenUser = decodeTokens(client.resetPasswordToken);
   const date = new Date().getTime();
   const tokenLimitExpire = tokenUser.exp * 1000;
 
@@ -150,14 +144,14 @@ exports.resetPassword_put = async (req, res) => {
 
   try {
     const user = await User.findOneAndUpdate(
-      { resetPasswordToken: req.params.token },
+      { resetPasswordToken: client.resetPasswordToken },
       {
         password: client.password,
         resetPasswordToken: 0,
       },
       { new: true }
     );
-
+    console.log(user);
     if (!user) {
       return res.status(404).send({
         message: "User not found or Token expired ..",

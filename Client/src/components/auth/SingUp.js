@@ -110,10 +110,10 @@ const SignUp = (operation) => {
       return registerInfo;
     } else if (registerInfo === "Sorry! email already exists") {
       setMessage("warning");
-      console.log("messs", message);
+
       return registerInfo;
     }
-  }, [registerInfo]);
+  }, [registerInfo, operation.client.history]);
 
   const handelSbmit = (e) => {
     e.preventDefault();
@@ -232,7 +232,7 @@ const SignUp = (operation) => {
 
       <Snackbar
         open={open}
-        autoHideDuration={6000}
+        autoHideDuration={2000}
         anchorOrigin={{ vertical, horizontal }}
       >
         <Alert severity={message} sx={{ width: "100%" }}>

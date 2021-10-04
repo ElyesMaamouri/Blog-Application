@@ -28,3 +28,41 @@ export const signIn = (data) => {
       });
   };
 };
+
+export const recoverPassword = (data) => {
+  return (dispatch, getState) => {
+    axios
+      .post(baseURL + "/recoverpassword", data)
+      .then((res) => {
+        dispatch({
+          type: "RECOVER_PASSWORD_SUCCESS",
+          payload: res.data.message,
+        });
+      })
+      .catch((err) => {
+        // const message = err.response.data.message;
+        // const codeMessage = err.response.status;
+        dispatch({
+          type: "RECOVER_PASSWORD_ERROR",
+          payload: err.response.data.message,
+        });
+      });
+  };
+};
+
+export const resetPassword = (data) => {
+  return (dispatch, getState) => {
+    axios
+      .put(baseURL + "/reset-password", data)
+      .then((res) => {
+        dispatch({ type: "RESET_PASSWORD_SUCCESS", payload: res.data.message });
+      })
+      .catch((err) => {
+        console.log("data", err.response);
+        dispatch({
+          type: "RESET_PASSWORD_ERROR",
+          payload: err.response.data.message,
+        });
+      });
+  };
+};

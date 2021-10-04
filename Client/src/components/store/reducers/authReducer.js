@@ -1,6 +1,8 @@
 const initState = {
   registerInfo: null,
   loginInfo: null,
+  recoverPasswordInfo: null,
+  resetPasswordInfo: null,
 };
 
 const authReducer = (state = initState, action) => {
@@ -25,6 +27,28 @@ const authReducer = (state = initState, action) => {
       return {
         ...state,
         loginInfo: action.payload,
+      };
+    case "RECOVER_PASSWORD_SUCCESS":
+      return {
+        ...state,
+        recoverPasswordInfo: action.payload,
+      };
+    case "RECOVER_PASSWORD_ERROR":
+      return {
+        ...state,
+        recoverPasswordInfo: action.payload,
+      };
+
+    case "RESET_PASSWORD_SUCCESS":
+      return {
+        ...state,
+        resetPasswordInfo: action.payload,
+      };
+
+    case "RESET_PASSWORD_ERROR":
+      return {
+        ...state,
+        resetPasswordInfo: action.payload,
       };
     default:
       return state;

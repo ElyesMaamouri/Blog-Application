@@ -19,6 +19,8 @@
 .leftside {
   background-image: url("../../assets/work.jpg");
   background-size: cover;
+  margin: 0;
+  padding: 0;
 }
 
 .rightside {

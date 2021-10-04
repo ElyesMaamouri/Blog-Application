@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { signIn } from "../store/actions/authActions";
+import { recoverPassword } from "../store/actions/authActions";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import { makeStyles } from "@mui/styles";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
-import "./signin.css";
 
 const useStyles = makeStyles({
   filed: {
@@ -27,77 +26,60 @@ const useStyles = makeStyles({
   },
 });
 
-const SignIn = (operation) => {
+const RecoverPassword = () => {
   const dispatch = useDispatch();
-  const loginInfo = useSelector((state) => {
-    return state.auth.loginInfo;
-  });
   const classes = useStyles();
-  const [user, setUser] = useState({
-    email: "",
-    password: "",
+  const recoverPasswordInfo = useSelector((state) => {
+    return state.auth.recoverPasswordInfo;
   });
+  console.log("recover compoenent", recoverPasswordInfo);
+  const [email, setEmail] = useState();
   const [emailError, setEmailError] = useState(false);
-  const [passwordError, setPasswordError] = useState(false);
-
   const [message, setMessage] = useState("info");
   const [open, setOpen] = useState(false);
-
+  const [validForm, setValidForm] = useState();
   // Position Snackbar
   const vertical = "top";
   const horizontal = "right";
-
   //   Snackbar
   const Alert = React.forwardRef(function Alert(props, ref) {
     return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
   });
-
   useEffect(() => {
-    if (localStorage.getItem("userDetails")) {
-      console.log("hello user");
-      return operation.client.history.push("/");
-    }
-    if (loginInfo === "Invalid email or password") {
+    if (
+      recoverPasswordInfo ===
+      "The email address is not associated with any account."
+    ) {
       setMessage("error");
-      return loginInfo;
-    } else if (loginInfo === "please activate your account") {
-      setMessage("warning");
-      return loginInfo;
-    } else if (loginInfo === "Successful authentication") {
+    } else if (
+      recoverPasswordInfo ===
+      "Password reset instructions will be sent to this email"
+    ) {
       setMessage("success");
-      setTimeout(() => {
-        operation.client.history.push("/");
-      }, 4000);
-      return loginInfo;
     }
-  }, [loginInfo, operation.client.history]);
+  }, [recoverPasswordInfo]);
 
   const handelChange = (e) => {
-    setUser({ ...user, [e.target.name]: e.target.value });
+    setEmail({ ...email, [e.target.name]: e.target.value });
     if (e.target.name === "email") {
       const regex =
         /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
       if (regex.test(String(e.target.value).toLowerCase())) {
         setEmailError(false);
+        setValidForm(true);
       } else {
         setEmailError(true);
+        setValidForm(false);
       }
     }
-    if (e.target.name === "password") {
-      if (e.target.value === "" || e.target.value.length < 8) {
-        setPasswordError(true);
-      } else {
-        setPasswordError(false);
-      }
-    }
-  };
-  const handelSbmit = (e) => {
-    e.preventDefault();
-    dispatch(signIn(user));
-    setOpen(true);
   };
 
+  const handelSbmit = (e) => {
+    e.preventDefault();
+    dispatch(recoverPassword(email));
+    setOpen(true);
+  };
   return (
     <div>
       <form
@@ -106,7 +88,7 @@ const SignIn = (operation) => {
         autoComplete="off"
         onSubmit={handelSbmit}
       >
-        <h1>Sigin</h1>
+        <h1>Recover Password</h1>
         <TextField
           className={classes.filed}
           onChange={handelChange}
@@ -120,32 +102,15 @@ const SignIn = (operation) => {
           helperText={emailError ? "Invalid format email" : ""}
         />
 
-        <TextField
-          className={classes.filed}
-          onChange={handelChange}
-          size="medium"
-          label="Password"
-          name="password"
-          variant="outlined"
-          required
-          type="password"
-          placeholder="Enter password"
-          error={passwordError}
-          helperText={
-            passwordError ? "Password should be minimum 8 characters" : ""
-          }
-        />
-        <div>
-          <Button
-            className={classes.buttonSubmit}
-            variant="contained"
-            type="submit"
-            color="success"
-            disabled={!user.email || user.password.length < 8}
-          >
-            Signup
-          </Button>
-        </div>
+        <Button
+          className={classes.buttonSubmit}
+          variant="contained"
+          type="submit"
+          color="success"
+          disabled={!validForm}
+        >
+          Signup
+        </Button>
       </form>
 
       <Snackbar
@@ -154,11 +119,11 @@ const SignIn = (operation) => {
         anchorOrigin={{ vertical, horizontal }}
       >
         <Alert severity={message} sx={{ width: "100%" }}>
-          {loginInfo}
+          {recoverPasswordInfo}
         </Alert>
       </Snackbar>
     </div>
   );
 };
 
-export default SignIn;
+export default RecoverPassword;

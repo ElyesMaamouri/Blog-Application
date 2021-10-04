@@ -151,5 +151,5 @@ module.exports = (app, pathApi) => {
    *      500:
    *        description: Error occurred reset password
    */
-  app.put(pathApi + "/reset-password/:token", clientControl.resetPassword_put);
+  app.put(pathApi + "/reset-password/", clientControl.resetPassword_put);
 };
