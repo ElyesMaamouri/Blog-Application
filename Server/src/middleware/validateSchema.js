@@ -21,7 +21,7 @@ exports.loginValidationForm = (user) => {
   return schema.validate(user);
 };
 
-//Valid form reset password : input email
+//Validation form reset password : input email
 exports.validateEmailResetPassword = (email) => {
   const schema = Joi.object({
     email: Joi.string().min(3).max(255).email(),
@@ -29,10 +29,20 @@ exports.validateEmailResetPassword = (email) => {
   return schema.validate(email);
 };
 
-//Valid new reset password : input password
+//Validation new reset password : input password
 exports.validateResetPassword = (password) => {
   const schema = Joi.object({
     password: Joi.string().min(8).max(255),
   });
   return schema.validate(password);
+};
+
+//Validation update profile user
+exports.validateProfileUpdate = (data) => {
+  const schema = Joi.object({
+    userName: Joi.string().min(3).max(255),
+    email: Joi.string().min(3).max(255).email(),
+    password: Joi.string().min(8).max(255),
+  });
+  return schema.validate(data);
 };

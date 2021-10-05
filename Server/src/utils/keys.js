@@ -8,7 +8,8 @@ module.exports = {
   saltBcryptPassword: 10,
   secretKey: "blogapp",
   secretToken: "#rsopMJ78~é",
-  tokenExprire: "80000",
+  tokenExprire: "990000",
   messageActivation: "confirm your email address",
   messageResetPassword: "Password change request",
+  underscoreId: "_id",
 };

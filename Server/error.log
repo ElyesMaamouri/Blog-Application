@@ -516,3 +516,26 @@
 {"message":"error occurred reset password :CastError: Cast to string failed for value \"{ email: 'maamouri.ilyes@gmail.com', iat: 1633378925, exp: 1633379005 }\" (type Object) at path \"resetPasswordToken\" for model \"User\"","level":"error","timestamp":"2021-10-04T20:27:42.060Z"}
 {"message":"error occurred reset password :CastError: Cast to string failed for value \"{ email: 'maamouri.ilyes@gmail.com', iat: 1633378925, exp: 1633379005 }\" (type Object) at path \"resetPasswordToken\" for model \"User\"","level":"error","timestamp":"2021-10-04T20:28:39.650Z"}
 {"message":"error occurred reset password :ReferenceError: resetPasswordToken is not defined","level":"error","timestamp":"2021-10-04T20:29:55.280Z"}
+{"level":"error","message":"Invalid email : undefined","timestamp":"2021-10-05T09:22:13.523Z"}
+{"level":"error","message":"Invalid email : undefined","timestamp":"2021-10-05T09:22:20.797Z"}
+{"level":"error","message":"Invalid email : undefined","timestamp":"2021-10-05T09:24:30.858Z"}
+{"level":"error","message":"Invalid email : undefined","timestamp":"2021-10-05T09:24:53.803Z"}
+{"level":"error","message":"Invalid email : undefined","timestamp":"2021-10-05T09:25:19.201Z"}
+{"level":"error","message":"Invalid email : undefined","timestamp":"2021-10-05T09:25:57.152Z"}
+{"level":"error","message":"Invalid email : maamomaamouri.ilyes@gmail.com","timestamp":"2021-10-05T09:35:51.031Z"}
+{"level":"error","message":"Sorry! email already exists id_User = ","timestamp":"2021-10-05T13:48:47.143Z"}
+{"level":"error","message":"Sorry! email already exists id_User = ","timestamp":"2021-10-05T13:49:06.969Z"}
+{"level":"error","message":"Sorry! email already exists id_User = 6158045166277450f5f622f1","timestamp":"2021-10-05T13:49:29.283Z"}
+{"level":"error","message":"Invalid email : jmaamouri.ilyes@gmail.com","timestamp":"2021-10-05T13:53:08.115Z"}
+{"level":"error","message":"Invalid email : jmaamouri.ilyes@gmail.com","timestamp":"2021-10-05T13:53:13.328Z"}
+{"level":"error","message":"Invalid email : jmaamouri.ilyes@gmail.com","timestamp":"2021-10-05T13:53:19.900Z"}
+{"level":"error","message":"Invalid email : jmaamouri.ilyes@gmail.com","timestamp":"2021-10-05T13:54:47.981Z"}
+{"level":"error","message":"Invalid email : jmaamouri.ilyes@gmail.com","timestamp":"2021-10-05T13:54:53.662Z"}
+{"level":"error","message":"Invalid email : jmaamouri.ilyes@gmail.com","timestamp":"2021-10-05T13:58:23.946Z"}
+{"level":"error","message":"Sorry! email already exists id_User = 6158045166277450f5f622f1","timestamp":"2021-10-05T13:59:41.870Z"}
+{"level":"error","message":"User not found ID = 6158045166277450f5f622f7","timestamp":"2021-10-05T14:00:28.743Z"}
+{"level":"error","message":"Sorry! email already exists id_User = 6158045166277450f5f622f1","timestamp":"2021-10-05T14:00:39.291Z"}
+{"level":"error","message":"Sorry! email already exists id_User = 6158045166277450f5f622f1","timestamp":"2021-10-05T14:00:52.871Z"}
+{"level":"error","message":"Sorry! email already exists id_User = 6158045166277450f5f622f1","timestamp":"2021-10-05T14:00:54.279Z"}
+{"level":"error","message":"Sorry! email already exists id_User = 615589052ca1034eadcc73c4","timestamp":"2021-10-05T15:23:02.219Z"}
+{"level":"error","message":"Invalid email : email@email.co","timestamp":"2021-10-05T15:46:54.846Z"}

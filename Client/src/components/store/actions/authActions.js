@@ -51,9 +51,12 @@ export const recoverPassword = (data) => {
 };
 
 export const resetPassword = (data) => {
+  const config = {
+    headers: { Authorization: `Bearer ${data.resetPasswordToken}` },
+  };
   return (dispatch, getState) => {
     axios
-      .put(baseURL + "/reset-password", data)
+      .put(baseURL + "/reset-password", data, config)
       .then((res) => {
         dispatch({ type: "RESET_PASSWORD_SUCCESS", payload: res.data.message });
       })

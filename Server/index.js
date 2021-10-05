@@ -9,6 +9,7 @@ const session = require("express-session");
 const xss = require("xss");
 const logger = require("./config/logger");
 const passport = require("passport");
+const { applyPassportStrategy } = require("./config/passport");
 const server = http.Server(app);
 const port = process.env.PORT || 4000;
 const swaggerUI = require("swagger-ui-express");
@@ -66,6 +67,8 @@ app.use(function (req, res, next) {
 
 // '*' cross-orgin header
 app.use(cors());
+// Apply strategy to passport
+applyPassportStrategy(passport);
 // To parse the incoming requests with JSON payloads (replace body-parser)
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());

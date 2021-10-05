@@ -26,14 +26,14 @@ exports.login_post = async (req, res) => {
   const client = new User(_.pick(req.body, ["email", "password"]));
 
   try {
-    console.log("user email ==>", client.email);
+    console.log("user email ==>", req.body);
     let user = await User.findOne({ email: client.email });
 
     // Test if customer
     if (!user) {
       logger.error("Invalid email : " + client.email);
       return res.status(403).send({
-        message: "Invalid email or password",
+        message: "Invalid email or passwordd",
         success: false,
       });
     }
@@ -127,13 +127,12 @@ exports.recoverPassword_post = async (req, res) => {
 };
 
 exports.resetPassword_put = async (req, res) => {
+  console.log("hello", req.user);
   const client = new User(_.pick(req.body, ["password", "resetPasswordToken"]));
-
   client.password = await cryptPassword(client.password);
-
-  const tokenUser = decodeTokens(client.resetPasswordToken);
   const date = new Date().getTime();
-  const tokenLimitExpire = tokenUser.exp * 1000;
+  // get payload token from passport
+  const tokenLimitExpire = req.user.exp * 1000;
 
   if (tokenLimitExpire < date) {
     return res.status(200).send({
@@ -151,7 +150,6 @@ exports.resetPassword_put = async (req, res) => {
       },
       { new: true }
     );
-    console.log(user);
     if (!user) {
       return res.status(404).send({
         message: "User not found or Token expired ..",

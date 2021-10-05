@@ -35,8 +35,8 @@ module.exports = (app, pathApi) => {
    *           type: string
    *           description: Password of user
    *       example:
-   *         email: email@email.co
-   *         password: azertyuiop
+   *         email : email@email.co
+   *         password : azertyuiop
    */
   /**
    * @swagger
@@ -46,12 +46,17 @@ module.exports = (app, pathApi) => {
    *       type: object
    *       required:
    *         - password
+   *         - resetPasswordToken
    *       properties:
    *         password:
    *           type: string
    *           description: New password of user
+   *         resetPasswordToken:
+   *           type: string
+   *           description: Token of user
    *       example:
    *         password : azerty123
+   *         resetPasswordToken : eytifd
    */
   /**
    * @swagger
@@ -68,6 +73,16 @@ module.exports = (app, pathApi) => {
    *       example:
    *         email: email@email.co
    */
+
+  /**
+   * @swagger
+   * components:
+   *     securitySchemes:
+   *        bearerAuth:
+   *          type: http
+   *          scheme: bearer
+   */
+
   /**
    * @swagger
    * tags :
@@ -87,7 +102,7 @@ module.exports = (app, pathApi) => {
    *         application/json:
    *           schema:
    *             type : object
-   *             $ref: '#/components/schemas/UserLogin'
+   *             $ref: '#/components/schemas/Login User'
    *     responses:
    *       200 :
    *         description: Successful authentication
@@ -124,17 +139,12 @@ module.exports = (app, pathApi) => {
 
   /**
    * @swagger
-   * /api/reset-password/{token}:
+   * /api/reset-password:
    *  put:
+   *    security:
+   *       - bearerAuth: []
    *    summary: Reset password account client
    *    tags: [User]
-   *    parameters:
-   *      - in: path
-   *        name: token
-   *        schema:
-   *          type: string
-   *        required: true
-   *        description: Reset password account client
    *    requestBody:
    *      required: true
    *      content:
@@ -151,5 +161,9 @@ module.exports = (app, pathApi) => {
    *      500:
    *        description: Error occurred reset password
    */
-  app.put(pathApi + "/reset-password/", clientControl.resetPassword_put);
+  app.put(
+    pathApi + "/reset-password",
+    passport.authenticate("jwt", { session: false }),
+    clientControl.resetPassword_put
+  );
 };

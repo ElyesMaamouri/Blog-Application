@@ -1,5 +1,8 @@
 const User = require("../../models/User");
-const { userValidateForm } = require("../../middleware/validateSchema");
+const {
+  userValidateForm,
+  validateProfileUpdate,
+} = require("../../middleware/validateSchema");
 const logger = require("../../../config/logger");
 const {
   cryptPassword,
@@ -114,4 +117,79 @@ exports.confirmAccount_get = async (req, res) => {
       success: false,
     });
   }
+};
+
+// update profil user
+exports.profileUpdate_patch = async (req, res) => {
+  const { error } = validateProfileUpdate(req.body);
+  if (error) {
+    return res.status(404).send(error.details[0].message);
+  }
+  const client = _.pick(req.body, ["email", "userName", "password"]);
+  client.password = await cryptPassword(client.password);
+  const newUpdate = new User({
+    _id: req.params.id,
+    email: client.email,
+    password: client.password,
+    userName: client.userName,
+  });
+
+  await User.findByIdAndUpdate({ _id: req.params.id }, { $set: newUpdate })
+    .then((user) => {
+      if (!user) {
+        logger.error("User not found ID = " + req.params.id);
+        return res.status(404).send({
+          message: "User not found",
+          success: true,
+        });
+      }
+      if (user.email === newUpdate.email) {
+        logger.error("Sorry! email already exists id_User = " + req.params.id);
+        return res.status(200).send({
+          message: "Sorry! email already exists",
+          success: true,
+        });
+      }
+      if (user) {
+        return res.status(201).send({
+          message: "Your account has been successfully updated",
+          success: true,
+        });
+      }
+    })
+    .catch((err) => {
+      return res.status(500).send({
+        message: "Error update profile :" + err,
+        success: false,
+      });
+    });
+  // try {
+  //   const user = await User.findByIdAndUpdate(
+  //     { _id: req.params.id },
+  //     newUpdate,
+  //     {
+  //       new: true,
+  //     }
+  //   ).then((user) => {
+  //     console.log("user", user);
+  //     if (user.email === newUpdate.email) {
+  //       return res.status(201).send({
+  //         message: "email exist",
+  //         success: true,
+  //       });
+  //     }
+
+  //     if (user) {
+  //       return res.status(201).send({
+  //         message: "profile updated",
+  //         success: true,
+  //       });
+  //     }
+  //   });
+  // } catch (err) {
+  //   return res.status(500).send({
+  //     message: "error" + err,
+  //     success: false,
+  //   });
+  // }
 };

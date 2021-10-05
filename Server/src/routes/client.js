@@ -1,6 +1,7 @@
 module.exports = (app, pathApi) => {
   const clientControl = require("../controllers/manageUsers/clientControllers");
   const configUploadAvatar = require("../middleware/file-upload");
+  const passport = require("passport");
   //Register client
 
   /**
@@ -33,6 +34,41 @@ module.exports = (app, pathApi) => {
    *         password: 12345678
    *         avatar : user.png
    */
+  /**
+   * @swagger
+   * components:
+   *   schemas:
+   *     Update profile user:
+   *       type: object
+   *       required:
+   *         - email
+   *         - password
+   *         - userName
+   *       properties:
+   *         userName:
+   *           type: string
+   *           description: Name of user
+   *         email:
+   *           type: string
+   *           description: Email of user
+   *         password:
+   *           type: string
+   *           description: Current password user
+   *       example:
+   *         userName : user55
+   *         email: email@email.co
+   *         password : azertt123
+   */
+
+  /**
+   * @swagger
+   * components:
+   *     securitySchemes:
+   *        bearerAuth:
+   *          type: http
+   *          scheme: bearer
+   */
+
   /**
    * @swagger
    * tags :
@@ -92,4 +128,43 @@ module.exports = (app, pathApi) => {
    *         description: Error Key Activation
    */
   app.get(pathApi + "/confirmation/:key", clientControl.confirmAccount_get);
+
+  /**
+   * @swagger
+   * /api/users/{id}:
+   *  patch:
+   *    security:
+   *       - bearerAuth: []
+   *    summary: Update profile user
+   *    tags: [User]
+   *    parameters:
+   *      - in: path
+   *        name: id
+   *        schema:
+   *          type: string
+   *        required: true
+   *        description: Update profile user
+   *    requestBody:
+   *      required: true
+   *      content:
+   *        application/json:
+   *          schema:
+   *            $ref: '#/components/schemas/Update profile user'
+   *    responses:
+   *      200:
+   *        description: Sorry! email already exists
+   *      201:
+   *        description: Your account has been successfully updated
+   *      401:
+   *        description:  Unauthorized
+   *      404:
+   *        description: User not found
+   *      500:
+   *        description: Error update profile
+   */
+  app.patch(
+    pathApi + "/users/:id",
+    passport.authenticate("jwt", { session: false }),
+    clientControl.profileUpdate_patch
+  );
 };
