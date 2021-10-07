@@ -40,6 +40,12 @@ const userSchema = new Schema({
   resetPasswordToken: {
     type: String,
   },
+  blogs: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Article",
+    },
+  ],
 });
 
 module.exports = mongoose.model("User", userSchema);

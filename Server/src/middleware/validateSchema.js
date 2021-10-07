@@ -1,5 +1,5 @@
 const Joi = require("joi");
-
+Joi.objectId = require("joi-objectid")(Joi);
 // Validate user schema
 exports.userValidateForm = (user) => {
   console.log("user uservalidate", user);
@@ -45,4 +45,16 @@ exports.validateProfileUpdate = (data) => {
     password: Joi.string().min(8).max(255),
   });
   return schema.validate(data);
+};
+
+// Validation add article
+exports.validateArticle = (article) => {
+  const schema = Joi.object({
+    title: Joi.string().min(3).max(255),
+    content: Joi.string().min(3).max(255),
+    picture: Joi.string().min(8).max(255),
+    author: Joi.objectId(),
+    category: Joi.objectId(),
+  });
+  return schema.validate(article);
 };

@@ -41,6 +41,13 @@ exports.cryptData = (data) => {
   return inputData;
 };
 
+// Decrypt data
+exports.decryptData = (data) => {
+  const bytes = CryptoJS.AES.decrypt(data, key.secretKey);
+  const originalText = bytes.toString(CryptoJS.enc.Utf8);
+  return originalText;
+};
+
 exports.sendEmailToUser = async (
   email,
   user,

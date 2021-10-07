@@ -15,7 +15,8 @@ exports.applyPassportStrategy = (passport) => {
           return done(null, {
             email: user.email,
             exp: payload.exp,
-            _id: user[key.underscoreId],
+            path: payload.path,
+            id: payload.id,
           });
         }
         return done(null, false);

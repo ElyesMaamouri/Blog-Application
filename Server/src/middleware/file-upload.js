@@ -3,7 +3,12 @@ const key = require("../utils/keys");
 // Storage destination & rename file
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, "src/uploads/avatar");
+    // Upload picture of article to floder user
+    if (req.user) {
+      cb(null, "src/uploads/" + req.user.path);
+    } else {
+      cb(null, "src/uploads/avatar");
+    }
   },
   filename: function (req, file, cb) {
     const fileName = file.originalname.split(" ").join("_").split(".")[0];
@@ -38,7 +43,6 @@ const getPicture = (file, fileValidationError, res, req) => {
     });
   }
   if (file) {
-    console.log("file here", file);
     return (picture = file.filename);
   } else {
     return (picture = key.defaultProfilPicture);
