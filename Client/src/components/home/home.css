@@ -1,0 +1,10 @@
+.article-blog {
+  float: left;
+  width: 60%;
+}
+.pp {
+  border: 2px solid black;
+}
+.home-page {
+  display: flex;
+}

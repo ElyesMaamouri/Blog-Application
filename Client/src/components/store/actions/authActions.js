@@ -1,4 +1,6 @@
 import axios from "axios";
+import jwt_decode from "jwt-decode";
+
 const baseURL = "http://localhost:4000/api";
 
 export const signUp = (user) => {
@@ -64,6 +66,31 @@ export const resetPassword = (data) => {
         console.log("data", err.response);
         dispatch({
           type: "RESET_PASSWORD_ERROR",
+          payload: err.response.data.message,
+        });
+      });
+  };
+};
+
+export const updateProfile = (data) => {
+  console.log("data back", data);
+  const token = localStorage.getItem("userDetails");
+  const config = {
+    headers: { Authorization: `Bearer ${token}` },
+  };
+  const userToken = jwt_decode(localStorage.getItem("userDetails"));
+
+  return (dispatch, getState) => {
+    axios
+      .patch(baseURL + "/users/" + userToken.id, data, config)
+      .then((res) => {
+        console.log("res sucess", res);
+        dispatch({ type: "PROFILE_UPDATE_SUCCESS", payload: res.data.message });
+      })
+      .catch((err) => {
+        console.log("ressp err", err.response);
+        dispatch({
+          type: " PROFILE_UPDATE_ERROR",
           payload: err.response.data.message,
         });
       });

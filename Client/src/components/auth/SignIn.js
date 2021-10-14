@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useHistory } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { signIn } from "../store/actions/authActions";
 import TextField from "@mui/material/TextField";
@@ -53,24 +53,22 @@ const SignIn = (operation) => {
   });
 
   useEffect(() => {
-    if (localStorage.getItem("userDetails")) {
-      console.log("hello user");
-      return operation.client.history.push("/");
-    }
     if (loginInfo === "Invalid email or password") {
       setMessage("error");
       return loginInfo;
-    } else if (loginInfo === "please activate your account") {
+    }
+    if (loginInfo === "please activate your account") {
       setMessage("warning");
       return loginInfo;
-    } else if (loginInfo === "Successful authentication") {
-      setMessage("success");
+    }
+    if (loginInfo === "Successful authentication") {
       setTimeout(() => {
         operation.client.history.push("/");
       }, 4000);
+      setMessage("success");
       return loginInfo;
     }
-  }, [loginInfo, operation.client.history]);
+  }, [loginInfo]);
 
   const handelChange = (e) => {
     setUser({ ...user, [e.target.name]: e.target.value });

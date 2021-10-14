@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="48932ff4-3f1d-426a-9c0f-36a47a547853" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/Client/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/Client/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/components/home/Home.js" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/components/home/Home.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/Client/yarn.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/error.log" beforeDir="false" afterPath="$PROJECT_DIR$/Server/error.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/src/controllers/manageUsers/clientControllers.js" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/controllers/manageUsers/clientControllers.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/src/utils/template-reset-password.js" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/utils/template-reset-password.js" afterDir="false" />
+    </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="1zDR875lFeVYtSwZ1jxr0sgekXI" />
+  <component name="PropertiesComponent">
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="48932ff4-3f1d-426a-9c0f-36a47a547853" name="Default Changelist" comment="" />
+      <created>1633680510307</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1633680510307</updated>
+      <workItem from="1633680513789" duration="50000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>

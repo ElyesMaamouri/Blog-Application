@@ -1,3 +1,5 @@
-.signin {
-  display: block;
+form {
+  display: inline-grid;
+  margin: 0 auto;
+  padding: 3px;
 }

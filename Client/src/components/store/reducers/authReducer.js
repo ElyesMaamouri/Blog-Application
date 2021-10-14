@@ -3,6 +3,7 @@ const initState = {
   loginInfo: null,
   recoverPasswordInfo: null,
   resetPasswordInfo: null,
+  updateProfileInfo: null,
 };
 
 const authReducer = (state = initState, action) => {
@@ -49,6 +50,19 @@ const authReducer = (state = initState, action) => {
       return {
         ...state,
         resetPasswordInfo: action.payload,
+      };
+
+    case "PROFILE_UPDATE_SUCCESS":
+      return {
+        ...state,
+        updateProfileInfo: action.payload,
+      };
+
+    case "PROFILE_UPDATE_ERROR":
+      console.log("updateProfileInfo", state.updateProfileInfo);
+      return {
+        ...state,
+        updateProfileInfo: action.payload,
       };
     default:
       return state;

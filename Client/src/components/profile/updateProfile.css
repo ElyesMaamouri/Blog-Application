@@ -1,0 +1,34 @@
+.updateAccount {
+  display: flex;
+  align-content: center;
+  justify-content: center;
+}
+
+.left_side_update_account {
+  margin-top: 64px;
+}
+
+.updateProfil {
+  display: grid;
+  align-content: space-evenly;
+  align-items: baseline;
+  justify-items: center;
+  justify-content: start;
+}
+.user {
+  width: 18%;
+  margin-top: 8px;
+  margin-bottom: 12px;
+}
+
+@media (max-width: 450px) {
+  .MuiTextField-root {
+    width: 300px !important;
+  }
+}
+
+@media (max-width: 330px) {
+  .MuiTextField-root {
+    width: 280px !important;
+  }
+}

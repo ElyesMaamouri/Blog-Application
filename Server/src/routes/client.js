@@ -41,9 +41,10 @@ module.exports = (app, pathApi) => {
    *     Update profile user:
    *       type: object
    *       required:
-   *         - email
-   *         - password
    *         - userName
+   *         - email
+   *         - currentlyPassword
+   *         - newPassword
    *       properties:
    *         userName:
    *           type: string
@@ -57,7 +58,8 @@ module.exports = (app, pathApi) => {
    *       example:
    *         userName : user55
    *         email: email@email.co
-   *         password : azertt123
+   *         currentlyPassword : azertt123
+   *         newPassword : newpassword123
    */
 
   /**
@@ -151,8 +153,6 @@ module.exports = (app, pathApi) => {
    *          schema:
    *            $ref: '#/components/schemas/Update profile user'
    *    responses:
-   *      200:
-   *        description: Sorry! email already exists
    *      201:
    *        description: Your account has been successfully updated
    *      401:

@@ -370,7 +370,7 @@ exports.templateResetPassword = (user, code, objectMessage) => {
                   
                      If you did not request this, please ignore this email and your password will remain unchanged.</p>
                    
-                     http://localhost:3000/${code}
+                     http://localhost:3000/reset-password/${code}
                     <!-- Action -->
                     <table class="body-action" align="center" width="100%" cellpadding="0" cellspacing="0">
                       <tr>
@@ -381,7 +381,7 @@ exports.templateResetPassword = (user, code, objectMessage) => {
                                 <table border="0" cellspacing="0" cellpadding="0">
                                   <tr>
                                     <td>
-                                      <a href=" http://localhost:3000/${code}" class="button button--yellow" style="color:#413F3F;padding:5px;font-weight:bold;border-radius:10px; font-size:16px;" target="_blank" type="submit">Password change request.</a>
+                                      <a href=" http://localhost:3000/reset-password/${code}" class="button button--yellow" style="color:#413F3F;padding:5px;font-weight:bold;border-radius:10px; font-size:16px;" target="_blank" type="submit">Password change request.</a>
                                     </td>
                                   </tr>
                                 </table>

@@ -32,9 +32,6 @@
   margin-top: 25px;
 }
 
-.pp {
-  border: 2px solid black;
-}
 @media (max-width: 860px) {
   .leftside {
     display: none;

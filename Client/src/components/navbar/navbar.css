@@ -1,0 +1,18 @@
+.MuiList-root {
+  color: white;
+}
+.svg_icons {
+  transform: scale(1.8);
+}
+
+.user_logo {
+  width: 25%;
+}
+.pp {
+  border: 2px solid black;
+}
+
+.right_nav {
+  width: 180px;
+  display: flex;
+}

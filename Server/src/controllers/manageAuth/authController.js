@@ -26,7 +26,6 @@ exports.login_post = async (req, res) => {
   const client = new User(_.pick(req.body, ["email", "password"]));
 
   try {
-    console.log("user email ==>", req.body);
     let user = await User.findOne({ email: client.email });
 
     // Test if customer
@@ -50,7 +49,7 @@ exports.login_post = async (req, res) => {
         success: false,
       });
     }
-
+    console.log("user email ==>", user);
     if (user.isActive === false) {
       logger.error("Account not activated : " + user.email);
       return res.status(200).send({
@@ -60,9 +59,10 @@ exports.login_post = async (req, res) => {
     }
     const payload = {
       name: user.userName,
-      id: cryptData(user.id),
+      id: user.id,
       email: user.email,
       isAdmin: user.isAdmin,
+      avatar: user.avatar,
       path: user.directoryPath,
     };
 

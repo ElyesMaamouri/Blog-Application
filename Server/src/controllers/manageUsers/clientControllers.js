@@ -7,6 +7,7 @@ const logger = require("../../../config/logger");
 const {
   cryptPassword,
   sendEmailToUser,
+  compareHashPassword,
 } = require("../../utils/commonFunction");
 const { v4: uuidv4 } = require("uuid");
 const fs = require("fs");
@@ -125,37 +126,61 @@ exports.profileUpdate_patch = async (req, res) => {
   if (error) {
     return res.status(404).send(error.details[0].message);
   }
-  const client = _.pick(req.body, ["email", "userName", "password"]);
-  client.password = await cryptPassword(client.password);
+  const client = _.pick(req.body, [
+    "userName",
+    "email",
+    "currentlyPassword",
+    "newPassword",
+  ]);
+
+  client.newPassword = await cryptPassword(client.newPassword);
+
   const newUpdate = new User({
     _id: req.params.id,
-    email: client.email,
-    password: client.password,
     userName: client.userName,
+    password: client.newPassword,
   });
 
-  await User.findByIdAndUpdate({ _id: req.params.id }, { $set: newUpdate })
-    .then((user) => {
+  const customerEmail = req.user.email;
+  console.log("client", customerEmail);
+  //const emailUser = await User.findOne({ email: client.email });
+  const findUser = await User.findByIdAndUpdate(
+    { _id: req.params.id },
+    { $set: newUpdate }
+  )
+    .then(async (user) => {
+      console.log(user.password);
       if (!user) {
         logger.error("User not found ID = " + req.params.id);
         return res.status(404).send({
           message: "User not found",
-          success: true,
+          success: false,
         });
       }
-      if (user.email === newUpdate.email) {
-        logger.error("Sorry! email already exists id_User = " + req.params.id);
+      if (user.email != customerEmail) {
         return res.status(200).send({
-          message: "Sorry! email already exists",
-          success: true,
+          message: "Invalid user",
+          success: false,
         });
       }
-      if (user) {
-        return res.status(201).send({
-          message: "Your account has been successfully updated",
-          success: true,
+      //Compare hash password
+      const checkPassword = await compareHashPassword(
+        client.currentlyPassword,
+        user.password
+      );
+      // console.log("checkk", checkPassword);
+      if (!checkPassword) {
+        console.log(" if passs");
+        logger.error("Invalid currently password : " + user.email);
+        return res.status(200).send({
+          message: "Invalid currently password",
+          success: false,
         });
       }
+      return res.status(201).send({
+        message: "Your account has been successfully updated",
+        success: true,
+      });
     })
     .catch((err) => {
       return res.status(500).send({
@@ -163,33 +188,4 @@ exports.profileUpdate_patch = async (req, res) => {
         success: false,
       });
     });
-  // try {
-  //   const user = await User.findByIdAndUpdate(
-  //     { _id: req.params.id },
-  //     newUpdate,
-  //     {
-  //       new: true,
-  //     }
-  //   ).then((user) => {
-  //     console.log("user", user);
-  //     if (user.email === newUpdate.email) {
-  //       return res.status(201).send({
-  //         message: "email exist",
-  //         success: true,
-  //       });
-  //     }
-
-  //     if (user) {
-  //       return res.status(201).send({
-  //         message: "profile updated",
-  //         success: true,
-  //       });
-  //     }
-  //   });
-  // } catch (err) {
-  //   return res.status(500).send({
-  //     message: "error" + err,
-  //     success: false,
-  //   });
-  // }
 };

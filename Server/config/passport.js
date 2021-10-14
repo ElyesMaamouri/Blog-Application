@@ -8,7 +8,6 @@ exports.applyPassportStrategy = (passport) => {
   options.secretOrKey = key.secretToken;
   passport.use(
     new Strategy(options, (payload, done) => {
-      console.log("payload token", payload);
       User.findOne({ email: payload.email }, (err, user) => {
         if (err) return done(err, false);
         if (user) {

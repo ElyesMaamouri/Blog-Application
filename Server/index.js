@@ -43,6 +43,9 @@ dotenv.config();
 // Passport config
 //require("./src/middleware/passport")(passport);
 
+// Display all file in floder uploads
+app.use(express.static("src/uploads"));
+
 //Session
 app.use(
   session({

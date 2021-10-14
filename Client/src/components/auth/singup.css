@@ -1,5 +1,7 @@
-.signup {
-  display: block;
+form {
+  display: inline-grid;
+  margin: 0 auto;
+  padding: 3px;
 }
 
 @media (max-width: 450px) {

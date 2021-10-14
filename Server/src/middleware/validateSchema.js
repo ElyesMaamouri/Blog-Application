@@ -42,7 +42,8 @@ exports.validateProfileUpdate = (data) => {
   const schema = Joi.object({
     userName: Joi.string().min(3).max(255),
     email: Joi.string().min(3).max(255).email(),
-    password: Joi.string().min(8).max(255),
+    currentlyPassword: Joi.string().min(8).max(255),
+    newPassword: Joi.string().min(8).max(255),
   });
   return schema.validate(data);
 };

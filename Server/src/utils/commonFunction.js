@@ -17,6 +17,7 @@ exports.cryptPassword = async (password) => {
 
 // Compare hash password
 exports.compareHashPassword = (userPassword, passwordFromBody) => {
+  console.log(userPassword, passwordFromBody);
   const password = bcrypt.compareSync(userPassword, passwordFromBody);
   return password;
 };
