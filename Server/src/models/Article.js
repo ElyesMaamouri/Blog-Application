@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 var Schema = mongoose.Schema;
+
 const articleSchema = new Schema({
   title: {
     type: String,
@@ -19,7 +20,7 @@ const articleSchema = new Schema({
   },
   author: {
     type: Schema.Types.ObjectId,
-    ref: "users",
+    ref: "User",
     required: true,
   },
   comments: [
@@ -30,7 +31,7 @@ const articleSchema = new Schema({
   ],
   category: {
     type: Schema.Types.ObjectId,
-    ref: "category",
+    ref: "Category",
     required: true,
   },
   vote: { type: Number, default: 0 },

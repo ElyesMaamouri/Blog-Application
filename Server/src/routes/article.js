@@ -206,4 +206,41 @@ module.exports = (app, pathApi) => {
     uploadPicture.upload,
     articleControl.updateArticle_patch
   );
+  /**
+   * @swagger
+   * /api/articles:
+   *   get:
+   *     summary: Get all articles
+   *     tags: [Blog]
+   *     responses:
+   *       200:
+   *         description: List of all articles
+   *       404 :
+   *         description: Articles not found
+   *       500 :
+   *         description: An error occurred list of articles
+   */
+  app.get(pathApi + "/articles", articleControl.listOfAllArticles);
+
+  /**
+   * @swagger
+   * /api/articles/categories/{id}:
+   *   get:
+   *     summary: Get all articles per category
+   *     tags: [Blog]
+   *     parameters:
+   *       - in: path
+   *         name: id
+   *     responses:
+   *       200:
+   *         description: List articles in category
+   *       404 :
+   *         description: No article in category
+   *       500 :
+   *         description: An error occurred updating your article
+   */
+  app.get(
+    pathApi + "/articles/categories/:id",
+    articleControl.listArticlesPerCategory
+  );
 };

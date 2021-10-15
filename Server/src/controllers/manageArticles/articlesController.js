@@ -1,5 +1,6 @@
 const Article = require("../../models/Article");
 const User = require("../../models/User");
+const categorySchema = require("../../models/Category");
 const logger = require("../../../config/logger");
 const { validateArticle } = require("../../middleware/validateSchema");
 const fileUpload = require("../../middleware/file-upload");
@@ -7,6 +8,7 @@ const { decryptData } = require("../../utils/commonFunction");
 const fs = require("fs");
 const _ = require("lodash");
 
+// Add new article
 exports.addArticle_post = async (req, res) => {
   const { error } = validateArticle(req.body);
   if (error) {
@@ -16,23 +18,30 @@ exports.addArticle_post = async (req, res) => {
     const article = new Article(
       _.pick(req.body, ["title", "content", "author", "picture", "category"])
     );
+
     //Get name of picture article
     article.picture = fileUpload.getPicture(
       req.file,
       req.fileValidationError,
       res
     );
-
-    article.author = await decryptData(req.user.id);
+    article.author = req.user.id;
     await article.save().then((data) => {
       User.findByIdAndUpdate(
         { _id: article.author },
         { $push: { blogs: data.id } }
-      ).then(() => {
-        return res.status(201).json({
-          message: "Your article has been successfully created",
-          success: true,
-        });
+      ).then(async () => {
+        await categorySchema
+          .findByIdAndUpdate(
+            { _id: article.category },
+            { $push: { articles: data.id } }
+          )
+          .then(() => {
+            return res.status(201).json({
+              message: "Your article has been successfully created",
+              success: true,
+            });
+          });
       });
     });
   } catch (err) {
@@ -44,6 +53,7 @@ exports.addArticle_post = async (req, res) => {
   }
 };
 
+// Delete article with picture & delete id from array blogs
 exports.removeArticle_delete = async (req, res) => {
   try {
     const client = decryptData(req.user.id);
@@ -85,6 +95,7 @@ exports.removeArticle_delete = async (req, res) => {
   }
 };
 
+// Get all articles user
 exports.getAllArticlePerUser_get = async (req, res) => {
   try {
     const authorBlogs = await User.findOne({ _id: req.params.id })
@@ -111,6 +122,7 @@ exports.getAllArticlePerUser_get = async (req, res) => {
   }
 };
 
+// Update article
 exports.updateArticle_patch = async (req, res) => {
   const { error } = validateArticle(req.body);
   if (error) {
@@ -167,6 +179,67 @@ exports.updateArticle_patch = async (req, res) => {
     logger.error("An error occurred updating your article :", err);
     return res.status(500).send({
       message: "An error occurred updating your article :" + err,
+      success: false,
+    });
+  }
+};
+
+// Get all article
+
+exports.listOfAllArticles = async (req, res) => {
+  try {
+    const listArticles = await Article.find();
+    if (!listArticles) {
+      return res.status(404).send({
+        message: "Articles not found",
+        success: false,
+      });
+    }
+    if (listArticles) {
+      return res.status(200).send({
+        message: "List of all articles",
+        articles: listArticles,
+      });
+    }
+  } catch (err) {
+    logger.error("An error occurred list of articles :", err);
+    return res.status(500).send({
+      message: "An error occurred list of articles :" + err,
+      success: false,
+    });
+  }
+};
+
+//Get article per category
+
+exports.listArticlesPerCategory = async (req, res) => {
+  try {
+    const items = await categorySchema
+      .findById({ _id: req.params.id })
+      .select("articles")
+      .populate(["articles"]);
+    if (!items) {
+      return res.status(404).send({
+        message: "No article in category",
+        success: false,
+      });
+    }
+    console.log(items);
+    if (items.articles.length === 0) {
+      return res.status(200).send({
+        message: "No article in category ",
+        success: false,
+      });
+    }
+    return res.status(200).send({
+      message: "List articles in category",
+      success: true,
+      articles: items,
+    });
+  } catch (err) {
+    logger.error("An error occurred list of articles per category :", err);
+    return res.status(500).send({
+      message: "An error occurred list of articles per category:" + err,
       success: false,
     });
   }

@@ -59,3 +59,12 @@ exports.validateArticle = (article) => {
   });
   return schema.validate(article);
 };
+
+// Validator schema category
+
+exports.validateCategory = (category) => {
+  const schema = Joi.object({
+    category: Joi.string().min(3).max(255),
+  });
+  return schema.validate(category);
+};

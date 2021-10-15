@@ -16,6 +16,7 @@ exports.applyPassportStrategy = (passport) => {
             exp: payload.exp,
             path: payload.path,
             id: payload.id,
+            isAdmin: payload.isAdmin,
           });
         }
         return done(null, false);
