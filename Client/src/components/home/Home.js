@@ -3,7 +3,7 @@ import Navbar from "../navbar/Navbar";
 import Card from "../cards/Card";
 import Header from "../header/Header";
 import Contact from "../contact/Contact";
-import RightCard from "../right-cards/RightCard";
+import RightCard from "../cards/RightCard";
 import Footer from "../footer/Footer";
 import "./home.css";
 const Home = () => {

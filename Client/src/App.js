@@ -26,7 +26,7 @@ class App extends Component {
               ]}
               component={AuthScreen}
             />
-            <div>
+            <>
               <Navbar />
               <Route exact path="/" component={Home} />
               {/* <Route path="/:token" component={ResetPassword} /> */}
@@ -34,7 +34,7 @@ class App extends Component {
             <Route path="/reset-password" component={ResetPassword} /> */}
               <Route exact path="/create-article" component={CreateArticle} />
               <Route exact path="/update-profile" component={UpdateProfile} />
-            </div>
+            </>
           </Switch>
         </Router>
       </div>

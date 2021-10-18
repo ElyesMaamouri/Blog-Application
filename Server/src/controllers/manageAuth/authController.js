@@ -64,6 +64,7 @@ exports.login_post = async (req, res) => {
       isAdmin: user.isAdmin,
       avatar: user.avatar,
       path: user.directoryPath,
+      blogs: user.blogs,
     };
 
     const token = generateTokens(payload);
