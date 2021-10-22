@@ -19,6 +19,7 @@
   background: #00b09c;
   border-color: #00b09c;
   color: #fff;
+  margin-top: 35px;
 }
 .main-btn:hover {
   background: #00a491;
@@ -36,6 +37,9 @@
 
 .form-article {
   margin-left: 40px;
+  margin-top: 40px;
+  padding-bottom: 120px;
+  width: 75%;
 }
 
 .add-article {
@@ -43,6 +47,7 @@
 }
 .create-article {
   display: flex;
+  align-items: center;
 }
 
 .card-box {
@@ -92,4 +97,64 @@
 h4 {
   line-height: 22px;
   font-size: 18px;
+}
+.MuiList-root {
+  color: black;
+}
+
+.MuiFormControl-root {
+  margin: 15px 0px 0px 0px !important;
+}
+
+.MuiSnackbar-root {
+  position: relative !important;
+  margin-bottom: 25px;
+  left: 0px !important;
+}
+@media (max-width: 758px) {
+  .create-article {
+    display: block;
+  }
+  .add-article {
+    width: 100%;
+    text-align: center;
+  }
+  .form-article {
+    width: 90%;
+    margin-top: 40px;
+    padding-bottom: 40px;
+    margin-left: 0px;
+    padding-left: 25px;
+    padding-right: 25px;
+  }
+  .card-box {
+    width: 80%;
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 450px) {
+  .MuiFormControl-root {
+    width: 300px;
+  }
+  .main-btn {
+    width: 300px;
+  }
+  .form-article {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 328px) {
+  .form-article {
+    width: 100%;
+    margin: 0 auto;
+  }
+
+  .MuiFormControl-root {
+    width: 280px;
+  }
+  .main-btn {
+    width: 280px;
+  }
 }

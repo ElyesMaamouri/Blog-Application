@@ -16,3 +16,7 @@
   width: 180px;
   display: flex;
 }
+
+.navbar {
+  padding: 5px;
+}
