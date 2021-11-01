@@ -48,6 +48,7 @@
 .create-article {
   display: flex;
   align-items: center;
+  /*background-color: blueviolet;*/
 }
 
 .card-box {

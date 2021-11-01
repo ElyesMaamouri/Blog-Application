@@ -65,6 +65,7 @@ app.use(function (req, res, next) {
     "Content-Type, Authorization, Content-Length, X-Requested-With"
   );
   res.header("Access-Control-Allow-Methods", "PUT, POST, GET, OPTIONS, DELETE");
+
   next();
 });
 
@@ -86,7 +87,6 @@ require("./src/routes/article")(app, process.env.PATH_API);
 require("./src/routes/category")(app, process.env.PATH_API);
 //app.use(xss());
 server.listen(port, (err) => {
-  if (err)
-    throw logger.error("the server is not running !! " + process.env.PORT);
+  if (err) throw logger.error("the server is not running !! " + PORT);
   console.log(`** the server is running on port ${port} **`);
 });

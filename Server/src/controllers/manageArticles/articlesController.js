@@ -56,7 +56,8 @@ exports.addArticle_post = async (req, res) => {
 // Delete article with picture & delete id from array blogs
 exports.removeArticle_delete = async (req, res) => {
   try {
-    const client = decryptData(req.user.id);
+    const client = req.user.id;
+    console.log("client", req.user.id);
     const userBlogs = await User.findById({ _id: client });
 
     // Get list of ids blogs[]

@@ -9,6 +9,7 @@ import ResetPassword from "./components/auth/ResetPassword";
 import CreateArticle from "./components/articles/CreateArticle";
 import Navbar from "./components/navbar/Navbar";
 import UpdateProfile from "./components/profile/UpdateProfile";
+import ListeArticle from "./components/articles/ListeArticle";
 class App extends Component {
   render() {
     return (
@@ -34,6 +35,7 @@ class App extends Component {
             <Route path="/reset-password" component={ResetPassword} /> */}
               <Route exact path="/create-article" component={CreateArticle} />
               <Route exact path="/update-profile" component={UpdateProfile} />
+              <Route exact path="/list-article" component={ListeArticle} />
             </>
           </Switch>
         </Router>

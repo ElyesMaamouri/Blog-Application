@@ -169,7 +169,7 @@ module.exports = (app, pathApi) => {
    */
   app.get(
     pathApi + "/users/:id/blogs",
-    passport.authenticate("jwt", { session: false }),
+    // passport.authenticate("jwt", { session: false }),
     articleControl.getAllArticlePerUser_get
   );
 
