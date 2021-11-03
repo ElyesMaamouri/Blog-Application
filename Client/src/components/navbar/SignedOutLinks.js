@@ -8,6 +8,7 @@ const SignedOutLinks = () => {
 
   const logoutHandler = () => {
     localStorage.removeItem("userDetails");
+
     window.location.reload();
   };
   return (

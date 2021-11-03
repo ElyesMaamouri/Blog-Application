@@ -10,23 +10,25 @@ import logoUser from "../../assets/user.svg";
 import decodeTokens from "../../helpers/decodeToken";
 import "./updateProfile.css";
 
-const useStyles = makeStyles({
-  filed: {
-    "&.MuiFormControl-root": {
-      marginBottom: 15,
-      marginLeft: 15,
-      marginRight: 15,
-      width: 300,
+const useStyles = makeStyles((theme) => {
+  return {
+    filed: {
+      "&.MuiFormControl-root": {
+        marginBottom: 15,
+        marginLeft: 15,
+        marginRight: 15,
+        width: 300,
+      },
     },
-  },
-  buttonSubmit: {
-    "&.MuiButton-root": {
-      paddingTop: 10,
-      paddingBottom: 10,
-      paddingRight: 50,
-      paddingLeft: 50,
+    buttonSubmit: {
+      "&.MuiButton-root": {
+        paddingTop: 10,
+        paddingBottom: 10,
+        paddingRight: 50,
+        paddingLeft: 50,
+      },
     },
-  },
+  };
 });
 
 const UpdateProfile = () => {

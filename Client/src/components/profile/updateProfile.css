@@ -21,14 +21,14 @@
   margin-bottom: 12px;
 }
 
-@media (max-width: 450px) {
+/* @media (max-width: 450px) {
   .MuiTextField-root {
     width: 300px !important;
   }
-}
+} */
 
 @media (max-width: 330px) {
-  .MuiTextField-root {
+  .filed-input {
     width: 280px !important;
   }
 }

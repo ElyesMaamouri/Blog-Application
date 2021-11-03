@@ -73,22 +73,9 @@ const CreateArticle = () => {
     setOpen(true);
   };
   const handleChange = (e) => {
-    console.log("slect value, ", e.target.value);
     setCategory(e.target.value);
     if (e.target.value) unregister(["category"]);
   };
-
-  // const { ref, ...inputProps } = register("title", {
-  //   required: "You need a title",
-  //   minLength: { value: 3, message: "Please enter a longer title" },
-  //   maxLength: { value: 50, message: "Please enter a shorter title" },
-  // });
-
-  // const { ref, ...inputProps } = register("content", {
-  //   required: "You need a content",
-  //   minLength: { value: 10, message: "Please enter a longer content" },
-  //   maxLength: { value: 200, message: "Please enter a shorter content" },
-  // });
 
   return (
     <div className="create-article">
@@ -97,7 +84,7 @@ const CreateArticle = () => {
         <form onSubmit={handleSubmit(onSubmit)} className="form-article ">
           <Snackbar
             open={open}
-            autoHideDuration={900000}
+            autoHideDuration={3000}
             anchorOrigin={{ vertical, horizontal }}
             onClose={() => setOpen(false)}
           >
@@ -107,6 +94,7 @@ const CreateArticle = () => {
           </Snackbar>
           <h3>CreateArticle</h3>
           <TextField
+            className="filed-form"
             size="medium"
             placeholder="Title of article"
             label="Title of article"
@@ -128,7 +116,7 @@ const CreateArticle = () => {
             size="medium"
             label="Content of article"
             variant="outlined"
-            name="Title"
+            name="Content"
             {...register("content", {
               required: "Content required",
               minLength: { value: 5, message: "Please enter a longer content" },
@@ -150,7 +138,7 @@ const CreateArticle = () => {
               labelId="demo-simple-select-error-label"
               id="demo-simple-select-error"
               value={category || ""}
-              label="Age"
+              label="Category"
               {...register("category", {
                 required: "category required",
               })}

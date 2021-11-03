@@ -7,10 +7,23 @@ import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
 import ModalAlert from "../Modal/ModalAlert";
 import TextField from "@mui/material/TextField";
+import EditIcon from "@mui/icons-material/Edit";
+import { makeStyles } from "@mui/styles";
+import "./listArticle.css";
+
+const useStyles = makeStyles({
+  inputSearch: {
+    "&.MuiFormControl-root": {
+      paddingBottom: 10,
+      width: "100%",
+    },
+  },
+});
 
 const ListeArticle = () => {
+  const classes = useStyles();
   const columns = [
-    { field: "id", headerName: "ID", width: 400 },
+    // { field: "id", headerName: "ID", width: 400 },
     { field: "title", headerName: "Title", width: 400 },
     { field: "comment", headerName: "Comments", width: 150 },
     { field: "vote", headerName: "Vote", width: 150 },
@@ -23,13 +36,28 @@ const ListeArticle = () => {
       renderCell: (params) => {
         return (
           <div
-            className="d-flex justify-content-between align-items-center"
-            style={{ cursor: "pointer" }}
+            className="d-flex justify-content-center  align-items-center"
+            style={{ cursor: "pointer", border: "2px solid black" }}
           >
             <DeleteIcon
               onClick={() => {
                 setOpen(true);
                 setArticle({ title: params.row.title, id: params.row.id });
+                setDisplayModal("modalDeleteArticle");
+              }}
+              index={params.row.id}
+            />
+            <EditIcon
+              onClick={() => {
+                setOpen(true);
+                setArticle({
+                  id: params.row.id,
+                  title: params.row.title,
+                  content: params.row.content,
+                  category: params.row.category,
+                  picture: params.row.picture,
+                });
+                setDisplayModal("modalUpdateArticle");
               }}
               index={params.row.id}
             />
@@ -45,6 +73,7 @@ const ListeArticle = () => {
     (state) => state.blog.deleteArticleInfo
   );
   const [open, setOpen] = useState(false);
+  const [displayModal, setDisplayModal] = useState();
   const [openSnackbar, setOpenSnackbar] = useState(false);
   const [article, setArticle] = useState({});
   const [blog, setBlog] = useState();
@@ -91,6 +120,9 @@ const ListeArticle = () => {
         rows.push({
           id: item._id,
           title: item.title,
+          content: item.content,
+          category: item.category,
+          picture: item.picture,
           comment: item.comments.length,
           vote: item.vote,
         });
@@ -135,13 +167,21 @@ const ListeArticle = () => {
     const filtered =
       oldTable &&
       oldTable.filter((item) => {
-        return item.title.toLowerCase().indexOf(e.toLowerCase()) > -1;
+        return (
+          item.title.toLowerCase().indexOf(e.toString().toLowerCase()) > -1
+        );
       });
     setTableData(filtered);
   };
+  const updateData = (item) => {
+    let idRow = item.id;
+    const tt = (tableData.filter((x) => {
+      return x.id === idRow;
+    })[0].title = item.title);
+  };
 
   return (
-    <div style={{ height: 400, width: "100%" }}>
+    <div className="section-article">
       <TextField
         onChange={handleChange}
         label="Search"
@@ -149,13 +189,13 @@ const ListeArticle = () => {
         name="Search"
         variant="outlined"
         value={searchValue}
+        className={classes.inputSearch}
       />
       <DataGrid
         rows={tableData}
         columns={columns}
         pageSize={5}
         rowsPerPageOptions={[5]}
-        checkboxSelection
       />
       <div>
         <ModalAlert
@@ -163,6 +203,8 @@ const ListeArticle = () => {
           blog={article}
           closeModal={handleClose}
           deleteBlog={deleteArticle}
+          showModal={displayModal}
+          updateData={updateData}
         />
       </div>
       <Snackbar

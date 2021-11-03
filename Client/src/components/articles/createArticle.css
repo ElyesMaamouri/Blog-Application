@@ -135,7 +135,7 @@ h4 {
 }
 
 @media (max-width: 450px) {
-  .MuiFormControl-root {
+  .filed-form {
     width: 300px;
   }
   .main-btn {
@@ -152,7 +152,7 @@ h4 {
     margin: 0 auto;
   }
 
-  .MuiFormControl-root {
+  .filed-form {
     width: 280px;
   }
   .main-btn {

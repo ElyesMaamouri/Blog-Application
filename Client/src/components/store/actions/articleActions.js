@@ -1,13 +1,12 @@
 import axios from "axios";
 import decodeTokens from "../../../helpers/decodeToken";
 const baseURL = "http://localhost:4000/api";
-
+const token = localStorage.getItem("userDetails");
+const config = {
+  headers: { Authorization: `Bearer ${token}` },
+};
+const userToken = decodeTokens();
 export const addArticle = (data) => {
-  const token = localStorage.getItem("userDetails");
-  const config = {
-    headers: { Authorization: `Bearer ${token}` },
-  };
-
   return (dispatch, getState) => {
     axios
       .post(baseURL + "/articles", data, config)
@@ -26,12 +25,6 @@ export const addArticle = (data) => {
 };
 
 export const listArticle = () => {
-  const token = localStorage.getItem("userDetails");
-  const userToken = decodeTokens();
-  const config = {
-    headers: { Authorization: `Bearer ${token}` },
-  };
-
   return (dispatch, getState) => {
     axios
       .get(baseURL + "/users/" + userToken.id + "/blogs", config)
@@ -51,12 +44,6 @@ export const listArticle = () => {
 };
 
 export const deleteBlog = (idBlog) => {
-  const token = localStorage.getItem("userDetails");
-
-  const config = {
-    headers: { Authorization: `Bearer ${token}` },
-  };
-
   return (dispatch, getState) => {
     axios
       .delete(baseURL + "/articles/" + idBlog, config)
@@ -73,5 +60,33 @@ export const deleteBlog = (idBlog) => {
           payload: err.response.data.message,
         });
       });
+  };
+};
+
+export const updateArticle = (data, idArticle) => {
+  return (dispatch, getState) => {
+    axios
+      .patch(baseURL + "/articles/" + idArticle, data, config)
+      .then((res) => {
+        console.log("response update success", res);
+        dispatch({
+          type: "UPDATE_ARTICLE_SUCCESS",
+          payload: res.data.message,
+        });
+      })
+      .catch((err) => {
+        console.log("response update err", err.response);
+        dispatch({
+          type: "UPDATE_ARTICLE_ERROR",
+          payload: err.response.data,
+        });
+      });
+  };
+};
+
+export const resetState = () => {
+  console.log("reset state");
+  return (dispatch, getState) => {
+    dispatch({ type: "RESET_INITIAL_STATE", payload: "" });
   };
 };

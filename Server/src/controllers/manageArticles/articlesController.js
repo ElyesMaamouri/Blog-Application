@@ -134,7 +134,8 @@ exports.updateArticle_patch = async (req, res) => {
       _.pick(req.body, ["title", "content", "author", "picture", "category"])
     );
 
-    const client = decryptData(req.user.id);
+    const client = req.user.id;
+
     const userBlogs = await User.findById({ _id: client });
     // Get list of ids blogs[]
     const idArticle = userBlogs.blogs.map((item) => {

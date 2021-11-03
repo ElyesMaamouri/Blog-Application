@@ -7,7 +7,6 @@ export const listCategories = () => {
     axios
       .get(baseURL + "/categories")
       .then((res) => {
-        console.log("errr", res.data);
         dispatch({ type: "GET_CATEGORY_SUCCESS", payload: res.data });
       })
       .catch((err) => {
