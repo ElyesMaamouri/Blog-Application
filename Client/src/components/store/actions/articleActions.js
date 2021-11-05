@@ -84,6 +84,25 @@ export const updateArticle = (data, idArticle) => {
   };
 };
 
+export const listArticlePerPage = (page) => {
+  return (dispatch, getState) => {
+    axios
+      .get(baseURL + "/articles/?page=" + page)
+      .then((res) => {
+        dispatch({
+          type: "GET_ARTICLE_SUCCESS",
+          payload: res.data,
+        });
+      })
+      .catch((err) => {
+        dispatch({
+          type: "GET_ARTICLE_ERROR",
+          payload: err.response,
+        });
+      });
+  };
+};
+
 export const resetState = () => {
   console.log("reset state");
   return (dispatch, getState) => {

@@ -13,8 +13,6 @@ const Home = () => {
       <div className="home-page">
         <div className="article-blog">
           <Card />
-          <Card />
-          <Card />
         </div>
         <RightCard />
       </div>

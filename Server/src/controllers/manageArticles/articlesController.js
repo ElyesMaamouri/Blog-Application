@@ -246,3 +246,40 @@ exports.listArticlesPerCategory = async (req, res) => {
     });
   }
 };
+
+// Pagination
+
+exports.getArticlesByPage_get = async (req, res) => {
+  try {
+    const page = req.query.page || 1;
+    const pageSize = 5; // Limit
+    const skip = (page - 1) * pageSize;
+    const numberOfArticles = await Article.count();
+    let totalPage = Math.ceil(numberOfArticles / pageSize);
+
+    const blogs = await Article.find()
+      .skip(skip)
+      .limit(pageSize)
+      .populate("author");
+    if (!blogs || blogs.length === 0) {
+      return res.status(404).send({
+        message: "Articles not found",
+        success: false,
+      });
+    }
+    return res.status(200).send({
+      message: "List of articles per page",
+      success: true,
+      totalPage: totalPage,
+      page: page,
+      size: pageSize,
+      articles: blogs,
+    });
+  } catch (err) {
+    logger.error("Error list of articles :", err);
+    return res.status(500).send({
+      message: "Error list of articles" + err,
+      success: false,
+    });
+  }
+};

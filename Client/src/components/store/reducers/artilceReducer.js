@@ -3,6 +3,7 @@ const initState = {
   listArticleInfo: null,
   deleteArticleInfo: null,
   updateArticleInfo: null,
+  listArticlePerPage: null,
 };
 
 const articleReducer = (state = initState, action) => {
@@ -47,8 +48,17 @@ const articleReducer = (state = initState, action) => {
         ...state,
         updateArticleInfo: action.updateArticleInfo,
       };
+    case "GET_ARTICLE_SUCCESS":
+      return {
+        ...state,
+        listArticlePerPage: action.payload,
+      };
+    case "GET_ARTICLE_ERROR":
+      return {
+        ...state,
+        listArticlePerPage: action.listArticlePerPage,
+      };
     case "RESET_INITIAL_STATE":
-      console.log("ress", state);
       return {
         ...state,
         updateArticleInfo: action.payload,

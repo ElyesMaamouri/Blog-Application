@@ -169,7 +169,7 @@ module.exports = (app, pathApi) => {
    */
   app.get(
     pathApi + "/users/:id/blogs",
-    // passport.authenticate("jwt", { session: false }),
+    passport.authenticate("jwt", { session: false }),
     articleControl.getAllArticlePerUser_get
   );
 
@@ -220,7 +220,7 @@ module.exports = (app, pathApi) => {
    *       500 :
    *         description: An error occurred list of articles
    */
-  app.get(pathApi + "/articles", articleControl.listOfAllArticles);
+  // app.get(pathApi + "/articles", articleControl.listOfAllArticles);
 
   /**
    * @swagger
@@ -243,4 +243,6 @@ module.exports = (app, pathApi) => {
     pathApi + "/articles/categories/:id",
     articleControl.listArticlesPerCategory
   );
+
+  app.get(pathApi + "/articles", articleControl.getArticlesByPage_get);
 };

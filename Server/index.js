@@ -14,7 +14,7 @@ const server = http.Server(app);
 const port = process.env.PORT || 4000;
 const swaggerUI = require("swagger-ui-express");
 const swaggerJSDoc = require("swagger-jsdoc");
-
+const path = require("path");
 // Config Swagger
 const options = {
   definition: {
@@ -44,7 +44,7 @@ dotenv.config();
 //require("./src/middleware/passport")(passport);
 
 // Display all file in floder uploads
-app.use(express.static("src/uploads"));
+app.use(express.static(path.join(__dirname, "src/uploads")));
 
 //Session
 app.use(
