@@ -288,21 +288,40 @@ exports.getArticlesByPage_get = async (req, res) => {
 
 exports.listArticlesByLike_get = async (req, res) => {
   const item = req.params.like;
+  const page = req.query.page || 1;
+  const pageSize = 5; // Limit
+  const skip = (page - 1) * pageSize;
+  const numberOfArticles = await Article.count();
+  let totalPage = Math.ceil(numberOfArticles / pageSize);
   try {
     if (item === "betterVote") {
-      const listOfArticles = await Article.find().sort({ vote: -1 });
+      const listOfArticles = await Article.find()
+        .sort({ vote: -1 })
+        .skip(skip)
+        .limit(pageSize)
+        .populate("author");
       return res.status(200).send({
         message: "List Articles by better voted",
         success: true,
         blogs: listOfArticles,
+        totalPage: totalPage,
+        page: page,
+        size: pageSize,
       });
     }
     if (item === "worseVote") {
-      const listOfArticles = await Article.find().sort({ vote: 1 });
+      const listOfArticles = await Article.find()
+        .sort({ vote: 1 })
+        .skip(skip)
+        .limit(pageSize)
+        .populate("author");
       return res.status(200).send({
-        message: "List Articles by worse voted",
+        message: "List Articles by better voted",
         success: true,
         blogs: listOfArticles,
+        totalPage: totalPage,
+        page: page,
+        size: pageSize,
       });
     }
     return res.status(404).send({
