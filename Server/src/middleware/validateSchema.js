@@ -51,9 +51,9 @@ exports.validateProfileUpdate = (data) => {
 // Validation add article
 exports.validateArticle = (article) => {
   const schema = Joi.object({
-    title: Joi.string().min(3).max(255),
+    title: Joi.string().min(3).max(100),
     content: Joi.string().min(3).max(255),
-    picture: Joi.string().min(8).max(255),
+    picture: Joi.string().min(2).max(100),
     author: Joi.objectId(),
     category: Joi.objectId(),
   });

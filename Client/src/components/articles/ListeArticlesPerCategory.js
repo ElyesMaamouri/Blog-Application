@@ -1,39 +1,31 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { listArticlePerPage } from "../store/actions/articleActions";
-import decodeTokens from "../../helpers/decodeToken";
-import Paginations from "../pagination/Paginations";
-import "./card.css";
-
-const Card = () => {
+import { useParams } from "react-router-dom";
+import { listCategoryById } from "../store/actions/categoryActions";
+const ListeArticlesPerCategory = () => {
   const dispatch = useDispatch();
-  const listOfArticlePerPage = useSelector(
-    (state) => state.blog.listArticlePerPage
+  let categoryId = useParams();
+  const [articles, setArticles] = useState();
+  const [numberOfArticles, setNumberOfArticles] = useState();
+  const [nameCategory, setNameCategory] = useState();
+  const categoryArticleInfo = useSelector(
+    (state) => state.category.categoryByIdInfo
   );
-  const [page, setPage] = useState(1);
-  const [blog, setBlog] = useState();
-  const [pageValue, setPageValue] = useState(1);
 
   useEffect(() => {
-    dispatch(listArticlePerPage(pageValue));
+    dispatch(listCategoryById(categoryId.id));
   }, []);
 
   useEffect(() => {
-    dispatch(listArticlePerPage(pageValue));
-  }, [pageValue]);
+    blogsByCategory();
+    itemCategory();
+  }, [categoryArticleInfo]);
 
-  useEffect(() => {
-    listOfArticles();
-    setPage(listOfArticlePerPage && listOfArticlePerPage.totalPage);
-  }, [listOfArticlePerPage]);
-
-  const handleChange = (event, value) => {
-    setPageValue(value);
-  };
-  const listOfArticles = () => {
+  const blogsByCategory = () => {
     let data =
-      listOfArticlePerPage &&
-      listOfArticlePerPage.articles.map((item) => {
+      categoryArticleInfo &&
+      categoryArticleInfo.articles.map((item, index) => {
+        setNumberOfArticles(index + 1);
         return (
           <div className="blog-item" key={item._id}>
             <a href="#">
@@ -60,15 +52,21 @@ const Card = () => {
           </div>
         );
       });
-    setBlog(data);
+    setArticles(data);
   };
 
+  const itemCategory = () => {
+    const category = categoryArticleInfo && categoryArticleInfo.category;
+    setNameCategory(category);
+  };
   return (
     <div>
-      <div className="body_item">{blog}</div>
-      <Paginations count={page} page={pageValue} handleChange={handleChange} />
+      <h3>
+        Category : {nameCategory} / Number of articles : {numberOfArticles}
+      </h3>
+      {articles}
     </div>
   );
 };
 
-export default Card;
+export default ListeArticlesPerCategory;

@@ -103,7 +103,10 @@ const CreateArticle = () => {
             {...register("title", {
               required: "Title required",
               minLength: { value: 3, message: "Please enter a longer title" },
-              maxLength: { value: 10, message: "Please enter a shorter title" },
+              maxLength: {
+                value: 100,
+                message: "Please enter a shorter title",
+              },
             })}
             error={Boolean(errors.title)}
             helperText={errors.title?.message}
@@ -119,9 +122,9 @@ const CreateArticle = () => {
             name="Content"
             {...register("content", {
               required: "Content required",
-              minLength: { value: 5, message: "Please enter a longer content" },
+              minLength: { value: 3, message: "Please enter a longer content" },
               maxLength: {
-                value: 100,
+                value: 255,
                 message: "Please enter a shorter content",
               },
             })}

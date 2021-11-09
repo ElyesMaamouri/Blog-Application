@@ -109,7 +109,13 @@ exports.listCategories_get = async (req, res) => {
 //Get category by id
 exports.listCategory_get = async (req, res) => {
   try {
-    const category = await categorySchema.findById({ _id: req.params.id });
+    const category = await categorySchema
+      .findById({ _id: req.params.id })
+      .populate({
+        path: "articles",
+        populate: { path: "author" },
+      });
+
     if (!category) {
       return res.status(404).send({
         message: "Category not found",

@@ -10,6 +10,7 @@ import CreateArticle from "./components/articles/CreateArticle";
 import Navbar from "./components/navbar/Navbar";
 import UpdateProfile from "./components/profile/UpdateProfile";
 import ListeArticle from "./components/articles/ListeArticle";
+import ListeArticlesPerCategory from "./components/articles/ListeArticlesPerCategory";
 class App extends Component {
   render() {
     return (
@@ -36,6 +37,11 @@ class App extends Component {
               <Route exact path="/create-article" component={CreateArticle} />
               <Route exact path="/update-profile" component={UpdateProfile} />
               <Route exact path="/list-article" component={ListeArticle} />
+              <Route
+                exact
+                path="/category/:id"
+                component={ListeArticlesPerCategory}
+              />
             </>
           </Switch>
         </Router>

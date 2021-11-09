@@ -1,5 +1,6 @@
 const initState = {
   categoryInfo: null,
+  categoryByIdInfo: null,
 };
 
 const categoryReducer = (state = initState, action) => {
@@ -13,6 +14,17 @@ const categoryReducer = (state = initState, action) => {
       return {
         ...state,
         categoryInfo: action.categoryInfo,
+      };
+
+    case "GET_GATEGORY_BY_ID_SUCCESS":
+      return {
+        ...state,
+        categoryByIdInfo: action.payload,
+      };
+    case "GET_GATEGORY_BY_ID_ERROR":
+      return {
+        ...state,
+        categoryByIdInfo: action.categoryInfo,
       };
     default:
       return state;
