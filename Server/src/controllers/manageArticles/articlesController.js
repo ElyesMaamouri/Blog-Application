@@ -283,3 +283,37 @@ exports.getArticlesByPage_get = async (req, res) => {
     });
   }
 };
+
+// list articles per number of like
+
+exports.listArticlesByLike_get = async (req, res) => {
+  const item = req.params.like;
+  try {
+    if (item === "betterVote") {
+      const listOfArticles = await Article.find().sort({ vote: -1 });
+      return res.status(200).send({
+        message: "List Articles by better voted",
+        success: true,
+        blogs: listOfArticles,
+      });
+    }
+    if (item === "worseVote") {
+      const listOfArticles = await Article.find().sort({ vote: 1 });
+      return res.status(200).send({
+        message: "List Articles by worse voted",
+        success: true,
+        blogs: listOfArticles,
+      });
+    }
+    return res.status(404).send({
+      message: "Articles not found",
+      success: false,
+    });
+  } catch (err) {
+    logger.error("Error get articles per vote : " + err);
+    return res.status(500).send({
+      message: "Error get articles per vote" + err,
+      success: 500,
+    });
+  }
+};

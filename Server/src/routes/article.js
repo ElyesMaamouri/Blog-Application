@@ -245,4 +245,5 @@ module.exports = (app, pathApi) => {
   );
 
   app.get(pathApi + "/articles", articleControl.getArticlesByPage_get);
+  app.get(pathApi + "/articles/:like", articleControl.listArticlesByLike_get);
 };

@@ -51,6 +51,8 @@ const Card = () => {
                 <div className="rounded"></div>
 
                 <p>{item.content}</p>
+
+                <p>Vote : {item.vote}</p>
               </div>
 
               <div className="item-arrow">
