@@ -2179,3 +2179,22 @@
 {"level":"error","message":"Error get category TypeError: utils.populate: invalid path. Expected string. Got typeof `object`","timestamp":"2021-11-09T10:46:47.921Z"}
 {"level":"error","message":"Error get category TypeError: utils.populate: invalid path. Expected string. Got typeof `object`","timestamp":"2021-11-09T10:46:49.074Z"}
 {"level":"error","message":"Error get category TypeError: utils.populate: invalid path. Expected string. Got typeof `object`","timestamp":"2021-11-09T10:46:49.720Z"}
+{"level":"error","message":"Error get articles per vote : MongoServerError: Skip value must be non-negative, but received: -9223372036854775808","timestamp":"2021-11-09T14:44:05.059Z"}
+{"level":"error","message":"Error get articles per vote : MongoServerError: Skip value must be non-negative, but received: -9223372036854775808","timestamp":"2021-11-09T14:44:05.073Z"}
+{"level":"error","message":"Error get articles per vote : MongoServerError: Skip value must be non-negative, but received: -9223372036854775808","timestamp":"2021-11-09T14:45:23.922Z"}
+{"level":"error","message":"Error get articles per vote : MongoServerError: Skip value must be non-negative, but received: -9223372036854775808","timestamp":"2021-11-09T14:45:23.935Z"}
+{"level":"error","message":"Error get articles per vote : MongoServerError: Skip value must be non-negative, but received: -9223372036854775808","timestamp":"2021-11-09T14:45:28.726Z"}
+{"level":"error","message":"Error get articles per vote : MongoServerError: Skip value must be non-negative, but received: -9223372036854775808","timestamp":"2021-11-09T14:45:28.738Z"}
+{"level":"error","message":"Error get articles per vote : MongoServerError: Skip value must be non-negative, but received: -9223372036854775808","timestamp":"2021-11-09T14:45:32.637Z"}
+{"level":"error","message":"Error get articles per vote : MongoServerError: Skip value must be non-negative, but received: -9223372036854775808","timestamp":"2021-11-09T14:45:32.647Z"}
+{"level":"error","message":"Error get articles per vote : MongoServerError: Skip value must be non-negative, but received: -9223372036854775808","timestamp":"2021-11-09T14:54:13.879Z"}
+{"level":"error","message":"Error get articles per vote : MongoServerError: Skip value must be non-negative, but received: -9223372036854775808","timestamp":"2021-11-09T14:54:57.872Z"}
+{"level":"error","message":"Error get articles per vote : MongoServerError: Skip value must be non-negative, but received: -9223372036854775808","timestamp":"2021-11-09T14:54:57.888Z"}
+{"level":"error","message":"Error get articles per vote : MongoServerError: Skip value must be non-negative, but received: -9223372036854775808","timestamp":"2021-11-09T14:55:25.364Z"}
+{"level":"error","message":"Error get articles per vote : MongoServerError: Skip value must be non-negative, but received: -9223372036854775808","timestamp":"2021-11-09T14:55:25.384Z"}
+{"level":"error","message":"Error get articles per vote : MongoServerError: Skip value must be non-negative, but received: -9223372036854775808","timestamp":"2021-11-09T14:55:37.732Z"}
+{"level":"error","message":"Error get articles per vote : MongoServerError: Skip value must be non-negative, but received: -9223372036854775808","timestamp":"2021-11-09T14:56:11.354Z"}
+{"level":"error","message":"Error get articles per vote : MongoServerError: Skip value must be non-negative, but received: -9223372036854775808","timestamp":"2021-11-09T14:56:11.389Z"}
+{"level":"error","message":"Error get articles per vote : MongoServerError: Skip value must be non-negative, but received: -9223372036854775808","timestamp":"2021-11-09T14:56:15.532Z"}
+{"level":"error","message":"Error get articles per vote : MongoServerError: Skip value must be non-negative, but received: -9223372036854775808","timestamp":"2021-11-09T14:56:53.953Z"}
+{"level":"error","message":"Error get articles per vote : MongoServerError: Skip value must be non-negative, but received: -9223372036854775808","timestamp":"2021-11-09T14:56:53.972Z"}

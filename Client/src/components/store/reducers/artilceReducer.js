@@ -4,6 +4,7 @@ const initState = {
   deleteArticleInfo: null,
   updateArticleInfo: null,
   listArticlePerPage: null,
+  listArticleByVotes: null,
 };
 
 const articleReducer = (state = initState, action) => {
@@ -57,6 +58,17 @@ const articleReducer = (state = initState, action) => {
       return {
         ...state,
         listArticlePerPage: action.listArticlePerPage,
+      };
+
+    case "GET_ARTICLE_BY_LIKES_SUCCESS":
+      return {
+        ...state,
+        listArticleByVotes: action.payload,
+      };
+    case "GET_ARTICLE_BY_LIKES_ERROR":
+      return {
+        ...state,
+        listArticleByVotes: action.listArticleByLikes,
       };
     case "RESET_INITIAL_STATE":
       return {

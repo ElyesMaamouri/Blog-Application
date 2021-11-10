@@ -4,10 +4,16 @@ import { NavLink } from "react-router-dom";
 import decodeTokens from "../../helpers/decodeToken";
 import "./navbar.css";
 const SignedOutLinks = () => {
-  const currentlyUser = decodeTokens(localStorage.getItem("userDetails"));
+  let currentlyUser;
+
+  if (localStorage.getItem("userDetails")) {
+    currentlyUser = decodeTokens(localStorage.getItem("userDetails"));
+  }
 
   const logoutHandler = () => {
-    localStorage.removeItem("userDetails");
+    if (localStorage.getItem("userDetails")) {
+      localStorage.removeItem("userDetails");
+    }
 
     window.location.reload();
   };

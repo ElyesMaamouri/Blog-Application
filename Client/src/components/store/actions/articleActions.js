@@ -103,6 +103,26 @@ export const listArticlePerPage = (page) => {
   };
 };
 
+export const listArticlePerLike = (vote, page) => {
+  return (dispatch, getState) => {
+    axios
+      .get(baseURL + "/articles/" + vote + "/?page=" + page)
+      .then((res) => {
+        console.log("res api vote", res);
+        dispatch({
+          type: "GET_ARTICLE_BY_LIKES_SUCCESS",
+          payload: res.data,
+        });
+      })
+      .catch((err) => {
+        dispatch({
+          type: "GET_ARTICLE_BY_LIKES_ERROR",
+          payload: err.response,
+        });
+      });
+  };
+};
+
 export const resetState = () => {
   console.log("reset state");
   return (dispatch, getState) => {
