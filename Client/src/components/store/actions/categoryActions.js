@@ -1,5 +1,4 @@
 import axios from "axios";
-
 const baseURL = "http://localhost:4000/api";
 
 export const listCategories = () => {
@@ -24,10 +23,10 @@ export const listCategoryById = (id) => {
     axios
       .get(baseURL + "/categories/" + id)
       .then((res) => {
-        console.log("ress cat id", res);
+        console.log("ress catg", res);
         dispatch({
           type: "GET_GATEGORY_BY_ID_SUCCESS",
-          payload: res.data.category,
+          payload: res.data,
         });
       })
       .catch((err) => {

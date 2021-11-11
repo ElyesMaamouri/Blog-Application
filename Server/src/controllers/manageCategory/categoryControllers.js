@@ -92,10 +92,20 @@ exports.listCategories_get = async (req, res) => {
         success: true,
       });
     }
+    const data = await listOfCategories.map((item) => {
+      return {
+        nameCategory: item.category,
+        numberOfArticle: item.articles.length,
+        id: item._id.toString(),
+      };
+    });
+
+    console.log("item", data);
     return res.status(200).send({
       message: "List of categories",
       success: true,
       categories: listOfCategories,
+      categoryDetails: data,
     });
   } catch (err) {
     logger.error("Error get list categories " + err);
@@ -125,6 +135,7 @@ exports.listCategory_get = async (req, res) => {
     return res.status(200).send({
       message: "Category name",
       success: true,
+      numberOfArticle: category.articles.length,
       category: category,
     });
   } catch (err) {

@@ -1,0 +1,15 @@
+.details {
+  display: flex;
+}
+.card img {
+  width: 50%;
+}
+.card-details {
+  height: fit-content;
+  margin-top: 25px;
+  margin-left: 25px;
+  width: 60%;
+}
+.pp {
+  border: 2px solid black;
+}

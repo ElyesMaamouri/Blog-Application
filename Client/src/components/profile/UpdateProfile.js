@@ -47,6 +47,7 @@ const UpdateProfile = () => {
   const [confirmPasswordError, setConfirmPasswordError] = useState(false);
   const [message, setMessage] = useState("info");
   const [open, setOpen] = useState(false);
+
   const currentlyUser = decodeTokens(localStorage.getItem("userDetails"));
   console.log("currentlyUser", currentlyUser);
   //   Snackbar

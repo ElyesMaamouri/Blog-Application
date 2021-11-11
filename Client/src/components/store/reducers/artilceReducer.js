@@ -5,6 +5,7 @@ const initState = {
   updateArticleInfo: null,
   listArticlePerPage: null,
   listArticleByVotes: null,
+  articleDetails: null,
 };
 
 const articleReducer = (state = initState, action) => {
@@ -70,6 +71,18 @@ const articleReducer = (state = initState, action) => {
         ...state,
         listArticleByVotes: action.listArticleByLikes,
       };
+
+    case "GET_ARTICLE_DETAILS_SUCCESS":
+      return {
+        ...state,
+        articleDetails: action.payload,
+      };
+    case "GET_ARTICLE_DETAILS_ERROR":
+      return {
+        ...state,
+        articleDetails: action.articleDetails,
+      };
+
     case "RESET_INITIAL_STATE":
       return {
         ...state,

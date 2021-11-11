@@ -2198,3 +2198,4 @@
 {"level":"error","message":"Error get articles per vote : MongoServerError: Skip value must be non-negative, but received: -9223372036854775808","timestamp":"2021-11-09T14:56:15.532Z"}
 {"level":"error","message":"Error get articles per vote : MongoServerError: Skip value must be non-negative, but received: -9223372036854775808","timestamp":"2021-11-09T14:56:53.953Z"}
 {"level":"error","message":"Error get articles per vote : MongoServerError: Skip value must be non-negative, but received: -9223372036854775808","timestamp":"2021-11-09T14:56:53.972Z"}
+{"level":"error","message":"Error article found by idCastError: Cast to ObjectId failed for value \"{ _id: '618b9acaf97351773a0ced' }\" (type Object) at path \"_id\" for model \"Article\"","timestamp":"2021-11-10T14:22:12.487Z"}

@@ -11,6 +11,7 @@ import Navbar from "./components/navbar/Navbar";
 import UpdateProfile from "./components/profile/UpdateProfile";
 import ListeArticle from "./components/articles/ListeArticle";
 import ListeArticlesPerCategory from "./components/articles/ListeArticlesPerCategory";
+import ArticleDetails from "./components/articles/ArticleDetails";
 class App extends Component {
   render() {
     return (
@@ -42,6 +43,7 @@ class App extends Component {
                 path="/category/:id"
                 component={ListeArticlesPerCategory}
               />
+              <Route exact path="/article/:id" component={ArticleDetails} />
             </>
           </Switch>
         </Router>

@@ -24,8 +24,7 @@ const ListeArticlesPerCategory = () => {
   const blogsByCategory = () => {
     let data =
       categoryArticleInfo &&
-      categoryArticleInfo.articles.map((item, index) => {
-        setNumberOfArticles(index + 1);
+      categoryArticleInfo[0].category.articles.map((item, index) => {
         return (
           <div className="blog-item" key={item._id}>
             <a href="#">
@@ -53,6 +52,9 @@ const ListeArticlesPerCategory = () => {
         );
       });
     setArticles(data);
+    if (categoryArticleInfo && categoryArticleInfo[0]) {
+      setNumberOfArticles(categoryArticleInfo[0].numberOfArticle);
+    }
   };
 
   const itemCategory = () => {

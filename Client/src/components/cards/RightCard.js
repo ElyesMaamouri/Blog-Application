@@ -22,13 +22,13 @@ const RightCard = (props) => {
         </div>
         <ul class="list-group list-group-flush">
           {categoryInfo &&
-            categoryInfo.categories.map((item, index) => (
+            categoryInfo.categoryDetails.map((item, index) => (
               <Link
                 class="list-group-item item-card"
-                to={"/category/" + item._id}
-                key={item._id}
+                to={"/category/" + item.id}
+                key={item.id}
               >
-                {item.category} ({item.articles.length})
+                {item.nameCategory} ({item.numberOfArticle})
               </Link>
             ))}
         </ul>

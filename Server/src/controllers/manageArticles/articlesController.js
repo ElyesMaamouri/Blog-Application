@@ -260,6 +260,7 @@ exports.getArticlesByPage_get = async (req, res) => {
     const blogs = await Article.find()
       .skip(skip)
       .limit(pageSize)
+      .sort({ createAt: -1 })
       .populate("author");
     if (!blogs || blogs.length === 0) {
       return res.status(404).send({
@@ -333,6 +334,36 @@ exports.listArticlesByLike_get = async (req, res) => {
     return res.status(500).send({
       message: "Error get articles per vote" + err,
       success: 500,
+    });
+  }
+};
+
+// Get article by id
+exports.articleById_get = async (req, res) => {
+  const idArticle = req.params.id;
+  console.log(idArticle);
+  try {
+    const article = await Article.findById({ _id: idArticle }).populate(
+      "author"
+    );
+    if (!article) {
+      return res.status(404).send({
+        message: "Article Not found",
+        success: false,
+      });
+    }
+    if (article) {
+      return res.status(200).send({
+        message: "Article Found",
+        success: false,
+        article: article,
+      });
+    }
+  } catch (err) {
+    logger.error("Error article found by id" + err);
+    return res.status(500).send({
+      message: "Error article found by id" + err,
+      success: false,
     });
   }
 };

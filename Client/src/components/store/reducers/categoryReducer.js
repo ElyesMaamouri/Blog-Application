@@ -19,7 +19,7 @@ const categoryReducer = (state = initState, action) => {
     case "GET_GATEGORY_BY_ID_SUCCESS":
       return {
         ...state,
-        categoryByIdInfo: action.payload,
+        categoryByIdInfo: [action.payload],
       };
     case "GET_GATEGORY_BY_ID_ERROR":
       return {
