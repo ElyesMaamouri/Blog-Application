@@ -28,13 +28,44 @@ exports.AddComment_post = async (req, res) => {
       await commentDetails.save();
       return res.status(201).send({
         message: "Comment has been successfully created",
-        success: false,
+        success: true,
       });
     }
   } catch (err) {
     logger.error("Error occurred create comment -- " + err);
     return res.status(500).send({
       message: "Error occurred create comment -- " + err,
+      success: false,
+    });
+  }
+};
+
+// Get comment
+exports.listComments = async (req, res) => {
+  try {
+    Comment.find()
+      .limit(5)
+      .sort({ createAt: -1 })
+      .populate({ path: "author", select: "userName" })
+      .then((comments) => {
+        if (!comments) {
+          return res.status(404).send({
+            message: "Comments not found",
+            success: false,
+          });
+        }
+        if (comments) {
+          return res.status(200).send({
+            message: "List of last five comments",
+            success: true,
+            comments: comments,
+          });
+        }
+      });
+  } catch (err) {
+    logger.error("Error list of last five comments :", err);
+    return res.status(500).send({
+      message: "Error list of last five comments" + err,
       success: false,
     });
   }

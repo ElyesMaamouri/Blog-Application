@@ -5,11 +5,40 @@
   width: 50%;
 }
 .card-details {
-  height: fit-content;
+  height: 428px;
   margin-top: 25px;
   margin-left: 25px;
   width: 60%;
 }
 .pp {
   border: 2px solid black;
+}
+
+.user_name {
+  font-size: 14px;
+  font-weight: bold;
+}
+.comments-list .media {
+  border-bottom: 1px dotted #ccc;
+}
+.section-comment {
+  margin-top: -500px;
+}
+.media {
+  display: block;
+}
+.media img {
+  width: 5%;
+}
+.section-comment form {
+  width: 95%;
+}
+.button-send {
+  width: 25%;
+}
+.form-group {
+  margin-bottom: 0px;
+}
+.page-header {
+  margin-bottom: 25px;
 }

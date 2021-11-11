@@ -10,7 +10,7 @@ const Navbar = () => {
         <SignedOutLinks />
       </div>
     );
-  } else {
+  } else if (localStorage.getItem("userDetails") === null) {
     return (
       <div>
         <SignedInLink />

@@ -44,7 +44,7 @@ const ModalAlert = (data) => {
     if (updateArticleInfo === "Your article has been successfully updated") {
       setTimeout(() => {
         dispatch(resetState());
-      }, 3000);
+      }, 4000);
     }
   }, [updateArticleInfo]);
 

@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
+import { listArticlePerPage } from "../store/actions/articleActions";
 import { listCategories } from "../store/actions/categoryActions";
+import { getComments } from "../store/actions/commentActions";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
@@ -8,10 +10,20 @@ import "./right-card.css";
 const RightCard = (props) => {
   const dispatch = useDispatch();
   const categoryInfo = useSelector((state) => state.category.categoryInfo);
-  console.log("props", props.match);
+  const listOfArticlePerPage = useSelector(
+    (state) => state.blog.listArticlePerPage
+  );
+  const listCommentsInfo = useSelector(
+    (state) => state.comment.listCommentsInfo
+  );
+
+  console.log("comments0", listCommentsInfo);
+  const [pageValue, setPageValue] = useState(1);
 
   useEffect(() => {
     dispatch(listCategories());
+    dispatch(listArticlePerPage(pageValue));
+    dispatch(getComments());
   }, []);
 
   return (
@@ -38,9 +50,21 @@ const RightCard = (props) => {
           <i class="bi bi-book-half icon-category"> Last Article</i>
         </div>
         <ul class="list-group list-group-flush">
-          <li class="list-group-item item-card">An item</li>
-          <li class="list-group-item item-card">A second item</li>
-          <li class="list-group-item item-card">A third item</li>
+          {listOfArticlePerPage &&
+            listOfArticlePerPage.articles.map((item) => {
+              {
+                console.log("itemmm", item.title);
+              }
+              return (
+                <Link
+                  class="list-group-item item-card"
+                  to={"/article/" + item._id}
+                  key={item._id}
+                >
+                  {item.title}
+                </Link>
+              );
+            })}
         </ul>
       </div>
 
@@ -49,9 +73,14 @@ const RightCard = (props) => {
           <i class="bi bi-chat-left-dots icon-category"> Last Comment</i>
         </div>
         <ul class="list-group list-group-flush">
-          <li class="list-group-item item-card">An item</li>
-          <li class="list-group-item item-card">A second item</li>
-          <li class="list-group-item item-card">A third item</li>
+          {listCommentsInfo &&
+            listCommentsInfo.comments.map((item) => {
+              return (
+                <li class="list-group-item item-card">
+                  {item.content} By : {item.author.userName}
+                </li>
+              );
+            })}
         </ul>
       </div>
     </div>

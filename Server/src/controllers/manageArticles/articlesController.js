@@ -7,6 +7,7 @@ const fileUpload = require("../../middleware/file-upload");
 const { decryptData } = require("../../utils/commonFunction");
 const fs = require("fs");
 const _ = require("lodash");
+const path = require("path");
 
 // Add new article
 exports.addArticle_post = async (req, res) => {
@@ -343,9 +344,13 @@ exports.articleById_get = async (req, res) => {
   const idArticle = req.params.id;
   console.log(idArticle);
   try {
-    const article = await Article.findById({ _id: idArticle }).populate(
-      "author"
-    );
+    const article = await Article.findById({ _id: idArticle })
+      .populate({
+        path: "comments",
+        populate: { path: "author", select: "userName avatar" },
+      })
+      .populate({ path: "author", select: "userName directoryPath" });
+
     if (!article) {
       return res.status(404).send({
         message: "Article Not found",
@@ -357,6 +362,7 @@ exports.articleById_get = async (req, res) => {
         message: "Article Found",
         success: false,
         article: article,
+        numberOfComment: article.comments.length,
       });
     }
   } catch (err) {
