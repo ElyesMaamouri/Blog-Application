@@ -68,3 +68,11 @@ exports.validateCategory = (category) => {
   });
   return schema.validate(category);
 };
+
+exports.validateComment = (comment) => {
+  const schema = Joi.object({
+    content: Joi.string().min(3).max(255),
+    author: Joi.objectId(),
+  });
+  return schema.validate(comment);
+};

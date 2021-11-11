@@ -2199,3 +2199,24 @@
 {"level":"error","message":"Error get articles per vote : MongoServerError: Skip value must be non-negative, but received: -9223372036854775808","timestamp":"2021-11-09T14:56:53.953Z"}
 {"level":"error","message":"Error get articles per vote : MongoServerError: Skip value must be non-negative, but received: -9223372036854775808","timestamp":"2021-11-09T14:56:53.972Z"}
 {"level":"error","message":"Error article found by idCastError: Cast to ObjectId failed for value \"{ _id: '618b9acaf97351773a0ced' }\" (type Object) at path \"_id\" for model \"Article\"","timestamp":"2021-11-10T14:22:12.487Z"}
+{"level":"error","message":"Error occurred create commenReferenceError: Article is not defined","timestamp":"2021-11-11T09:00:17.617Z"}
+{"level":"error","message":"Error occurred create commenCastError: Cast to ObjectId failed for value \"{ _id: undefined }\" (type Object) at path \"_id\" for model \"Article\"","timestamp":"2021-11-11T09:01:21.531Z"}
+{"level":"error","message":"Error occurred create comment CastError: Cast to ObjectId failed for value \"{ _id: undefined }\" (type Object) at path \"_id\" for model \"Article\"","timestamp":"2021-11-11T09:01:40.109Z"}
+{"level":"error","message":"Error occurred create comment -- CastError: Cast to ObjectId failed for value \"{ _id: undefined }\" (type Object) at path \"_id\" for model \"Article\"","timestamp":"2021-11-11T09:01:58.860Z"}
+{"level":"error","message":"Error occurred create comment -- CastError: Cast to ObjectId failed for value \"{ _id: undefined }\" (type Object) at path \"_id\" for model \"Article\"","timestamp":"2021-11-11T09:02:27.946Z"}
+{"level":"error","message":"Error occurred create comment -- CastError: Cast to ObjectId failed for value \"hello\" (type string) at path \"comments\"","timestamp":"2021-11-11T09:08:08.625Z"}
+{"level":"error","message":"Error occurred create comment -- CastError: Cast to ObjectId failed for value \"{ id: '618a2f2c32ff805de3034385' }\" (type Object) at path \"_id\" for model \"Article\"","timestamp":"2021-11-11T09:08:19.704Z"}
+{"level":"error","message":"Error occurred create comment -- CastError: Cast to ObjectId failed for value \"hello\" (type string) at path \"comments\"","timestamp":"2021-11-11T09:09:51.084Z"}
+{"level":"error","message":"Error occurred create comment -- ReferenceError: comment is not defined","timestamp":"2021-11-11T09:10:23.535Z"}
+{"level":"error","message":"Error occurred create comment -- ReferenceError: comment is not defined","timestamp":"2021-11-11T09:10:40.284Z"}
+{"level":"error","message":"Error occurred create comment -- ReferenceError: comment is not defined","timestamp":"2021-11-11T09:10:42.418Z"}
+{"level":"error","message":"Error occurred create comment -- CastError: Cast to ObjectId failed for value \"hello\" (type string) at path \"comments\"","timestamp":"2021-11-11T09:11:13.454Z"}
+{"level":"error","message":"Error Schema comment","timestamp":"2021-11-11T09:12:52.050Z"}
+{"level":"error","message":"Error occurred create comment -- ValidationError: author: Path `author` is required.","timestamp":"2021-11-11T09:13:04.737Z"}
+{"level":"error","message":"Error occurred create comment -- ValidationError: author: Path `author` is required.","timestamp":"2021-11-11T09:13:32.073Z"}
+{"level":"error","message":"Error occurred create comment -- ValidationError: author: Path `author` is required.","timestamp":"2021-11-11T09:14:13.004Z"}
+{"level":"error","message":"Error occurred create comment -- ValidationError: author: Path `author` is required., content: Path `content` is required.","timestamp":"2021-11-11T09:14:34.700Z"}
+{"level":"error","message":"Error occurred create comment -- ValidationError: author: Path `author` is required., content: Path `content` is required.","timestamp":"2021-11-11T09:15:02.912Z"}
+{"level":"error","message":"Error occurred create comment -- ValidationError: author: Path `author` is required., content: Path `content` is required.","timestamp":"2021-11-11T09:15:34.351Z"}
+{"level":"error","message":"Error occurred create comment -- ValidationError: author: Path `author` is required., content: Path `content` is required.","timestamp":"2021-11-11T09:16:09.410Z"}
+{"level":"error","message":"Error occurred create comment -- ValidationError: author: Path `author` is required., content: Path `content` is required.","timestamp":"2021-11-11T09:16:58.126Z"}

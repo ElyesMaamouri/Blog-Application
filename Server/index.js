@@ -85,6 +85,7 @@ require("./src/routes/auth")(app, process.env.PATH_API);
 require("./src/routes/client")(app, process.env.PATH_API);
 require("./src/routes/article")(app, process.env.PATH_API);
 require("./src/routes/category")(app, process.env.PATH_API);
+require("./src/routes/comment")(app, process.env.PATH_API);
 //app.use(xss());
 server.listen(port, (err) => {
   if (err) throw logger.error("the server is not running !! " + PORT);
