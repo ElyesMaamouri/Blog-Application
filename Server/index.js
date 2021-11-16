@@ -1,4 +1,5 @@
 const express = require("express");
+
 const dotenv = require("dotenv");
 const app = express();
 const http = require("http");
@@ -74,8 +75,10 @@ app.use(cors());
 // Apply strategy to passport
 applyPassportStrategy(passport);
 // To parse the incoming requests with JSON payloads (replace body-parser)
-app.use(express.urlencoded({ extended: true }));
+
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
 app.use(helmet());
 app.use(errorHandler());
 

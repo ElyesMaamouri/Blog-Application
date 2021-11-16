@@ -256,4 +256,10 @@ module.exports = (app, pathApi) => {
     checkRoleUser.checkIsAdmin,
     articleControl.deleteArticleById_delete
   );
+  app.patch(
+    pathApi + "/blogs/:id",
+    passport.authenticate("jwt", { session: false }),
+    checkRoleUser.checkIsAdmin,
+    articleControl.updateArticleByAdmin
+  );
 };

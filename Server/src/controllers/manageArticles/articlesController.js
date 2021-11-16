@@ -189,7 +189,6 @@ exports.updateArticle_patch = async (req, res) => {
 };
 
 // Get all article
-
 exports.listOfAllArticles = async (req, res) => {
   try {
     const listArticles = await Article.find();
@@ -423,6 +422,62 @@ exports.deleteArticleById_delete = async (req, res) => {
     logger.error("An error occurred deleting your article : ", err);
     return res.status(500).send({
       message: "	An error occurred deleting your article :" + err,
+      success: false,
+    });
+  }
+};
+
+//Admin update article
+exports.updateArticleByAdmin = async (req, res) => {
+  const { error } = validateArticle(req.body);
+  if (error) {
+    return res.status(404).send(error.details[0].message);
+  }
+  try {
+    const articles = new Article(
+      _.pick(req.body, ["title", "content", "author", "picture", "category"])
+    );
+
+    const data = await Article.findById({ _id: req.params.id });
+    if (data) {
+      if (req.file) {
+        articles.picture = fileUpload.getPicture(
+          req.file,
+          req.fileValidationError,
+          res
+        );
+      }
+      articles.picture = data.picture;
+      const newUpdate = new Article({
+        _id: req.params.id,
+        title: articles.title,
+        content: articles.content,
+        picture: articles.picture,
+        category: articles.category,
+      });
+      await Article.findByIdAndUpdate(
+        { _id: req.params.id },
+        { $set: newUpdate }
+      );
+
+      await categorySchema.findByIdAndUpdate(
+        { _id: newUpdate.category },
+        { $push: { articles: req.params.id } }
+      );
+      return res.status(201).send({
+        message: "Your article has been successfully updated",
+        success: true,
+      });
+    }
+    logger.error("Article not found (Update article)");
+    return res.status(404).send({
+      message: "Article Not found",
+      success: false,
+    });
+  } catch (err) {
+    logger.error("An error occurred updating your article :", err);
+    return res.status(500).send({
+      message: "An error occurred updating your article :" + err,
       success: false,
     });
   }
