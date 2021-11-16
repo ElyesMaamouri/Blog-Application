@@ -1,5 +1,6 @@
 const Article = require("../../models/Article");
 const User = require("../../models/User");
+const Comment = require("../../models/Comment");
 const categorySchema = require("../../models/Category");
 const logger = require("../../../config/logger");
 const { validateArticle } = require("../../middleware/validateSchema");
@@ -369,6 +370,59 @@ exports.articleById_get = async (req, res) => {
     logger.error("Error article found by id" + err);
     return res.status(500).send({
       message: "Error article found by id" + err,
+      success: false,
+    });
+  }
+};
+
+// Admin remove article by id
+exports.deleteArticleById_delete = async (req, res) => {
+  try {
+    const removeArticle = await Article.findByIdAndDelete({
+      _id: req.params.id,
+    }).populate("author category");
+
+    if (!removeArticle) {
+      res.status(404).send({
+        message: "Article Not found",
+        success: false,
+      });
+    } else {
+      let idArticle = removeArticle.author.blogs.toString();
+      const client = removeArticle.author.id;
+      const category = removeArticle.category.id;
+      const comments = removeArticle.comments;
+
+      if (idArticle.includes(req.params.id) === true) {
+        // Delete id article from array blogs
+        await User.findByIdAndUpdate(
+          { _id: client },
+          { $pull: { blogs: req.params.id } }
+        );
+        // Delete picture article
+        const path =
+          "src/uploads/" +
+          removeArticle.author.directoryPath +
+          "/" +
+          removeArticle.picture;
+        await fs.unlinkSync(path);
+        // Remove id article from array category
+        await categorySchema.findByIdAndUpdate(
+          { _id: category },
+          { $pull: { articles: req.params.id } }
+        );
+        // Remove all comments of article
+        await Comment.deleteMany({ _id: { $in: comments } });
+        return res.status(201).send({
+          message: "Article has been deleted",
+          success: true,
+        });
+      }
+    }
+  } catch (err) {
+    logger.error("An error occurred deleting your article : ", err);
+    return res.status(500).send({
+      message: "	An error occurred deleting your article :" + err,
       success: false,
     });
   }

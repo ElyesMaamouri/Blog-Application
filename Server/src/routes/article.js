@@ -2,6 +2,7 @@ module.exports = (app, pathApi) => {
   const articleControl = require("../controllers/manageArticles/articlesController");
   const uploadPicture = require("../middleware/file-upload");
   const passport = require("passport");
+  const checkRoleUser = require("../middleware/chekRoleUser");
 
   /**
    * @swagger
@@ -247,4 +248,12 @@ module.exports = (app, pathApi) => {
   app.get(pathApi + "/articles", articleControl.getArticlesByPage_get);
   app.get(pathApi + "/articles/:like", articleControl.listArticlesByLike_get);
   app.get(pathApi + "/articles/details/:id", articleControl.articleById_get);
+
+  //Admin
+  app.delete(
+    pathApi + "/blogs/:id",
+    passport.authenticate("jwt", { session: false }),
+    checkRoleUser.checkIsAdmin,
+    articleControl.deleteArticleById_delete
+  );
 };

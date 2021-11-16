@@ -2,7 +2,7 @@
   display: flex;
 }
 .card img {
-  width: 50%;
+  max-width: 300px;
 }
 .card-details {
   height: 428px;
