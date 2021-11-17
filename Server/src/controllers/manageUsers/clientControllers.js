@@ -265,3 +265,40 @@ exports.deleteClientAdmin_delete = async (req, res) => {
     });
   }
 };
+
+// Admin List of clients
+
+exports.listClientsAdmin_get = async (req, res) => {
+  try {
+    const page = req.query.page || 1;
+    const pageSize = 5; // Limit
+    const skip = (page - 1) * pageSize;
+    const numberOfClients = await User.count();
+    let totalPage = Math.ceil(numberOfClients / pageSize);
+
+    const listClients = await User.find()
+      .skip(skip)
+      .limit(pageSize)
+      .sort({ createAt: 1 });
+    if (!listClients || listClients.length === 0) {
+      return res.status(404).send({
+        message: "Clients not found",
+        success: false,
+      });
+    }
+    return res.status(200).send({
+      message: "List of client per page",
+      success: true,
+      totalPage: totalPage,
+      page: page,
+      size: pageSize,
+      users: listClients,
+    });
+  } catch (err) {
+    logger.error("Error List of client per page :", err);
+    return res.status(500).send({
+      message: "Error List of client per page" + err,
+      success: false,
+    });
+  }
+};

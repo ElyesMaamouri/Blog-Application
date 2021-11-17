@@ -182,4 +182,11 @@ module.exports = (app, pathApi) => {
     checkRoleUser.checkIsAdmin,
     clientControl.deleteClientAdmin_delete
   );
+
+  app.get(
+    pathApi + "/clients/",
+    passport.authenticate("jwt", { session: false }),
+    checkRoleUser.checkIsAdmin,
+    clientControl.listClientsAdmin_get
+  );
 };
