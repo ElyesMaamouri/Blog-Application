@@ -2,6 +2,8 @@ module.exports = (app, pathApi) => {
   const clientControl = require("../controllers/manageUsers/clientControllers");
   const configUploadAvatar = require("../middleware/file-upload");
   const passport = require("passport");
+  const checkRoleUser = require("../middleware/chekRoleUser");
+
   //Register client
 
   /**
@@ -166,5 +168,11 @@ module.exports = (app, pathApi) => {
     pathApi + "/users/:id",
     passport.authenticate("jwt", { session: false }),
     clientControl.profileUpdate_patch
+  );
+  app.patch(
+    pathApi + "/clients/:id",
+    passport.authenticate("jwt", { session: false }),
+    checkRoleUser.checkIsAdmin,
+    clientControl.updateProfileClientAdmin_patch
   );
 };

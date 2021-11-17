@@ -2,6 +2,7 @@ const User = require("../../models/User");
 const {
   userValidateForm,
   validateProfileUpdate,
+  validateUpdateProfileAdmin,
 } = require("../../middleware/validateSchema");
 const logger = require("../../../config/logger");
 const {
@@ -189,3 +190,53 @@ exports.profileUpdate_patch = async (req, res) => {
       });
     });
 };
+
+//Admin update profil client
+exports.updateProfileClientAdmin_patch = async (req, res) => {
+  try {
+    const { error } = validateUpdateProfileAdmin(req.body);
+    if (error) {
+      return res.status(404).send(error.details[0].message);
+    }
+    const client = _.pick(req.body, ["email", "isAdmin", "newPassword"]);
+
+    client.newPassword = await cryptPassword(client.newPassword);
+    const newUpdate = new User({
+      _id: req.params.id,
+      email: client.email,
+      password: client.newPassword,
+      isAdmin: client.isAdmin,
+    });
+
+    const email = await User.findOne({ email: client.email });
+
+    if (email) {
+      return res.status(200).send({
+        message: "Sorry! email already exists",
+        success: false,
+      });
+    }
+    const user = await User.findByIdAndUpdate(
+      { _id: req.params.id },
+      { $set: newUpdate }
+    );
+
+    if (!user) {
+      return res.status(404).send({
+        message: "User not found",
+        success: false,
+      });
+    }
+    return res.status(201).send({
+      message: "Account client has been successfully updated",
+      success: false,
+    });
+  } catch (err) {
+    return res.status(500).send({
+      message: "Error update profile client:" + err,
+      success: false,
+    });
+  }
+};
+
+exports.deleteClientAdmin_delete = (req, res) => {};
