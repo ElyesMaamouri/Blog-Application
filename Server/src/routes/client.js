@@ -175,4 +175,11 @@ module.exports = (app, pathApi) => {
     checkRoleUser.checkIsAdmin,
     clientControl.updateProfileClientAdmin_patch
   );
+
+  app.delete(
+    pathApi + "/clients/:id",
+    passport.authenticate("jwt", { session: false }),
+    checkRoleUser.checkIsAdmin,
+    clientControl.deleteClientAdmin_delete
+  );
 };

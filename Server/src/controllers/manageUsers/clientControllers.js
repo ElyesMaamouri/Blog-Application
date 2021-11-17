@@ -232,6 +232,7 @@ exports.updateProfileClientAdmin_patch = async (req, res) => {
       success: false,
     });
   } catch (err) {
+    logger.error("Error update profile client :" + err);
     return res.status(500).send({
       message: "Error update profile client:" + err,
       success: false,
@@ -239,4 +240,28 @@ exports.updateProfileClientAdmin_patch = async (req, res) => {
   }
 };
 
-exports.deleteClientAdmin_delete = (req, res) => {};
+// Admin  : Delete client
+exports.deleteClientAdmin_delete = async (req, res) => {
+  try {
+    const user = await User.findByIdAndDelete({ _id: req.params.id });
+    console.log(user);
+    if (!user) {
+      return res.status(404).send({
+        message: "User not found",
+        success: false,
+      });
+    }
+    const path = "src/uploads/avatar/" + user.avatar;
+    await fs.unlinkSync(path);
+    return res.status(200).send({
+      message: "Account client has been successfully removed",
+      success: true,
+    });
+  } catch (err) {
+    logger.error("Error Removed client :" + err);
+    return res.status(500).send({
+      message: "Error Removed client" + err,
+      success: false,
+    });
+  }
+};
