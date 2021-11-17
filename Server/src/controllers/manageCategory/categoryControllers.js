@@ -221,6 +221,7 @@ exports.removeCategory = async (req, res) => {
   }
 };
 
+// Admin : Update category
 exports.updateCategoryAdmin_delete = async (req, res) => {
   const { error } = validateCategory(req.body);
   if (error) {
@@ -265,6 +266,43 @@ exports.updateCategoryAdmin_delete = async (req, res) => {
     logger.error("Error update category" + err);
     return res.status(500).send({
       message: "Error update category" + err,
+      success: false,
+    });
+  }
+};
+// Get category per page
+exports.categoriesDetailsAdmin = async (req, res) => {
+  console.log("query=======>");
+  try {
+    const page = req.query.page || 1;
+    const pageSize = 5; // Limit
+    const skip = (page - 1) * pageSize;
+    const numberOfCategories = await categorySchema.count();
+    let totalPage = Math.ceil(numberOfCategories / pageSize);
+    const detailsCategory = await categorySchema
+      .find()
+      .skip(skip)
+      .limit(pageSize)
+      .sort({ createAt: 1 });
+    if (!detailsCategory || detailsCategory.length === 0) {
+      return res.status(404).send({
+        message: "Categories not found",
+        success: false,
+      });
+    }
+    return res.status(200).send({
+      message: "List of categories",
+      success: true,
+      totalPage: totalPage,
+      page: page,
+      size: pageSize,
+      categories: detailsCategory,
+      numberOfCategories: numberOfCategories,
+    });
+  } catch (err) {
+    logger.error("Error list of categories" + err);
+    return res.status(500).send({
+      message: "Error list categories",
       success: false,
     });
   }

@@ -2430,3 +2430,4 @@
 {"level":"error","message":"Article not found (Update article)","timestamp":"2021-11-16T16:31:52.134Z"}
 {"level":"error","message":"An error occurred updating your article : dalse is not defined","stack":"ReferenceError: dalse is not defined\n    at exports.updateArticleByAdmin (C:\\Users\\DevPoint\\Desktop\\Elyes\\personal__project\\Blog__Application\\Server\\src\\controllers\\manageArticles\\articlesController.js:475:16)\n    at processTicksAndRejections (internal/process/task_queues.js:95:5)","timestamp":"2021-11-16T16:31:52.135Z"}
 {"level":"error","message":"Article not found (Update article)","timestamp":"2021-11-16T16:32:07.701Z"}
+{"level":"error","message":"Error list of categoriesTypeError: categorySchema(...).find is not a function","timestamp":"2021-11-17T14:06:36.631Z"}

@@ -173,4 +173,11 @@ module.exports = (app, pathApi) => {
     checkRoleUser.checkIsAdmin,
     categoryControl.updateCategoryAdmin_delete
   );
+
+  app.get(
+    pathApi + "/list-categories/",
+    passport.authenticate("jwt", { session: false }),
+    checkRoleUser.checkIsAdmin,
+    categoryControl.categoriesDetailsAdmin
+  );
 };
