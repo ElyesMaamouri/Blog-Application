@@ -166,4 +166,11 @@ module.exports = (app, pathApi) => {
     // checkRoleUser.checkIsAdmin,
     categoryControl.removeCategory
   );
+
+  app.patch(
+    pathApi + "/categories/:id",
+    passport.authenticate("jwt", { session: false }),
+    checkRoleUser.checkIsAdmin,
+    categoryControl.updateCategoryAdmin_delete
+  );
 };

@@ -220,3 +220,52 @@ exports.removeCategory = async (req, res) => {
     });
   }
 };
+
+exports.updateCategoryAdmin_delete = async (req, res) => {
+  const { error } = validateCategory(req.body);
+  if (error) {
+    logger.error("Error Schema category", error.details[0].message);
+    return res.status(400).send(error.details[0].message);
+  }
+  const slug = new categorySchema(_.pick(req.body, ["category"]));
+  try {
+    const checkCategory = await categorySchema.findOne({
+      category: slug.category,
+    });
+
+    const newUpdate = new categorySchema({
+      _id: req.params.id,
+      category: slug.category,
+    });
+
+    if (!checkCategory) {
+      const category = await categorySchema
+        .findByIdAndUpdate({ _id: req.params.id }, { $set: newUpdate })
+        .then((data) => {
+          if (!data) {
+            return res.status(404).send({
+              message: "Category not found",
+              success: false,
+            });
+          } else {
+            return res.status(201).send({
+              message: " Category has been successfully updated",
+              success: true,
+            });
+          }
+        });
+    }
+    if (checkCategory) {
+      return res.status(200).send({
+        message: "Category already exists",
+        success: false,
+      });
+    }
+  } catch (err) {
+    logger.error("Error update category" + err);
+    return res.status(500).send({
+      message: "Error update category" + err,
+      success: false,
+    });
+  }
+};
