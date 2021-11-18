@@ -150,11 +150,11 @@ exports.listCategory_get = async (req, res) => {
   }
 };
 
-// delete a category with these articles
+// delete a category with  articles
 exports.removeCategory = async (req, res) => {
   try {
-    // Find and delete category with artilce
-    const item = await categorySchema.findById({ _id: req.params.id });
+    // Find and delete category
+    const item = await categorySchema.findByIdAndDelete({ _id: req.params.id });
     if (!item) {
       return res.status(404).send({
         message: "Category not found",
@@ -162,51 +162,23 @@ exports.removeCategory = async (req, res) => {
       });
     }
     if (item) {
-      const blogs = item.articles.map((data) => {
-        return data._id.toString();
-      });
-      // Find articles to delete them
-      const findArticle = await Article.find({ _id: { $in: blogs } }).populate({
-        path: "author",
-        select: "userName directoryPath",
-      });
-      // Remove all picture articles
-      const folder = findArticle.map((result) => {
-        return result.author.directoryPath;
-      });
-      const listOfFolderUser = [...new Set(folder)];
-      console.log("foder ====>", listOfFolderUser);
-      const pictureAllArticles = findArticle.map((result) => {
-        return result.picture;
-      });
       let arrayComment = [];
+      // Find articles to delete them
+      const findArticle = await Article.find({ _id: { $in: item.articles } });
+      // Get list ids comments
       findArticle.map((result) => {
         result.comments.map((comment) => {
           return arrayComment.push(comment.toString());
         });
       });
-      // const filterComments = commentAllArticles.filter((data) => {
-      //   return data;
-      // });
-      const comm = await Comment.find({ _id: { $in: arrayComment } });
-
-      //await Article.deleteMany({ _id: { $in: blogs } });
-      //
-      var removeFile = function (err) {
-        if (err) {
-          console.log("unlink failed", err);
-        } else {
-          console.log("file deleted");
-        }
-      };
-      // glob
-      listOfFolderUser.map((item) => {
-        pictureAllArticles.map((data) => {
-          console.log(item, data);
-          fs.unlinkSync("src/uploads/" + item, data);
-        });
+      // Delete all articles of category
+      const deleteArticle = await Article.deleteMany({
+        _id: { $in: item.articles },
       });
-
+      // remove all comments of articles removed
+      const deleteComments = await Comment.deleteMany({
+        _id: { $in: arrayComment },
+      });
       return res.status(200).send({
         message: "Category has been successfully removed",
         success: true,
