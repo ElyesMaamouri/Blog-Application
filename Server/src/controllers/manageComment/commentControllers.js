@@ -70,3 +70,32 @@ exports.listComments = async (req, res) => {
     });
   }
 };
+
+//Admin delete comments
+exports.removeComments_delete = async (req, res) => {
+  const idComment = req.params.id;
+  try {
+    const comment = await Comment.findOneAndDelete({ _id: idComment });
+    if (!comment) {
+      return res.status(404).send({
+        message: "Comment Not found",
+        success: false,
+      });
+    }
+    const item = await Article.findOneAndUpdate(
+      { comments: { $in: idComment } },
+      { $pull: { comments: idComment } }
+    );
+
+    return res.status(201).send({
+      message: "Comment deleted",
+      success: true,
+    });
+  } catch (err) {
+    logger.error("Error delete comment" + err);
+    return res.status(500).send({
+      message: "Error delete comment" + err,
+      success: false,
+    });
+  }
+};

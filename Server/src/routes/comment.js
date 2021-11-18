@@ -10,4 +10,10 @@ module.exports = (app, pathApi) => {
   );
 
   app.get(pathApi + "/comments", commentControl.listComments);
+  app.delete(
+    pathApi + "/comments/:id",
+    passport.authenticate("jwt", { session: false }),
+    checkRoleUser.checkIsAdmin,
+    commentControl.removeComments_delete
+  );
 };
