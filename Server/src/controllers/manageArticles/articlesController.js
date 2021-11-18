@@ -482,3 +482,32 @@ exports.updateArticleByAdmin = async (req, res) => {
     });
   }
 };
+
+// Find article with search input
+exports.filtreArticles_post = async (req, res) => {
+  console.log("data", req.query.search);
+  try {
+    const searchedField = req.query.search;
+    const article = await Article.find({
+      title: { $regex: searchedField, $options: "$i" },
+    });
+    if (!article || article.length === 0) {
+      return res.status(200).send({
+        message: "Sorry ! No result of your search : " + searchedField,
+        success: false,
+      });
+    }
+    return res.status(200).send({
+      message: "Result of search",
+      success: true,
+      numberResultSearched: article.length,
+      resultOfSearched: article,
+    });
+  } catch (err) {
+    logger.error("Error search article" + err);
+    return res.status(500).send({
+      message: "Error search article" + err,
+      success: false,
+    });
+  }
+};

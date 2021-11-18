@@ -262,4 +262,10 @@ module.exports = (app, pathApi) => {
     checkRoleUser.checkIsAdmin,
     articleControl.updateArticleByAdmin
   );
+
+  app.get(
+    pathApi + "/blogs/",
+
+    articleControl.filtreArticles_post
+  );
 };
