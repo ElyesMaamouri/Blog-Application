@@ -16,4 +16,5 @@ module.exports = (app, pathApi) => {
     checkRoleUser.checkIsAdmin,
     commentControl.removeComments_delete
   );
+  app.get(pathApi + "/list-comments", commentControl.listCommentsPerPageAdmin);
 };

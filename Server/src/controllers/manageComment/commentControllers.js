@@ -99,3 +99,40 @@ exports.removeComments_delete = async (req, res) => {
     });
   }
 };
+
+// Admin get comments per page
+exports.listCommentsPerPageAdmin = async (req, res) => {
+  try {
+    const page = req.query.page || 1;
+    const pageSize = 5;
+    const skip = (page - 1) * pageSize;
+    const numberOfComments = await Comment.count();
+    let totalPage = Math.ceil(numberOfComments / pageSize);
+    const comments = await Comment.find()
+      .skip(skip)
+      .limit(pageSize)
+      .sort({ createAt: -1 })
+      .populate("author");
+
+    if (!comments || comments.length === 0) {
+      return res.status(404).send({
+        message: "Comments not found",
+        success: false,
+      });
+    }
+    return res.status(200).send({
+      message: "List of comments per page",
+      success: true,
+      totalPage: totalPage,
+      page: page,
+      size: pageSize,
+      comments: comments,
+    });
+  } catch (err) {
+    logger.error("Error of list comments" + err);
+    return res.status(500).send({
+      message: "Error of list comments" + err,
+      success: false,
+    });
+  }
+};
