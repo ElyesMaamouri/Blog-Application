@@ -272,6 +272,7 @@ exports.getArticlesByPage_get = async (req, res) => {
     return res.status(200).send({
       message: "List of articles per page",
       success: true,
+      numberOfArticles: numberOfArticles,
       totalPage: totalPage,
       page: page,
       size: pageSize,

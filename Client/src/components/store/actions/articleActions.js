@@ -85,6 +85,7 @@ export const updateArticle = (data, idArticle) => {
 };
 
 export const listArticlePerPage = (page) => {
+  console.log("page in actions", page);
   return (dispatch, getState) => {
     axios
       .get(baseURL + "/articles/?page=" + page)

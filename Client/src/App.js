@@ -12,12 +12,32 @@ import UpdateProfile from "./components/profile/UpdateProfile";
 import ListeArticle from "./components/articles/ListeArticle";
 import ListeArticlesPerCategory from "./components/articles/ListeArticlesPerCategory";
 import ArticleDetails from "./components/articles/ArticleDetails";
+import Dashboard from "./components/Dashboard/Dashboard";
+import CommentDashbord from "./components/Dashboard/CommentDashbord";
+import ClientDashbord from "./components/Dashboard/ClientDashbord";
+import ArticleDashboard from "./components/Dashboard/ArticleDashboard";
+import Layout from "./components/layout/Layout";
+
 class App extends Component {
   render() {
+    console.log("this is app");
     return (
       <div className="App">
         <Router>
           <Switch>
+            <Layout>
+              <Route exact path="/dashbord/admin" component={Dashboard} />
+            </Layout>
+
+            {/* <Layout />
+              <Route exact path="/dashbord/admin" component={Dashboard} />
+              <Route
+                exact
+                path="/client-article"
+                component={ArticleDashboard}
+              />
+              <Route exact path="/client-comment" component={CommentDashbord} />
+      */}
             {/* <Route path="/sigin" component={SignUp} /> 
             {/* <Route path="/sigin" component={SignIn} /> */}
             <Route
@@ -29,6 +49,7 @@ class App extends Component {
               ]}
               component={AuthScreen}
             />
+
             <>
               <Navbar />
               <Route exact path="/" component={Home} />

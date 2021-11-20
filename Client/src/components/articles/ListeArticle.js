@@ -26,6 +26,7 @@ const ListeArticle = () => {
     // { field: "id", headerName: "ID", width: 400 },
     { field: "title", headerName: "Title", width: 400 },
     { field: "comment", headerName: "Comments", width: 150 },
+
     { field: "vote", headerName: "Vote", width: 150 },
     {
       field: "actions",
@@ -103,7 +104,7 @@ const ListeArticle = () => {
     }
   }, [blog, deleteArticleInfo]);
 
-  // Wait reponse from api
+  // Wait response from api
   useEffect(() => {
     listOfBlogs();
   }, [listArticleInfo]);
