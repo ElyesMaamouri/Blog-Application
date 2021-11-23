@@ -66,7 +66,7 @@ const Card = () => {
       setVoteValue("worseVote");
     }
   };
-
+  console.log("listOfArticlePerPage", listOfArticlePerPage);
   const listOfArticles = () => {
     let data =
       listOfArticlePerPage &&

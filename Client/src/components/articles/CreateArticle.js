@@ -40,7 +40,6 @@ const CreateArticle = () => {
   // Position Snackbar
   const vertical = "bottom";
   const horizontal = "left";
-
   useEffect(() => {
     if (articleInfo === "Your article has been successfully created") {
       setMessage("success");
@@ -182,7 +181,7 @@ const CreateArticle = () => {
           />
         </form>
       </div>
-      <div class=" text-center card-box">
+      {/* <div class=" text-center card-box">
         <div class="member-card pt-2 pb-2">
           <div class="thumb-lg member-thumb mx-auto">
             <img
@@ -269,7 +268,7 @@ const CreateArticle = () => {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };

@@ -4,8 +4,14 @@ import { makeStyles } from "@mui/styles";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { useDispatch, useSelector } from "react-redux";
-import { listArticlePerPage } from "../store/actions/articleActions";
-
+import {
+  listArticlePerPage,
+  removeArticleByAdmin,
+} from "../store/actions/articleActions";
+import ModalAlertAdmin from "../Modal/ModalAlertAdmin";
+import ModalAlert from "../Modal/ModalAlert";
+import Snackbar from "@mui/material/Snackbar";
+import MuiAlert from "@mui/material/Alert";
 import "./articleDashbord.css";
 const useStyles = makeStyles({
   tableArticle: {
@@ -15,121 +21,177 @@ const useStyles = makeStyles({
   },
 });
 
-const columns = [
-  // { field: "id", headerName: "ID", width: 400 },
-  { field: "title", headerName: "Title", width: 400 },
-  { field: "category", headerName: "Category", width: 400 },
-  { field: "comment", headerName: "Comments", width: 150 },
-  { field: "vote", headerName: "Vote", width: 150 },
-  {
-    field: "actions",
-    headerName: "Actions",
-    sortable: false,
-    width: 140,
-    disableClickEventBubbling: true,
-    renderCell: (params) => {
-      return (
-        <div
-          className="d-flex justify-content-center  align-items-center"
-          style={{ cursor: "pointer", border: "2px solid black" }}
-        >
-          <DeleteIcon
-          //  onClick={() => {
-          //    setOpen(true);
-          //    setArticle({ title: params.row.title, id: params.row.id });
-          //    setDisplayModal("modalDeleteArticle");
-          //  }}
-          //   index={params.row.id}
-          />
-          <EditIcon
-          //  onClick={() => {
-          //    setOpen(true);
-          //    setArticle({
-          //      id: params.row.id,
-          //      title: params.row.title,
-          //      content: params.row.content,
-          //      category: params.row.category,
-          //      picture: params.row.picture,
-          //    });
-          //    setDisplayModal("modalUpdateArticle");
-          //  }}
-          //  index={params.row.id}
-          />
-        </div>
-      );
-    },
-  },
-];
-
 const ArticleDashboard = () => {
+  // Position Snackbar
+  const vertical = "top";
+  const horizontal = "left";
+  //   Snackbar
+  const Alert = React.forwardRef(function Alert(props, ref) {
+    return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+  });
+
+  const columns = [
+    // { field: "id", headerName: "ID", width: 400 },
+    { field: "title", headerName: "Title", width: 400 },
+    { field: "createAt", headerName: "CreateAt", width: 400 },
+    { field: "comments", headerName: "Comments", width: 150 },
+    { field: "vote", headerName: "Vote", width: 150 },
+    {
+      field: "actions",
+      headerName: "Actions",
+      sortable: false,
+      width: 140,
+      disableClickEventBubbling: true,
+      renderCell: (params) => {
+        return (
+          <div
+            className="d-flex justify-content-center  align-items-center"
+            style={{ cursor: "pointer", border: "2px solid black" }}
+          >
+            <DeleteIcon
+              onClick={() => {
+                setOpenModal(true);
+
+                console.log("article details", article);
+                setArticle({ title: params.row.title, id: params.row._id });
+                setDisplayModal("modalDeleteArticleByAdmin");
+              }}
+              index={params.row.id}
+            />
+            <EditIcon
+              onClick={() => {
+                setOpenModal(true);
+                setArticle({
+                  id: params.row._id,
+                  title: params.row.title,
+                  content: params.row.content,
+                  comments: params.row.comments,
+                  picture: params.row.picture,
+                });
+                setDisplayModal("modalUpdateArticleByAdmin");
+              }}
+              index={params.row.id}
+            />
+          </div>
+        );
+      },
+    },
+  ];
   const classes = useStyles();
   const dispatch = useDispatch();
   const listOfArticlePerPage = useSelector(
     (state) => state.blog.listArticlePerPage
   );
+  const deleteArticleInfo = useSelector(
+    (state) => state.blog.deleteArticleInfo
+  );
 
-  const [pageValue, setPageValue] = useState(1);
-  const [tableData, setTableData] = useState([]);
-  const [numberRows, setNumberRows] = useState(0);
-
-  let rows = [];
-  //   useEffect(() => {
-  //     dispatch(listArticlePerPage(pageValue));
-  //   }, []);
+  const [rows, setRows] = useState([]);
+  const [article, setArticle] = useState({});
+  const [openSnackbar, setOpenSnackbar] = useState(false);
+  const [blog, setBlog] = useState();
+  const [displayModal, setDisplayModal] = useState();
+  const [openModal, setOpenModal] = useState(false);
 
   // First call api
   useEffect(() => {
-    console.log("fire page value", pageValue);
-    dispatch(listArticlePerPage(pageValue));
-  }, [pageValue]);
+    console.log("fire 1 ...");
+    dispatch(listArticlePerPage(1));
+  }, []);
 
+  useEffect(() => {
+    console.log("fire 1 ...");
+    dispatch(listArticlePerPage(1));
+  }, [deleteArticleInfo]);
   // Wait reponse from api
   useEffect(() => {
-    listOfBlogs();
+    console.log("fire 2 ...");
+    listOfArticlePerPage && setRows(listOfArticlePerPage.articles);
   }, [listOfArticlePerPage]);
 
-  const handleChangePage = (e) => {
-    if (e === 0) {
-      setPageValue(1);
-    } else {
-      setPageValue(e + 1);
+  // Show snackbar if article has been successfully removed
+  useEffect(() => {
+    if (deleteArticleInfo === "Article has been deleted admin") {
+      setOpenSnackbar(true);
+      setBlog("");
     }
+  }, [blog, deleteArticleInfo]);
+
+  // Pagination in table
+  const handleChangePage = (e) => {
+    dispatch(listArticlePerPage(e + 1));
   };
 
-  const listOfBlogs = () => {
-    listOfArticlePerPage &&
-      listOfArticlePerPage.articles.map((item) => {
-        rows.push({
-          id: item._id,
-          title: item.title,
-          content: item.content,
-          category: item.category,
-          picture: item.picture,
-          comment: item.comments.length,
-          vote: item.vote,
-          createAt: item.createAt,
-        });
-      });
-    // TableData : the new array
-    setTableData(rows);
-    setNumberRows(
-      listOfArticlePerPage && listOfArticlePerPage.numberOfArticles
-    );
-    // OldTable : the old array
-    // setOldTable(rows);
+  const updateData = (item) => {
+    let idRow = item._id;
+    const tt = (rows.filter((x) => {
+      return x.id === idRow;
+    })[0].title = item.title);
   };
-  console.log("tab", tableData);
+
+  // Close snackbar
+  const handleCloseSnackbar = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setOpenSnackbar(false);
+  };
+  // Close modal
+  const handleCloseModal = () => {
+    setOpenModal(false);
+    setBlog(deleteArticleInfo);
+  };
+  // Get id of row and remove article
+  const deleteArticle = () => {
+    let id = article.id;
+
+    let articleRemoved = rows.filter((item) => {
+      return item._id !== id;
+    });
+    dispatch(removeArticleByAdmin(article.id));
+
+    setRows(articleRemoved);
+    handleCloseModal();
+  };
   return (
-    <div className="table-article" style={{ height: 400, width: "100%" }}>
+    <div className="table-article">
       <DataGrid
-        rows={tableData}
+        style={{ height: "500px" }}
+        rows={rows}
         columns={columns}
         pageSize={5}
         onPageChange={handleChangePage}
-        checkboxSelection
-        rowCount={numberRows}
-        rowsPerPageOptions={[5]}
+        // id of rows
+        rowCount={
+          listOfArticlePerPage ? listOfArticlePerPage.numberOfArticles : 0
+        }
+        getRowId={(row) => row._id}
+        paginationMode="server"
       />
+      <div>
+        <ModalAlertAdmin
+          display={openModal}
+          blog={article}
+          closeModal={handleCloseModal}
+          deleteBlog={deleteArticle}
+          showModal={displayModal}
+          updateData={updateData}
+        />
+      </div>
+      <Snackbar
+        open={openSnackbar}
+        autoHideDuration={2000}
+        anchorOrigin={{ vertical, horizontal }}
+        onClose={handleCloseSnackbar}
+      >
+        <Alert
+          severity="success"
+          sx={{ width: "100%" }}
+          onClose={handleCloseSnackbar}
+        >
+          {deleteArticleInfo}
+        </Alert>
+      </Snackbar>
     </div>
   );
 };

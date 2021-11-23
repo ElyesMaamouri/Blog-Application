@@ -82,7 +82,16 @@ const articleReducer = (state = initState, action) => {
         ...state,
         articleDetails: action.articleDetails,
       };
-
+    case "DELETE_ARTICLE_SUCCESS_BY_ADMIN":
+      return {
+        ...state,
+        deleteArticleInfo: action.payload,
+      };
+    case "DELETE_ARTICLE_ERROR_BY_ADMIN":
+      return {
+        ...state,
+        deleteArticleInfo: action.deleteArticleInfo,
+      };
     case "RESET_INITIAL_STATE":
       return {
         ...state,

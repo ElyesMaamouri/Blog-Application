@@ -21,9 +21,9 @@ const SignedOutLinks = () => {
     <div>
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
         <div className="container-fluid">
-          <a href="#" className="navbar-brand">
-            Dev.To
-          </a>
+          <NavLink className="nav-item nav-link active" to="/">
+            DEV.TO
+          </NavLink>
           <button
             type="button"
             className="navbar-toggler"
@@ -89,7 +89,7 @@ const SignedOutLinks = () => {
             <div className=" nav-item dropdown show right_nav    ">
               <img
                 className=" avatar user_logo"
-                src={`http://localhost:4000/${currentlyUser.avatar}`}
+                /*  src={`http://localhost:4000/${currentlyUser.avatar}`} */
                 // src={require("../../assets/user.svg").default}
                 alt="Avatar"
               />
@@ -100,7 +100,7 @@ const SignedOutLinks = () => {
                 aria-expanded="true"
                 style={{ textDecoration: "none" }}
               >
-                {currentlyUser.name} <b className="caret"></b>
+                {/* {currentlyUser.name} */} <b className="caret"></b>
               </a>
               <div className="dropdown-menu  ">
                 <NavLink

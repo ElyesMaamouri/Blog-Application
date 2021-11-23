@@ -263,12 +263,28 @@ exports.getArticlesByPage_get = async (req, res) => {
       .limit(pageSize)
       .sort({ createAt: -1 })
       .populate("author");
+    // .populate({ path: "category", select: "category -_id" });
     if (!blogs || blogs.length === 0) {
       return res.status(404).send({
         message: "Articles not found",
         success: false,
       });
     }
+
+    const listOfBlogs = blogs.map((item) => {
+      console.log(item);
+      return {
+        _id: item._id,
+        author: item.author,
+        title: item.title,
+        content: item.content,
+        picture: item.picture,
+        comments: item.comments.length,
+        createAt: item.createAt,
+        vote: item.vote,
+        category: item.category,
+      };
+    });
     return res.status(200).send({
       message: "List of articles per page",
       success: true,
@@ -276,7 +292,7 @@ exports.getArticlesByPage_get = async (req, res) => {
       totalPage: totalPage,
       page: page,
       size: pageSize,
-      articles: blogs,
+      articles: listOfBlogs,
     });
   } catch (err) {
     logger.error("Error list of articles :", err);
@@ -389,7 +405,9 @@ exports.deleteArticleById_delete = async (req, res) => {
       });
     } else {
       let idArticle = removeArticle.author.blogs.toString();
+
       const client = removeArticle.author.id;
+
       const category = removeArticle.category.id;
       const comments = removeArticle.comments;
 
@@ -414,7 +432,7 @@ exports.deleteArticleById_delete = async (req, res) => {
         // Remove all comments of article
         await Comment.deleteMany({ _id: { $in: comments } });
         return res.status(201).send({
-          message: "Article has been deleted",
+          message: "Article has been deleted admin",
           success: true,
         });
       }

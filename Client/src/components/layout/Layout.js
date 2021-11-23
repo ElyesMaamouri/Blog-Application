@@ -68,7 +68,6 @@ const Layout = ({ children }) => {
   ];
   return (
     <div className={classes.root}>
-      {console.log("layouttt")}
       <AppBar className={classes.appBar}>
         <Toolbar>
           <Typography>DEV.TO WELCOME </Typography>

@@ -112,7 +112,7 @@ const ModalAlert = (data) => {
     required: "category required",
   });
 
-  if (data.showModal === "modalDeleteArticle") {
+  if (data.showModal === "modalDeleteArticleByAdmin") {
     choiceModal = (
       <Dialog
         open={data.display}
@@ -167,7 +167,7 @@ const ModalAlert = (data) => {
           </DialogActions> */}
       </Dialog>
     );
-  } else if (data.showModal === "modalUpdateArticle") {
+  } else if (data.showModal === "modalUpdateArticleByAdmin") {
     choiceModal = (
       <Dialog
         fullWidth
@@ -256,7 +256,7 @@ const ModalAlert = (data) => {
                       error={Boolean(errors.category)}
                       helperText={errors.category?.message}
                       {...testInputCategory}
-                      value={category}
+                      value={category?.category}
                       onChange={(e) => {
                         testInputCategory.onChange(e);
                         setCategory(e.target.value);

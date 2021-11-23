@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import SignUp from "./components/auth/SingUp";
 import SignIn from "./components/auth/SignIn";
@@ -17,6 +17,54 @@ import CommentDashbord from "./components/Dashboard/CommentDashbord";
 import ClientDashbord from "./components/Dashboard/ClientDashbord";
 import ArticleDashboard from "./components/Dashboard/ArticleDashboard";
 import Layout from "./components/layout/Layout";
+import { Redirect } from "react-router";
+
+const DashboardLayoutRoute = ({ component: Component, ...rest }) => {
+  return (
+    <Route
+      {...rest}
+      render={(props) => (
+        <Layout>
+          <Component {...props} />
+        </Layout>
+      )}
+    />
+  );
+};
+
+const SignOutLayoutRoute = ({ component: Component, secure, ...rest }) => {
+  return (
+    <Fragment>
+      {secure ? (
+        <Fragment>
+          {localStorage.getItem("userDetails") ? (
+            <Route
+              {...rest}
+              render={(props) => (
+                <>
+                  <Navbar />
+                  <Component {...props} />
+                </>
+              )}
+            />
+          ) : (
+            <Redirect to="/" />
+          )}
+        </Fragment>
+      ) : (
+        <Route
+          {...rest}
+          render={(props) => (
+            <>
+              <Navbar />
+              <Component {...props} />
+            </>
+          )}
+        />
+      )}
+    </Fragment>
+  );
+};
 
 class App extends Component {
   render() {
@@ -25,9 +73,59 @@ class App extends Component {
       <div className="App">
         <Router>
           <Switch>
-            <Layout>
+            {/* <Layout>
               <Route exact path="/dashbord/admin" component={Dashboard} />
-            </Layout>
+              <Route path="/" component={Home} />
+            </Layout> */}
+
+            <DashboardLayoutRoute
+              path="/dashbord/admin"
+              component={Dashboard}
+            />
+
+            <DashboardLayoutRoute
+              path="/client-article"
+              component={ArticleDashboard}
+            />
+
+            <DashboardLayoutRoute
+              path="/client-comment"
+              component={CommentDashbord}
+            />
+            <SignOutLayoutRoute
+              exact
+              path="/"
+              component={Home}
+              secure={false}
+            />
+
+            <SignOutLayoutRoute
+              exact
+              path="/create-article"
+              component={CreateArticle}
+              secure={true}
+            />
+
+            <SignOutLayoutRoute
+              exact
+              path="/article/:id"
+              component={ArticleDetails}
+            />
+            <SignOutLayoutRoute
+              exact
+              path="/list-article"
+              component={ListeArticle}
+            />
+            {/* <Route exact path="/dashbord/admin" >
+              <Layout>
+                <Dashboard />
+              </Layout>
+            </Route> */}
+
+            {/*  <Route path="/" component={Home}>
+              <Navbar />
+              <Home />
+            </Route> */}
 
             {/* <Layout />
               <Route exact path="/dashbord/admin" component={Dashboard} />
@@ -51,8 +149,6 @@ class App extends Component {
             />
 
             <>
-              <Navbar />
-              <Route exact path="/" component={Home} />
               {/* <Route path="/:token" component={ResetPassword} /> */}
               {/* <Route path="/recover-password" component={RecoverPassword} />
             <Route path="/reset-password" component={ResetPassword} /> */}
@@ -64,7 +160,6 @@ class App extends Component {
                 path="/category/:id"
                 component={ListeArticlesPerCategory}
               />
-              <Route exact path="/article/:id" component={ArticleDetails} />
             </>
           </Switch>
         </Router>

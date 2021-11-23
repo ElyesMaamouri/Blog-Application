@@ -85,7 +85,6 @@ export const updateArticle = (data, idArticle) => {
 };
 
 export const listArticlePerPage = (page) => {
-  console.log("page in actions", page);
   return (dispatch, getState) => {
     axios
       .get(baseURL + "/articles/?page=" + page)
@@ -144,6 +143,27 @@ export const blogsDetails = (id) => {
   };
 };
 
+//Admin
+export const removeArticleByAdmin = (idArticle) => {
+  return (dispatch, getState) => {
+    axios
+      .delete(baseURL + "/blogs/" + idArticle, config)
+      .then((res) => {
+        console.log("res remv", res);
+        dispatch({
+          type: "DELETE_ARTICLE_SUCCESS_BY_ADMIN",
+          payload: res.data.message,
+        });
+      })
+      .catch((err) => {
+        console.log(err.response);
+        dispatch({
+          type: "DELETE_ARTICLE_ERROR_By_ADMIN",
+          payload: err.response.data.message,
+        });
+      });
+  };
+};
 export const resetState = () => {
   console.log("reset state");
   return (dispatch, getState) => {
