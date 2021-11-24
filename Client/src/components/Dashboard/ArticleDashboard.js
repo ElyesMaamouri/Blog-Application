@@ -9,7 +9,6 @@ import {
   removeArticleByAdmin,
 } from "../store/actions/articleActions";
 import ModalAlertAdmin from "../Modal/ModalAlertAdmin";
-import ModalAlert from "../Modal/ModalAlert";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
 import "./articleDashbord.css";
@@ -31,7 +30,6 @@ const ArticleDashboard = () => {
   });
 
   const columns = [
-    // { field: "id", headerName: "ID", width: 400 },
     { field: "title", headerName: "Title", width: 400 },
     { field: "createAt", headerName: "CreateAt", width: 400 },
     { field: "comments", headerName: "Comments", width: 150 },
@@ -95,17 +93,16 @@ const ArticleDashboard = () => {
 
   // First call api
   useEffect(() => {
-    console.log("fire 1 ...");
     dispatch(listArticlePerPage(1));
   }, []);
 
+  // Refresh array after delete article
   useEffect(() => {
-    console.log("fire 1 ...");
     dispatch(listArticlePerPage(1));
   }, [deleteArticleInfo]);
+
   // Wait reponse from api
   useEffect(() => {
-    console.log("fire 2 ...");
     listOfArticlePerPage && setRows(listOfArticlePerPage.articles);
   }, [listOfArticlePerPage]);
 
@@ -121,7 +118,7 @@ const ArticleDashboard = () => {
   const handleChangePage = (e) => {
     dispatch(listArticlePerPage(e + 1));
   };
-
+  // Update data in row without call api
   const updateData = (item) => {
     let idRow = item._id;
     const tt = (rows.filter((x) => {
@@ -141,15 +138,14 @@ const ArticleDashboard = () => {
     setOpenModal(false);
     setBlog(deleteArticleInfo);
   };
+
   // Get id of row and remove article
   const deleteArticle = () => {
     let id = article.id;
-
     let articleRemoved = rows.filter((item) => {
       return item._id !== id;
     });
     dispatch(removeArticleByAdmin(article.id));
-
     setRows(articleRemoved);
     handleCloseModal();
   };

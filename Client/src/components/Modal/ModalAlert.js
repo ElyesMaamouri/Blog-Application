@@ -25,14 +25,27 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 const ModalAlert = (data) => {
+  const dispatch = useDispatch();
   const updateArticleInfo = useSelector(
     (state) => state.blog.updateArticleInfo
   );
-
+  const categoryInfo = useSelector((state) => state.category.categoryInfo);
   const [title, setTitle] = useState();
   const [content, setContent] = useState();
   const [category, setCategory] = useState();
-  // Show snackbar if article has been successfully removed
+  const currentlyUser = decodeTokens();
+  let choiceModal;
+  const {
+    register,
+    handleSubmit,
+    control,
+    watch,
+    unregister,
+    formState: { errors },
+  } = useForm({
+    mode: "onChange",
+    reValidateMode: "onChange",
+  });
 
   useEffect(() => {
     setTitle(data.blog.title);
@@ -51,21 +64,6 @@ const ModalAlert = (data) => {
   useEffect(() => {
     dispatch(listCategories());
   }, []);
-  let choiceModal;
-  const dispatch = useDispatch();
-  const {
-    register,
-    handleSubmit,
-    control,
-    watch,
-    unregister,
-    formState: { errors },
-  } = useForm({
-    mode: "onChange",
-    reValidateMode: "onChange",
-  });
-  const currentlyUser = decodeTokens();
-  const categoryInfo = useSelector((state) => state.category.categoryInfo);
 
   const onSubmit = (item, e) => {
     const formData = new FormData();
@@ -154,17 +152,7 @@ const ModalAlert = (data) => {
               </div>
             </div>
           </div>
-          {/* <DialogContentText id="alert-dialog-slide-description">
-              Let Google help apps determine location. This means sending
-              anonymous location data to Google, even when no apps are running.
-              ====Title Here=====
-              {data.blog.title}
-            </DialogContentText> */}
         </DialogContent>
-        {/* <DialogActions>
-            <Button onClick={data.closeModal}>Yes</Button>
-            <Button onClick={data.closeModal}>No</Button>
-          </DialogActions> */}
       </Dialog>
     );
   } else if (data.showModal === "modalUpdateArticle") {
@@ -177,8 +165,6 @@ const ModalAlert = (data) => {
         onClose={data.closeModal}
         aria-describedby="alert-dialog-slide-description"
       >
-        {/* <DialogTitle>{"Use Google's location service?"}</DialogTitle> */}
-
         <DialogContent>
           <div className="modal-dialog modal-confirm">
             <div className="modal-content">
@@ -193,17 +179,6 @@ const ModalAlert = (data) => {
                     variant="outlined"
                     name="Title"
                     {...testInputTitle}
-                    // {...register("title", {
-                    //   required: "Title required",
-                    //   minLength: {
-                    //     value: 3,
-                    //     message: "Please enter a longer title",
-                    //   },
-                    //   maxLength: {
-                    //     value: 10,
-                    //     message: "Please enter a shorter title",
-                    //   },
-                    // })}
                     onChange={(e) => {
                       testInputTitle.onChange(e);
                       setTitle(e.target.value);
@@ -222,17 +197,6 @@ const ModalAlert = (data) => {
                     label="Content of article"
                     variant="outlined"
                     name="Content"
-                    // {...register("content", {
-                    //   required: "Content required",
-                    //   minLength: {
-                    //     value: 5,
-                    //     message: "Please enter a longer content",
-                    //   },
-                    //   maxLength: {
-                    //     value: 100,
-                    //     message: "Please enter a shorter content",
-                    //   },
-                    // })}
                     error={Boolean(errors.content)}
                     helperText={errors.content?.message}
                     value={content}
@@ -242,8 +206,6 @@ const ModalAlert = (data) => {
                       setContent(e.target.value);
                     }}
                   />
-
-                  {/* Select */}
                   <FormControl>
                     <InputLabel id="demo-simple-select-error-label">
                       Category
@@ -261,8 +223,6 @@ const ModalAlert = (data) => {
                         testInputCategory.onChange(e);
                         setCategory(e.target.value);
                       }}
-
-                      // renderValue={(value) => `⚠️  - ${value}`}
                     >
                       {categoryInfo &&
                         categoryInfo.categories.map((item) => (
@@ -271,23 +231,7 @@ const ModalAlert = (data) => {
                           </MenuItem>
                         ))}
                     </Select>
-                    {/* <p>{errors.category && errors.category.message}</p> 
-            {/* <FormHelperText{errors.category && errors.category.message}></FormHelperText> */}
                   </FormControl>
-
-                  {/* <TextField
-                    type="file"
-                    label="Choose picture"
-                    InputLabelProps={{ shrink: true }}
-                    variant="outlined"
-                    name="picture"
-                    {...register("picture", {
-                      required: "required picture",
-                    })}
-                    error={Boolean(errors.picture)}
-                    helperText={errors.picture?.message}
-                  /> */}
-
                   <button
                     onClick={data.closeModal}
                     type="button"
@@ -301,26 +245,11 @@ const ModalAlert = (data) => {
                   </button>
 
                   <p>{updateArticleInfo}</p>
-
-                  {/* <img
-                    rel="image_src"
-                    src={`http://localhost:4000/${currentlyUser.path}/${data.blog.picture}`}
-                  /> */}
                 </form>
               </div>
             </div>
           </div>
-          {/* <DialogContentText id="alert-dialog-slide-description">
-              Let Google help apps determine location. This means sending
-              anonymous location data to Google, even when no apps are running.
-              ====Title Here=====
-              {data.blog.title}
-            </DialogContentText> */}
         </DialogContent>
-        {/* <DialogActions>
-            <Button onClick={data.closeModal}>Yes</Button>
-            <Button onClick={data.closeModal}>No</Button>
-          </DialogActions> */}
       </Dialog>
     );
   }

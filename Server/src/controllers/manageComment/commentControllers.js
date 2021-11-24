@@ -88,7 +88,7 @@ exports.removeComments_delete = async (req, res) => {
     );
 
     return res.status(201).send({
-      message: "Comment deleted",
+      message: "Comment has been deleted admin",
       success: true,
     });
   } catch (err) {
@@ -112,7 +112,7 @@ exports.listCommentsPerPageAdmin = async (req, res) => {
       .skip(skip)
       .limit(pageSize)
       .sort({ createAt: -1 })
-      .populate("author");
+      .populate({ path: "author", select: "userName -_id" });
 
     if (!comments || comments.length === 0) {
       return res.status(404).send({
@@ -126,6 +126,7 @@ exports.listCommentsPerPageAdmin = async (req, res) => {
       totalPage: totalPage,
       page: page,
       size: pageSize,
+      numberOfComments: numberOfComments,
       comments: comments,
     });
   } catch (err) {

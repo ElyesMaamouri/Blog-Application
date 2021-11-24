@@ -1,24 +1,17 @@
 import React, { useState, useEffect } from "react";
 import Dialog from "@mui/material/Dialog";
-import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
-import DialogContentText from "@mui/material/DialogContentText";
-import DialogTitle from "@mui/material/DialogTitle";
 import Slide from "@mui/material/Slide";
-import Button from "@mui/material/Button";
-import ErrorIcon from "@mui/icons-material/Error";
 import { useForm, Controller } from "react-hook-form";
 import decodeTokens from "../../helpers/decodeToken";
 import { useDispatch, useSelector } from "react-redux";
-import Snackbar from "@mui/material/Snackbar";
-import MuiAlert from "@mui/material/Alert";
 import TextField from "@mui/material/TextField";
 import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import { listCategories } from "../store/actions/categoryActions";
-import { updateArticle, resetState } from "../store/actions/articleActions";
+import { updateBlog, resetState } from "../store/actions/articleActions";
 import "./modalAlert.css";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
@@ -28,29 +21,10 @@ const ModalAlert = (data) => {
   const updateArticleInfo = useSelector(
     (state) => state.blog.updateArticleInfo
   );
-
+  const categoryInfo = useSelector((state) => state.category.categoryInfo);
   const [title, setTitle] = useState();
   const [content, setContent] = useState();
   const [category, setCategory] = useState();
-  // Show snackbar if article has been successfully removed
-
-  useEffect(() => {
-    setTitle(data.blog.title);
-    setContent(data.blog.content);
-    setCategory(data.blog.category);
-  }, [data.blog.title, data.blog.content, data.blog.category]);
-
-  useEffect(() => {
-    if (updateArticleInfo === "Your article has been successfully updated") {
-      setTimeout(() => {
-        dispatch(resetState());
-      }, 4000);
-    }
-  }, [updateArticleInfo]);
-
-  useEffect(() => {
-    dispatch(listCategories());
-  }, []);
   let choiceModal;
   const dispatch = useDispatch();
   const {
@@ -64,8 +38,26 @@ const ModalAlert = (data) => {
     mode: "onChange",
     reValidateMode: "onChange",
   });
-  const currentlyUser = decodeTokens();
-  const categoryInfo = useSelector((state) => state.category.categoryInfo);
+
+  // Initial all filed with default data passed in props (default data is empty object)
+  useEffect(() => {
+    setTitle(data.blog.title);
+    setContent(data.blog.content);
+    setCategory(data.blog.category);
+  }, [data.blog.title, data.blog.content, data.blog.category]);
+
+  // Reset state to inital value ""
+  useEffect(() => {
+    if (updateArticleInfo === "Your article has been successfully updated") {
+      setTimeout(() => {
+        dispatch(resetState());
+      }, 4000);
+    }
+  }, [updateArticleInfo]);
+  // Get list of category
+  useEffect(() => {
+    dispatch(listCategories());
+  }, []);
 
   const onSubmit = (item, e) => {
     const formData = new FormData();
@@ -73,8 +65,8 @@ const ModalAlert = (data) => {
     formData.append("title", item.title);
     formData.append("content", item.content);
     formData.append("category", item.category);
-    formData.append("author", currentlyUser.id);
-    dispatch(updateArticle(formData, data.blog.id));
+
+    dispatch(updateBlog(formData, data.blog.id));
 
     data.updateData({
       title: item.title,

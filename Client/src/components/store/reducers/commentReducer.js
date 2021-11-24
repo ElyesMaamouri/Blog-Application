@@ -1,6 +1,8 @@
 const initState = {
   commentInfo: null,
   listCommentsInfo: null,
+  listCommentsPerPage: null,
+  removeCommentInfo: null,
 };
 
 const commentReducer = (state = initState, action) => {
@@ -27,11 +29,33 @@ const commentReducer = (state = initState, action) => {
         listCommentsInfo: action.commentInfo,
       };
 
+    case "LIST_COMMENTS_PER_PAGE_SUCCESS":
+      return {
+        ...state,
+        listCommentsPerPage: action.payload,
+      };
+    case "LIST_COMMENTS_PER_PAGE_ERROR":
+      return {
+        ...state,
+        listCommentsPerPage: action.listCommentsPerPage,
+      };
+
+    case "REMOVE_COMMENTS_SUCCESS":
+      return {
+        ...state,
+        removeCommentInfo: action.payload,
+      };
+    case "REMOVE_COMMENTS_ERROR":
+      return {
+        ...state,
+        removeCommentInfo: action.payload,
+      };
     case "RESET_INITIAL_STATE_COMMENT":
       return {
         ...state,
         commentInfo: action.payload,
       };
+
     default:
       return state;
   }

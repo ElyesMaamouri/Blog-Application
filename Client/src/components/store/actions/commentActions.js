@@ -32,6 +32,45 @@ export const getComments = () => {
   };
 };
 
+// Admin Get list of commnts
+export const displayCommentsPerPage = (page) => {
+  return (dispatch, getState) => {
+    axios
+      .get(baseURL + "/list-comments/" + "?page=" + page)
+      .then((res) => {
+        dispatch({
+          type: "LIST_COMMENTS_PER_PAGE_SUCCESS",
+          payload: res.data,
+        });
+      })
+      .catch((err) => {
+        dispatch({
+          type: "LIST_COMMENTS_PER_PAGE_ERROR",
+          payload: err.response,
+        });
+      });
+  };
+};
+// Admin Remove Comments
+export const removeComment = (id) => {
+  return (dispatch, getState) => {
+    axios
+      .delete(baseURL + "/comments/" + id, config)
+      .then((res) => {
+        dispatch({
+          type: "REMOVE_COMMENTS_SUCCESS",
+          payload: res.data.message,
+        });
+      })
+      .catch((err) => {
+        console.log("errorrr", err.response.data.message);
+        dispatch({
+          type: "REMOVE_COMMENTS_ERROR",
+          payload: err.response.data.message,
+        });
+      });
+  };
+};
 export const resetStateComment = () => {
   return (dispatch, getState) => {
     dispatch({ type: "RESET_INITIAL_STATE_COMMENT", payload: "" });

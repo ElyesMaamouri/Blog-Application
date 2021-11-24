@@ -164,6 +164,28 @@ export const removeArticleByAdmin = (idArticle) => {
       });
   };
 };
+
+export const updateBlog = (data, idArticle) => {
+  return (dispatch, getState) => {
+    axios
+      .patch(baseURL + "/articles/" + idArticle, data, config)
+      .then((res) => {
+        console.log("response update success", res);
+        dispatch({
+          type: "UPDATE_ARTICLE_SUCCESS",
+          payload: res.data.message,
+        });
+      })
+      .catch((err) => {
+        console.log("response update err", err.response);
+        dispatch({
+          type: "UPDATE_ARTICLE_ERROR",
+          payload: err.response.data,
+        });
+      });
+  };
+};
+
 export const resetState = () => {
   console.log("reset state");
   return (dispatch, getState) => {
