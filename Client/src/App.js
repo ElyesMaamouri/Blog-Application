@@ -92,6 +92,10 @@ class App extends Component {
               path="/client-comment"
               component={CommentDashbord}
             />
+            <DashboardLayoutRoute
+              path="/list-clients"
+              component={ClientDashbord}
+            />
             <SignOutLayoutRoute
               exact
               path="/"

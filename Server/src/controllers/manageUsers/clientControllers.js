@@ -194,18 +194,19 @@ exports.profileUpdate_patch = async (req, res) => {
 //Admin update profil client
 exports.updateProfileClientAdmin_patch = async (req, res) => {
   try {
+    console.log("object====>W", req.body);
     const { error } = validateUpdateProfileAdmin(req.body);
     if (error) {
       return res.status(404).send(error.details[0].message);
     }
-    const client = _.pick(req.body, ["email", "isAdmin", "newPassword"]);
+    const client = _.pick(req.body, ["email", "newPassword"]);
 
     client.newPassword = await cryptPassword(client.newPassword);
     const newUpdate = new User({
       _id: req.params.id,
       email: client.email,
       password: client.newPassword,
-      isAdmin: client.isAdmin,
+      // isAdmin: client.isAdmin,
     });
 
     const email = await User.findOne({ email: client.email });
@@ -292,6 +293,7 @@ exports.listClientsAdmin_get = async (req, res) => {
       totalPage: totalPage,
       page: page,
       size: pageSize,
+      numberOfClients: numberOfClients,
       users: listClients,
     });
   } catch (err) {

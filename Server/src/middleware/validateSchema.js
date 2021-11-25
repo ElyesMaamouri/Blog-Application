@@ -81,7 +81,7 @@ exports.validateUpdateProfileAdmin = (profile) => {
   const schema = Joi.object({
     newPassword: Joi.string().min(8).max(255),
     email: Joi.string().min(3).max(255).email(),
-    isAdmin: Joi.boolean(),
+    // isAdmin: Joi.boolean(),
   });
   return schema.validate(profile);
 };

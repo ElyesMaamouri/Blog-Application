@@ -139,7 +139,7 @@ const ArticleDashboard = () => {
     setBlog(deleteArticleInfo);
   };
 
-  // Get id of row and remove article
+  // Get id of row and remove article from table
   const deleteArticle = () => {
     let id = article.id;
     let articleRemoved = rows.filter((item) => {

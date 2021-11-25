@@ -63,7 +63,7 @@ const Layout = ({ children }) => {
     {
       text: "Users",
       icon: <PeopleAltIcon />,
-      path: "/list-article",
+      path: "/list-clients",
     },
   ];
   return (
