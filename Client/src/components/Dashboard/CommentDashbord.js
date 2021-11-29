@@ -74,7 +74,7 @@ const CommentDashbord = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const [rows, setRows] = useState([]);
-  const [comment, setComment] = useState();
+  const [comment, setComment] = useState({});
   const [openSnackbar, setOpenSnackbar] = useState(false);
   const [displayModal, setDisplayModal] = useState();
   const [openModal, setOpenModal] = useState(false);
@@ -115,7 +115,7 @@ const CommentDashbord = () => {
       }, 3000);
     }
   }, [deleteCommentInfo]);
-  console.log("deleteCommentInfo", displayComments);
+
   // Pagination in table
   const handleChangePage = (e) => {
     dispatch(displayCommentsPerPage(e + 1));

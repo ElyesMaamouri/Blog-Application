@@ -11,7 +11,6 @@ exports.applyPassportStrategy = (passport) => {
       User.findOne({ email: payload.email }, (err, user) => {
         if (err) return done(err, false);
         if (user) {
-          console.log("user", user);
           return done(null, {
             email: user.email,
             exp: payload.exp,

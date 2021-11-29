@@ -60,8 +60,8 @@ module.exports = (app, pathApi) => {
    */
   app.post(
     pathApi + "/categories",
-    // passport.authenticate("jwt", { session: false }),
-    // checkRoleUser.checkIsAdmin,
+    passport.authenticate("jwt", { session: false }),
+    checkRoleUser.checkIsAdmin,
     categoryControl.createCategory_post
   );
 

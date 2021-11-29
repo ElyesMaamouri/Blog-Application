@@ -227,7 +227,7 @@ const ModalClient = (data) => {
     }
     return displayUi;
   };
-  const modalUi = modal();
+  let modalUi = modal();
 
   return <div>{modalUi}</div>;
 };

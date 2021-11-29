@@ -86,6 +86,7 @@ const ClientDashbord = () => {
   const removeClientInfo = useSelector(
     (state) => state.client.removeClientInfo
   );
+  console.log("listOfUser", listOfUser);
   const classes = useStyles();
   const dispatch = useDispatch();
   const [rows, setRows] = useState([]);

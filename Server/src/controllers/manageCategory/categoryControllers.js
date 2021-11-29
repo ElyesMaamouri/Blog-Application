@@ -27,7 +27,7 @@ exports.createCategory_post = async (req, res) => {
     }
     await slug.save();
     return res.status(201).send({
-      message: " Category has been successfully created",
+      message: "Category has been successfully created",
       success: true,
     });
   } catch (err) {
@@ -41,6 +41,7 @@ exports.createCategory_post = async (req, res) => {
 
 // Update existe category
 exports.updateCategory_put = async (req, res) => {
+  console.log("body", req.body);
   const { error } = validateCategory(req.body);
   if (error) {
     logger.error("Error Schema category", error.details[0].message);
@@ -154,7 +155,7 @@ exports.listCategory_get = async (req, res) => {
 exports.removeCategory = async (req, res) => {
   try {
     // Find and delete category
-    const item = await categorySchema.findByIdAndDelete({ _id: req.params.id });
+    const item = await categorySchema.findById({ _id: req.params.id });
     if (!item) {
       return res.status(404).send({
         message: "Category not found",
@@ -163,19 +164,45 @@ exports.removeCategory = async (req, res) => {
     }
     if (item) {
       let arrayComment = [];
+      let articleOfUser = [];
       // Find articles to delete them
       const findArticle = await Article.find({ _id: { $in: item.articles } });
+      const findUser = await User.find({ blogs: { $in: item.articles } });
+
+      //Create table with multiple
+      findUser.map(async (data) => {
+        articleOfUser.push({
+          updateOne: {
+            filter: { _id: data._id.toString() },
+            update: {
+              $pull: {
+                blogs: {
+                  $in: item.articles.filter((x) => data.blogs.includes(x)),
+                },
+              },
+            },
+          },
+          // userId: data._id.toString(),
+          // blogsId: item.articles.filter((x) => data.blogs.includes(x)),
+        });
+      });
+      // Remove ids article in array blogs[]
+      await User.bulkWrite(articleOfUser).then((res) => {
+        console.log("response ==>", res);
+      });
+
       // Get list ids comments
       findArticle.map((result) => {
         result.comments.map((comment) => {
           return arrayComment.push(comment.toString());
         });
       });
-      // Delete all articles of category
+
+      // // Delete all articles of category
       const deleteArticle = await Article.deleteMany({
         _id: { $in: item.articles },
       });
-      // remove all comments of articles removed
+      // // remove all comments of articles removed
       const deleteComments = await Comment.deleteMany({
         _id: { $in: arrayComment },
       });
@@ -222,7 +249,7 @@ exports.updateCategoryAdmin_delete = async (req, res) => {
             });
           } else {
             return res.status(201).send({
-              message: " Category has been successfully updated",
+              message: "Category has been successfully updated",
               success: true,
             });
           }

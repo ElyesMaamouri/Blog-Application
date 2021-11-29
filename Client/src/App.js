@@ -16,6 +16,7 @@ import Dashboard from "./components/Dashboard/Dashboard";
 import CommentDashbord from "./components/Dashboard/CommentDashbord";
 import ClientDashbord from "./components/Dashboard/ClientDashbord";
 import ArticleDashboard from "./components/Dashboard/ArticleDashboard";
+import CategoryDashbord from "./components/Dashboard/CategoryDashbord";
 import Layout from "./components/layout/Layout";
 import { Redirect } from "react-router";
 
@@ -95,6 +96,10 @@ class App extends Component {
             <DashboardLayoutRoute
               path="/list-clients"
               component={ClientDashbord}
+            />
+            <DashboardLayoutRoute
+              path="/list-category"
+              component={CategoryDashbord}
             />
             <SignOutLayoutRoute
               exact

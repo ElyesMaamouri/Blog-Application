@@ -8,6 +8,7 @@ import List from "@mui/material/List";
 import ArticleIcon from "@mui/icons-material/Article";
 import CommentIcon from "@mui/icons-material/Comment";
 import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
+import CategoryIcon from "@mui/icons-material/Category";
 import HomeIcon from "@mui/icons-material/Home";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
@@ -64,6 +65,11 @@ const Layout = ({ children }) => {
       text: "Users",
       icon: <PeopleAltIcon />,
       path: "/list-clients",
+    },
+    {
+      text: "Catgeory",
+      icon: <CategoryIcon />,
+      path: "/list-category",
     },
   ];
   return (
