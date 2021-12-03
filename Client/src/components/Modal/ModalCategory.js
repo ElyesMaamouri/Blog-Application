@@ -20,6 +20,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 const ModalCategory = (data) => {
+  console.log("data ==>", data);
   const [category, setCategory] = useState();
   const createCategoryInfo = useSelector(
     (state) => state.category.createCategoryInfo
@@ -132,6 +133,9 @@ const ModalCategory = (data) => {
         </Dialog>
       );
     } else if (choiceModal === "modalUpdateCategoryByAdmin") {
+      {
+        console.log("Here ....", data.display);
+      }
       displayUi = (
         <Dialog
           fullWidth
@@ -185,10 +189,67 @@ const ModalCategory = (data) => {
           </DialogContent>
         </Dialog>
       );
+    } else if (choiceModal === "modalRemoveCategoryByAdmin") {
+      displayUi = (
+        <Dialog
+          open={data.display}
+          TransitionComponent={Transition}
+          keepMounted
+          onClose={data.closeModal}
+          aria-describedby="alert-dialog-slide-description"
+        >
+          <DialogContent>
+            <div className="modal-dialog modal-confirm">
+              <div className="modal-content">
+                <div className="modal-header">
+                  <div className="icon-box">
+                    <i className="bi bi-exclamation-lg material-icons"> </i>
+                  </div>
+                  <h4 className="modal-title">Are you sure?</h4>
+                </div>
+                <div className="modal-body">
+                  <p>
+                    Do you really want to delete category
+                    <b> {data.category.category}</b>
+                  </p>
+                </div>
+                <div className="modal-footer">
+                  <button
+                    onClick={data.closeModal}
+                    type="button"
+                    className="btn btn-info"
+                    data-dismiss="modal"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    onClick={data.deleteCategory}
+                    type="button"
+                    className="btn btn-danger"
+                  >
+                    Delete
+                  </button>
+                </div>
+              </div>
+            </div>
+            {/* <DialogContentText id="alert-dialog-slide-description">
+              Let Google help apps determine location. This means sending
+              anonymous location data to Google, even when no apps are running.
+              ====Title Here=====
+              {data.blog.title}
+            </DialogContentText> */}
+          </DialogContent>
+          {/* <DialogActions>
+            <Button onClick={data.closeModal}>Yes</Button>
+            <Button onClick={data.closeModal}>No</Button>
+          </DialogActions> */}
+        </Dialog>
+      );
     }
     return displayUi;
   };
   let modalUi = modal();
+
   return <div>{modalUi}</div>;
 };
 

@@ -155,7 +155,7 @@ exports.listCategory_get = async (req, res) => {
 exports.removeCategory = async (req, res) => {
   try {
     // Find and delete category
-    const item = await categorySchema.findById({ _id: req.params.id });
+    const item = await categorySchema.findByIdAndDelete({ _id: req.params.id });
     if (!item) {
       return res.status(404).send({
         message: "Category not found",
@@ -169,7 +169,7 @@ exports.removeCategory = async (req, res) => {
       const findArticle = await Article.find({ _id: { $in: item.articles } });
       const findUser = await User.find({ blogs: { $in: item.articles } });
 
-      //Create table with multiple
+      //Create table with multiple query
       findUser.map(async (data) => {
         articleOfUser.push({
           updateOne: {
@@ -186,7 +186,7 @@ exports.removeCategory = async (req, res) => {
           // blogsId: item.articles.filter((x) => data.blogs.includes(x)),
         });
       });
-      // Remove ids article in array blogs[]
+      // Remove ids article in array blogs[] and pass array of query
       await User.bulkWrite(articleOfUser).then((res) => {
         console.log("response ==>", res);
       });
@@ -271,7 +271,6 @@ exports.updateCategoryAdmin_delete = async (req, res) => {
 };
 // Get category per page
 exports.categoriesDetailsAdmin = async (req, res) => {
-  console.log("query=======>");
   try {
     const page = req.query.page || 1;
     const pageSize = 5; // Limit

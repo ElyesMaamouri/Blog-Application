@@ -97,3 +97,32 @@ export const updateCategory = (category, id) => {
       });
   };
 };
+
+export const removeCategory = (id) => {
+  return (dispatch, getState) => {
+    axios
+      .delete(baseURL + "/categories/" + id, config)
+      .then((res) => {
+        console.log("id remove", res);
+        dispatch({
+          type: "REMOVE_CATEGORY_SUCCESS",
+          payload: res.data.message,
+        });
+      })
+      .catch((err) => {
+        dispatch({
+          type: "REMOVE_CATEGORY_ERROR",
+          payload: err.response.data,
+        });
+      });
+  };
+};
+
+export const resetStateCategory = () => {
+  return (dispatch, getState) => {
+    dispatch({
+      type: "RESET_STATE_CATEGORY",
+      payload: "",
+    });
+  };
+};

@@ -4,6 +4,7 @@ const initState = {
   listCategoriesInfo: null,
   createCategoryInfo: null,
   updateCategoryInfo: null,
+  removeCategoryInfo: null,
 };
 
 const categoryReducer = (state = initState, action) => {
@@ -59,6 +60,21 @@ const categoryReducer = (state = initState, action) => {
       return {
         ...state,
         updateCategoryInfo: action.payload,
+      };
+    case "REMOVE_CATEGORY_SUCCESS":
+      return {
+        ...state,
+        removeCategoryInfo: action.payload,
+      };
+    case "REMOVE_CATEGORY_ERROR":
+      return {
+        ...state,
+        removeCategoryInfo: action.payload,
+      };
+    case "RESET_STATE_CATEGORY":
+      return {
+        ...state,
+        removeCategoryInfo: action.payload,
       };
     default:
       return state;

@@ -5,8 +5,14 @@ import { useDispatch, useSelector } from "react-redux";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
-import { getListCategories } from "../store/actions/categoryActions";
+import {
+  getListCategories,
+  removeCategory,
+  resetStateCategory,
+} from "../store/actions/categoryActions";
 import ModalCategory from "../Modal/ModalCategory";
+import Snackbar from "@mui/material/Snackbar";
+import MuiAlert from "@mui/material/Alert";
 import "./articleDashbord.css";
 const useStyles = makeStyles({
   iconCreate: {
@@ -17,6 +23,13 @@ const useStyles = makeStyles({
   },
 });
 const CategoryDashbord = () => {
+  // Position Snackbar
+  const vertical = "top";
+  const horizontal = "left";
+  //   Snackbar
+  const Alert = React.forwardRef(function Alert(props, ref) {
+    return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+  });
   const columns = [
     { field: "category", headerName: "Category", width: 250 },
     { field: "createAt", headerName: "Create At", width: 250 },
@@ -47,12 +60,15 @@ const CategoryDashbord = () => {
             style={{ cursor: "pointer", border: "2px solid black" }}
           >
             <DeleteIcon
-            //   onClick={() => {
-            //     setOpenModal(true);
-            //     setUser({ client: params.row.userName, id: params.row._id });
-            //     setDisplayModal("modalDeleteClientByAdmin");
-            //   }}
-            //   index={params.row.id}
+              onClick={() => {
+                setOpenModal(true);
+                setCategory({
+                  id: params.row._id,
+                  category: params.row.category,
+                });
+                setDisplayModal("modalRemoveCategoryByAdmin");
+              }}
+              index={params.row.id}
             />
             <EditIcon
               onClick={() => {
@@ -79,10 +95,15 @@ const CategoryDashbord = () => {
   const createCategoryInfo = useSelector(
     (state) => state.category.createCategoryInfo
   );
+
+  const removeCategoryInfo = useSelector(
+    (state) => state.category.removeCategoryInfo
+  );
+  console.log("removeCategoryInfo", removeCategoryInfo);
   const [displayModal, setDisplayModal] = useState();
   const [openModal, setOpenModal] = useState(false);
   const [category, setCategory] = useState({});
-  console.log("gategory List ==>", listOfCategories);
+  const [openSnackbar, setOpenSnackbar] = useState(false);
   useEffect(() => {
     dispatch(getListCategories(1));
   }, []);
@@ -91,20 +112,34 @@ const CategoryDashbord = () => {
     listOfCategories && setRows(listOfCategories[0].categories);
   }, [listOfCategories]);
   useEffect(() => {
-    if (createCategoryInfo === "Category has been successfully created")
+    if (removeCategoryInfo === "Category has been successfully created")
       dispatch(getListCategories(1));
   }, [createCategoryInfo]);
+  // Show snackbar if article has been successfully removed + reset state
+  useEffect(() => {
+    if (removeCategoryInfo === "Category has been successfully removed") {
+      setOpenSnackbar(true);
+      setTimeout(() => {
+        dispatch(resetStateCategory());
+      }, 3000);
+    }
+  }, [removeCategoryInfo]);
 
   // Pagination in table
   const handleChangePage = (e) => {
     dispatch(getListCategories(e + 1));
   };
   const handleCreateCategory = (e) => {
-    console.log("handel click catgeory");
     setOpenModal(true);
     setDisplayModal("modalCreateCategoryByAdmin");
   };
-
+  // Close snackbar
+  const handleCloseSnackbar = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setOpenSnackbar(false);
+  };
   // Update data in row without call api
   const updateData = (item) => {
     let idRow = item.id;
@@ -116,6 +151,17 @@ const CategoryDashbord = () => {
   // Close modal
   const handleCloseModal = () => {
     setOpenModal(false);
+  };
+  // Remove Category
+  const rmvCategory = () => {
+    let id = category.id;
+    let categoryRemoved = rows.filter((item) => {
+      return item._id !== id;
+    });
+
+    dispatch(removeCategory(id));
+    setRows(categoryRemoved);
+    handleCloseModal();
   };
   return (
     <div>
@@ -142,10 +188,25 @@ const CategoryDashbord = () => {
         display={openModal}
         category={category}
         closeModal={handleCloseModal}
-        // deleteBlog={deleteArticle}
+        deleteCategory={rmvCategory}
         showModal={displayModal}
         updateData={updateData}
       />
+
+      <Snackbar
+        open={openSnackbar}
+        autoHideDuration={2000}
+        anchorOrigin={{ vertical, horizontal }}
+        onClose={handleCloseSnackbar}
+      >
+        <Alert
+          severity="success"
+          sx={{ width: "100%" }}
+          onClose={handleCloseSnackbar}
+        >
+          {removeCategoryInfo}
+        </Alert>
+      </Snackbar>
     </div>
   );
 };

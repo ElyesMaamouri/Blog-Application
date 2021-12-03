@@ -122,17 +122,7 @@ const ModalClient = (data) => {
                 </div>
               </div>
             </div>
-            {/* <DialogContentText id="alert-dialog-slide-description">
-                  Let Google help apps determine location. This means sending
-                  anonymous location data to Google, even when no apps are running.
-                  ====Title Here=====
-                  {data.blog.title}
-                </DialogContentText> */}
           </DialogContent>
-          {/* <DialogActions>
-                <Button onClick={data.closeModal}>Yes</Button>
-                <Button onClick={data.closeModal}>No</Button>
-              </DialogActions> */}
         </Dialog>
       );
     } else if (choiceModal === "modalUpdateClientByAdmin") {
