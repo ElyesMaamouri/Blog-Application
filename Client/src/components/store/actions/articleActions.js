@@ -123,6 +123,25 @@ export const listArticlePerLike = (vote, page) => {
   };
 };
 
+export const listArticleSearched = (search) => {
+  return (dispatch, getState) => {
+    axios
+      .get(baseURL + "/blogs/?search=" + search)
+      .then((res) => {
+        console.log("ress search", res.data);
+        dispatch({
+          type: "LIST_ARTICLE_BY_SEARCH_SUCCESS",
+          payload: res.data,
+        });
+      })
+      .catch((err) => {
+        dispatch({
+          type: "LIST_ARTICLE_BY_SEARCH_ERROR",
+          payload: err.response,
+        });
+      });
+  };
+};
 export const blogsDetails = (id) => {
   return (dispatch, getState) => {
     axios

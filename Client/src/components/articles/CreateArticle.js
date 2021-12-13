@@ -12,6 +12,7 @@ import FormControl from "@mui/material/FormControl";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
 import { NavLink } from "react-router-dom";
+import RightCard from "../cards/RightCard";
 import "./createArticle.css";
 
 const CreateArticle = () => {

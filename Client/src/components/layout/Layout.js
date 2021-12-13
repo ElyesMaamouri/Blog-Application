@@ -12,32 +12,40 @@ import CategoryIcon from "@mui/icons-material/Category";
 import HomeIcon from "@mui/icons-material/Home";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import Button from "@mui/material/Button";
+import LogoutIcon from "@mui/icons-material/Logout";
+
+import Avatar from "@mui/material/Avatar";
+
 import { makeStyles } from "@mui/styles";
 import { useHistory, useLocation } from "react-router";
 
 const drawerWidth = 240;
-const useStyles = makeStyles({
-  page: {
-    background: "#f9f9f9",
-    width: "100%",
-  },
-  drawer: {
-    width: drawerWidth,
-  },
-  drawerPaper: {
-    width: drawerWidth,
-  },
-  root: {
-    display: "flex",
-  },
-  active: {
-    background: "#f4f4f4",
-  },
-  appBar: {
-    "&.MuiAppBar-root": {
-      width: `calc(100% - ${drawerWidth}px)`,
+const useStyles = makeStyles((theme) => {
+  return {
+    page: {
+      // background: "#f9f9f9",
+      width: "100%",
     },
-  },
+    drawer: {
+      width: drawerWidth,
+    },
+    drawerPaper: {
+      width: drawerWidth,
+    },
+    root: {
+      display: "flex",
+    },
+    active: {
+      background: "#f4f4f4",
+    },
+    appBar: {
+      "&.MuiAppBar-root": {
+        width: `calc(100% - ${drawerWidth}px)`,
+      },
+    },
+  };
 });
 
 const Layout = ({ children }) => {
@@ -53,25 +61,38 @@ const Layout = ({ children }) => {
     {
       text: "Articles",
       icon: <ArticleIcon />,
-      path: "/client-article",
+      path: "/dashbord/client-article",
     },
     {
       text: "Comments",
       icon: <CommentIcon />,
-      path: "/client-comment",
+      path: "/dashbord/client-comment",
     },
 
     {
       text: "Users",
       icon: <PeopleAltIcon />,
-      path: "/list-clients",
+      path: "/dashbord/list-clients",
     },
     {
       text: "Catgeory",
       icon: <CategoryIcon />,
-      path: "/list-category",
+      path: "/dashbord/list-category",
+    },
+    {
+      text: "Profil Admin",
+      icon: <AccountCircleIcon />,
+      path: "/update-profile",
     },
   ];
+  const logoutHandler = () => {
+    if (localStorage.getItem("userDetails")) {
+      localStorage.removeItem("userDetails");
+      history.push("/");
+    }
+
+    // window.location.reload();
+  };
   return (
     <div className={classes.root}>
       <AppBar className={classes.appBar}>
@@ -103,6 +124,13 @@ const Layout = ({ children }) => {
             </ListItem>
           ))}
         </List>
+        <Button
+          onClick={logoutHandler}
+          variant="outlined"
+          startIcon={<LogoutIcon />}
+        >
+          Logout
+        </Button>
       </Drawer>
       <div className={classes.page}>{children} </div>
     </div>

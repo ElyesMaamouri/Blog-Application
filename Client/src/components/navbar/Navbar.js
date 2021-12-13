@@ -4,19 +4,25 @@ import SignedOutLinks from "./SignedOutLinks";
 import SignedInLink from "./SignedInLink";
 import "./navbar.css";
 const Navbar = () => {
-  if (localStorage.getItem("userDetails") !== null) {
-    return (
-      <div>
-        <SignedOutLinks />
-      </div>
-    );
-  } else if (localStorage.getItem("userDetails") === null) {
-    return (
-      <div>
-        <SignedInLink />
-      </div>
-    );
-  }
+  let nav = localStorage.getItem("userDetails") ? (
+    <SignedOutLinks />
+  ) : (
+    <SignedInLink />
+  );
+  // if (localStorage.getItem("userDetails") !== null) {
+  //   return (
+  //     <div>
+  //       <SignedOutLinks />
+  //     </div>
+  //   );
+  // } else if (localStorage.getItem("userDetails") === null) {
+  //   return (
+  //     <div>
+  //       <SignedInLink />
+  //     </div>
+  //   );
+  //}
+  return <div>{nav}</div>;
 };
 
 export default Navbar;

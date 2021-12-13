@@ -6,6 +6,7 @@ const initState = {
   listArticlePerPage: null,
   listArticleByVotes: null,
   articleDetails: null,
+  listArticleSearchedInfo: null,
 };
 
 const articleReducer = (state = initState, action) => {
@@ -91,6 +92,17 @@ const articleReducer = (state = initState, action) => {
       return {
         ...state,
         deleteArticleInfo: action.deleteArticleInfo,
+      };
+
+    case "LIST_ARTICLE_BY_SEARCH_SUCCESS":
+      return {
+        ...state,
+        listArticleSearchedInfo: action.payload,
+      };
+    case "LIST_ARTICLE_BY_SEARCH_ERROR":
+      return {
+        ...state,
+        listArticleSearchedInfo: action.payload,
       };
     case "RESET_INITIAL_STATE":
       return {

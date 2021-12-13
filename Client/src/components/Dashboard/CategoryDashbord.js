@@ -13,12 +13,12 @@ import {
 import ModalCategory from "../Modal/ModalCategory";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
-import "./articleDashbord.css";
+import "./categoryDashbord.css";
 const useStyles = makeStyles({
   iconCreate: {
-    marginLeft: "460px",
-    position: "relative",
-    top: "136px",
+    // marginLeft: "460px",
+    // position: "relative",
+    // top: "136px",
     cursor: "pointer",
   },
 });
@@ -165,12 +165,14 @@ const CategoryDashbord = () => {
   };
   return (
     <div>
-      <AddCircleOutlineIcon
-        onClick={handleCreateCategory}
-        className={classes.iconCreate}
-        fontSize="large"
-      />
-      <p className={classes.iconCreate}> Create Category</p>
+      <div className="add-category  ">
+        <AddCircleOutlineIcon
+          onClick={handleCreateCategory}
+          className={classes.iconCreate}
+          fontSize="large"
+        />
+        <p className={classes.iconCreate}> Create Category</p>
+      </div>
       <DataGrid
         className="table-article"
         style={{ height: "500px" }}

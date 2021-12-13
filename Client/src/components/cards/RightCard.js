@@ -17,7 +17,6 @@ const RightCard = (props) => {
     (state) => state.comment.listCommentsInfo
   );
 
-  console.log("comments0", listCommentsInfo);
   const [pageValue, setPageValue] = useState(1);
 
   useEffect(() => {
@@ -53,7 +52,6 @@ const RightCard = (props) => {
           {listOfArticlePerPage &&
             listOfArticlePerPage.articles.map((item) => {
               {
-                console.log("itemmm", item.title);
               }
               return (
                 <Link

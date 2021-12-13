@@ -46,6 +46,7 @@ dotenv.config();
 
 // Display all file in floder uploads
 app.use(express.static(path.join(__dirname, "src/uploads")));
+app.use(express.static(path.join(__dirname, "src/uploads/avatar")));
 
 //Session
 app.use(

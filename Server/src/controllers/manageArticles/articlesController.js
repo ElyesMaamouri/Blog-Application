@@ -505,11 +505,53 @@ exports.updateArticleByAdmin = async (req, res) => {
 // Find article with search input
 exports.filtreArticles_post = async (req, res) => {
   console.log("data", req.query.search);
+
   try {
+    const page = req.query.page || 1;
+    const pageSize = 5;
+    const skip = (page - 1) * pageSize;
+
     const searchedField = req.query.search;
-    const article = await Article.find({
-      title: { $regex: searchedField, $options: "$i" },
-    });
+    const article = await Article.aggregate([
+      {
+        $match: {
+          title: { $regex: searchedField, $options: "i" },
+        },
+      },
+
+      {
+        $facet: {
+          totalRecords: [
+            {
+              $count: "total",
+            },
+          ],
+          data: [
+            {
+              $skip: skip,
+            },
+            {
+              $limit: pageSize,
+            },
+            {
+              $lookup: {
+                from: "users",
+                localField: "author",
+                foreignField: "_id",
+                as: "author",
+              },
+            },
+          ],
+        },
+      },
+    ]);
+    // const article = await Article.find({
+    //   title: { $regex: searchedField, $options: "$i" },
+    // })
+    //   .skip(skip)
+    //   .limit(pageSize)
+    //   .sort({ createAt: -1 })
+    //   .populate("author");
     if (!article || article.length === 0) {
       return res.status(200).send({
         message: "Sorry ! No result of your search : " + searchedField,
@@ -519,7 +561,8 @@ exports.filtreArticles_post = async (req, res) => {
     return res.status(200).send({
       message: "Result of search",
       success: true,
-      numberResultSearched: article.length,
+      page: page,
+      size: pageSize,
       resultOfSearched: article,
     });
   } catch (err) {

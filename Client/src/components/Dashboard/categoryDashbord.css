@@ -1,0 +1,10 @@
+.add-category {
+  margin-bottom: -135px;
+  margin-top: 75px;
+  display: flex;
+}
+
+.add-category p {
+  margin-top: 5px;
+  margin-left: 5px;
+}

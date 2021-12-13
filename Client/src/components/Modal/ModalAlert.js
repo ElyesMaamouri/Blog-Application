@@ -130,7 +130,7 @@ const ModalAlert = (data) => {
               </div>
               <div className="modal-body">
                 <p>
-                  Do you really want to delete article <br></br>
+                  Do you really want to delete article
                   <b> {data.blog.title}</b>
                 </p>
               </div>

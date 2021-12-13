@@ -85,20 +85,20 @@ class App extends Component {
             />
 
             <DashboardLayoutRoute
-              path="/client-article"
+              path="/dashbord/client-article"
               component={ArticleDashboard}
             />
 
             <DashboardLayoutRoute
-              path="/client-comment"
+              path="/dashbord/client-comment"
               component={CommentDashbord}
             />
             <DashboardLayoutRoute
-              path="/list-clients"
+              path="/dashbord/list-clients"
               component={ClientDashbord}
             />
             <DashboardLayoutRoute
-              path="/list-category"
+              path="/dashbord/list-category"
               component={CategoryDashbord}
             />
             <SignOutLayoutRoute
@@ -125,6 +125,17 @@ class App extends Component {
               path="/list-article"
               component={ListeArticle}
             />
+            <SignOutLayoutRoute
+              exact
+              path="/update-profile"
+              component={UpdateProfile}
+            />
+            <SignOutLayoutRoute
+              exact
+              path="/category/:id"
+              component={ListeArticlesPerCategory}
+            />
+
             {/* <Route exact path="/dashbord/admin" >
               <Layout>
                 <Dashboard />

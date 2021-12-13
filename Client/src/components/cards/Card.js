@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   listArticlePerPage,
   listArticlePerLike,
+  listArticleSearched,
 } from "../store/actions/articleActions";
 import decodeTokens from "../../helpers/decodeToken";
 import Paginations from "../pagination/Paginations";
@@ -13,7 +14,8 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import ThumbUpAltIcon from "@mui/icons-material/ThumbUpAlt";
-import ArticleDetails from "../articles/ArticleDetails";
+import Box from "@mui/material/Box";
+import TextField from "@mui/material/TextField";
 import { Link } from "react-router-dom";
 import "./card.css";
 
@@ -25,13 +27,16 @@ const Card = () => {
   const listOfArticleByLikes = useSelector(
     (state) => state.blog.listArticleByVotes
   );
-
-  console.log("listOfArticleByLikes", listOfArticleByLikes);
+  const listOfArticleSearched = useSelector(
+    (state) => state.blog.listArticleSearchedInfo
+  );
+  console.log("listOfArticleSearched", listOfArticleSearched);
 
   const [page, setPage] = useState(1);
   const [blog, setBlog] = useState();
   const [pageValue, setPageValue] = useState(1);
   const [voteValue, setVoteValue] = useState("");
+  const [filedSearch, setFiledSerach] = useState("");
 
   useEffect(() => {
     dispatch(listArticlePerPage(pageValue));
@@ -47,18 +52,33 @@ const Card = () => {
       dispatch(listArticlePerLike(voteValue, pageValue));
       window.scrollTo({ top: 200, behavior: "smooth" });
       // setPage(listOfArticleByLikes && listOfArticleByLikes.totalPage);
+    } else if (listOfArticleSearched) {
+      setPage(
+        listOfArticleSearched &&
+          Math.ceil(
+            listOfArticleSearched.resultOfSearched[0].totalRecords[0].total /
+              listOfArticleSearched.size
+          )
+      );
     } else {
       listOfArticles();
       setPage(listOfArticlePerPage && listOfArticlePerPage.totalPage);
     }
-  }, [listOfArticlePerPage, voteValue, page]);
+  }, [listOfArticlePerPage, voteValue, page, listOfArticleSearched, pageValue]);
+
+  useEffect(() => {
+    articleSearched();
+    // setPage(
+    //   listOfArticleSearched &&
+    //     listOfArticleSearched.resultOfSearched[0].totalRecords[0].total
+    // );
+  }, [listOfArticleSearched]);
 
   const handleChange = (event, value) => {
     setPageValue(value);
   };
 
   const handleChangeLike = (e) => {
-    console.log("target ", e.target.value);
     if (e.target.value === "Most Liked") {
       setVoteValue("betterVote");
     }
@@ -66,7 +86,7 @@ const Card = () => {
       setVoteValue("worseVote");
     }
   };
-  console.log("listOfArticlePerPage", listOfArticlePerPage);
+  console.log("page here", page);
   const listOfArticles = () => {
     let data =
       listOfArticlePerPage &&
@@ -146,6 +166,59 @@ const Card = () => {
 
     setBlog(data);
   };
+
+  const articleSearched = () => {
+    let mm =
+      listOfArticleSearched &&
+      listOfArticleSearched.resultOfSearched[0].totalRecords[0].total;
+
+    let data =
+      listOfArticleSearched &&
+      listOfArticleSearched.resultOfSearched[0].data.map((item) => {
+        return (
+          <div className="blog-item" key={item._id}>
+            <Link to={"/article/" + item._id}>
+              <div className="icon">
+                <img
+                  src={`http://localhost:4000/${item.author[0].directoryPath}/${item.picture}`}
+                  alt=""
+                />
+              </div>
+              <div className="content">
+                <div className="title">
+                  {item.title}
+                  <span className="blog-date">
+                    {dayjs(item.createAt).format(" MM/DD/YY H:mm:ss A Z")}
+                  </span>
+                </div>
+                <div className="rounded"></div>
+
+                <p>{item.content}</p>
+
+                <p>
+                  <ThumbUpAltIcon /> : {item.vote}
+                </p>
+              </div>
+
+              <div className="item-arrow">
+                <i className="fa fa-long-arrow-right" aria-hidden="true"></i>
+              </div>
+            </Link>
+          </div>
+        );
+      });
+
+    setBlog(data);
+    setPageValue(1);
+  };
+  const handelChangeInputSearch = (e) => {
+    setFiledSerach({ ...filedSearch, [e.target.name]: e.target.value });
+  };
+  const handelSbmit = (e) => {
+    console.log("object", filedSearch);
+    e.preventDefault();
+    dispatch(listArticleSearched(filedSearch.search));
+  };
   return (
     <div>
       Sort by :
@@ -164,6 +237,27 @@ const Card = () => {
           <MenuItem value={"Worse Liked"}>Worse Liked</MenuItem>
         </Select>
       </FormControl>
+      <form onSubmit={handelSbmit} style={{ display: "flex" }}>
+        <Box
+          component="form"
+          sx={{
+            "& > :not(style)": { m: 1, width: "25ch" },
+          }}
+          noValidate
+          autoComplete="off"
+        >
+          <TextField
+            id="standard-basic"
+            label="Standard"
+            variant="standard"
+            name="search"
+            onChange={handelChangeInputSearch}
+          />
+        </Box>
+        <button type="button" type="submit" class="btn btn-secondary">
+          <i class="bi-search"></i>
+        </button>
+      </form>
       {/* <button onClick={handleChangeLike}>Most Liked</button>
       <button onClick={handleChangeLike}>Worse Liked</button> */}
       <div className="body_item">{blog}</div>

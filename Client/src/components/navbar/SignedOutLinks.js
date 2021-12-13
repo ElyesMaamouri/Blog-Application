@@ -1,9 +1,10 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-
+import { useHistory } from "react-router";
 import decodeTokens from "../../helpers/decodeToken";
 import "./navbar.css";
 const SignedOutLinks = () => {
+  const history = useHistory();
   let currentlyUser;
 
   if (localStorage.getItem("userDetails")) {
@@ -14,9 +15,10 @@ const SignedOutLinks = () => {
     if (localStorage.getItem("userDetails")) {
       localStorage.removeItem("userDetails");
     }
-
-    window.location.reload();
+    history.push("/");
+    // window.location.reload();
   };
+
   return (
     <div>
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -86,10 +88,10 @@ const SignedOutLinks = () => {
                 </button>
               </div>
             </form>
-            <div className=" nav-item dropdown show right_nav    ">
+            <div className=" nav-item dropdown show right_nav">
               <img
                 className=" avatar user_logo"
-                /*  src={`http://localhost:4000/${currentlyUser.avatar}`} */
+                src={`http://localhost:4000/${currentlyUser.avatar}`}
                 // src={require("../../assets/user.svg").default}
                 alt="Avatar"
               />
@@ -100,25 +102,31 @@ const SignedOutLinks = () => {
                 aria-expanded="true"
                 style={{ textDecoration: "none" }}
               >
-                {/* {currentlyUser.name} */} <b className="caret"></b>
+                {currentlyUser.name} <b className="caret"></b>
               </a>
               <div className="dropdown-menu  ">
                 <NavLink
                   to="/update-profile"
                   style={{ textDecoration: "none" }}
                 >
-                  <a href="#" className="dropdown-item">
+                  <a className="dropdown-item">
                     <i className="fa fa-user-o"></i> Profile
                   </a>
                 </NavLink>
-                <a href="#" className="dropdown-item">
-                  <i className="fa fa-calendar-o"></i> Calendar
-                </a>
+
+                <NavLink
+                  to="/create-article"
+                  style={{ textDecoration: "none" }}
+                >
+                  <a className="dropdown-item">
+                    <i class="bi bi-plus-circle"></i> Add Article
+                  </a>
+                </NavLink>
                 <a href="#" className="dropdown-item">
                   <i className="fa fa-sliders"></i> Settings
                 </a>
                 <div className="dropdown-divider"></div>
-                <a href="#" className="dropdown-item" onClick={logoutHandler}>
+                <a className="dropdown-item" onClick={logoutHandler}>
                   <i class="bi bi-box-arrow-right"></i> Logout
                 </a>
               </div>
