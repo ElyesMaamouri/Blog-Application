@@ -18,6 +18,7 @@ const useStyles = makeStyles({
   },
   buttonSubmit: {
     "&.MuiButton-root": {
+      marginTop: 25,
       paddingTop: 10,
       paddingBottom: 10,
       paddingRight: 50,
@@ -109,7 +110,7 @@ const RecoverPassword = () => {
           color="success"
           disabled={!validForm}
         >
-          Signup
+          Recover
         </Button>
       </form>
 

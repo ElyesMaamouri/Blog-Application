@@ -13,9 +13,8 @@ const AuthScreen = (props) => {
   const location = useLocation();
   const history = useHistory();
 
-  console.log("history", history);
   const operation = props.match.path;
-
+  console.log("history", props.match);
   // const operationUser = operation.replace("/", "");
   // const clientOperation =
   //   operationUser.charAt(0).toUpperCase() + operationUser.slice(1);

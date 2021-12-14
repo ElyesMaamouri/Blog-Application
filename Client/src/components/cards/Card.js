@@ -8,6 +8,7 @@ import {
 import decodeTokens from "../../helpers/decodeToken";
 import Paginations from "../pagination/Paginations";
 import * as dayjs from "dayjs";
+import LinearProgress from "@mui/material/LinearProgress";
 
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
@@ -17,6 +18,7 @@ import ThumbUpAltIcon from "@mui/icons-material/ThumbUpAlt";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import { Link } from "react-router-dom";
+
 import "./card.css";
 
 const Card = () => {
@@ -32,12 +34,13 @@ const Card = () => {
   );
   console.log("listOfArticleSearched", listOfArticleSearched);
 
-  const [page, setPage] = useState(1);
+  const [dataPage, setDataPage] = useState(1);
   const [blog, setBlog] = useState();
   const [pageValue, setPageValue] = useState(1);
   const [voteValue, setVoteValue] = useState("");
   const [filedSearch, setFiledSerach] = useState("");
 
+  const [loading, setloading] = useState(false);
   useEffect(() => {
     dispatch(listArticlePerPage(pageValue));
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -53,7 +56,7 @@ const Card = () => {
       window.scrollTo({ top: 200, behavior: "smooth" });
       // setPage(listOfArticleByLikes && listOfArticleByLikes.totalPage);
     } else if (listOfArticleSearched) {
-      setPage(
+      setDataPage(
         listOfArticleSearched &&
           Math.ceil(
             listOfArticleSearched.resultOfSearched[0].totalRecords[0].total /
@@ -62,9 +65,15 @@ const Card = () => {
       );
     } else {
       listOfArticles();
-      setPage(listOfArticlePerPage && listOfArticlePerPage.totalPage);
+      setDataPage(listOfArticlePerPage && listOfArticlePerPage.totalPage);
     }
-  }, [listOfArticlePerPage, voteValue, page, listOfArticleSearched, pageValue]);
+  }, [
+    listOfArticlePerPage,
+    voteValue,
+    dataPage,
+    listOfArticleSearched,
+    pageValue,
+  ]);
 
   useEffect(() => {
     articleSearched();
@@ -86,7 +95,7 @@ const Card = () => {
       setVoteValue("worseVote");
     }
   };
-  console.log("page here", page);
+
   const listOfArticles = () => {
     let data =
       listOfArticlePerPage &&
@@ -125,6 +134,7 @@ const Card = () => {
         );
       });
     setBlog(data);
+    //setloading(true);
   };
 
   const listOfArticlesByNumberOfLikes = () => {
@@ -163,15 +173,11 @@ const Card = () => {
           </div>
         );
       });
-
+    //setloading(true);
     setBlog(data);
   };
 
   const articleSearched = () => {
-    let mm =
-      listOfArticleSearched &&
-      listOfArticleSearched.resultOfSearched[0].totalRecords[0].total;
-
     let data =
       listOfArticleSearched &&
       listOfArticleSearched.resultOfSearched[0].data.map((item) => {
@@ -210,6 +216,7 @@ const Card = () => {
 
     setBlog(data);
     setPageValue(1);
+    setloading(true);
   };
   const handelChangeInputSearch = (e) => {
     setFiledSerach({ ...filedSearch, [e.target.name]: e.target.value });
@@ -222,46 +229,55 @@ const Card = () => {
   return (
     <div>
       Sort by :
-      <FormControl variant="standard" sx={{ m: 1, minWidth: 150 }}>
-        <InputLabel id="demo-simple-select-standard-label">
-          Number Of Likes
-        </InputLabel>
-        <Select
-          labelId="demo-simple-select-standard-label"
-          id="demo-simple-select-standard"
-          //value={age}
-          onChange={handleChangeLike}
-          label="Likes"
-        >
-          <MenuItem value={"Most Liked"}>Most Liked</MenuItem>
-          <MenuItem value={"Worse Liked"}>Worse Liked</MenuItem>
-        </Select>
-      </FormControl>
-      <form onSubmit={handelSbmit} style={{ display: "flex" }}>
-        <Box
-          component="form"
-          sx={{
-            "& > :not(style)": { m: 1, width: "25ch" },
-          }}
-          noValidate
-          autoComplete="off"
-        >
-          <TextField
-            id="standard-basic"
-            label="Standard"
-            variant="standard"
-            name="search"
-            onChange={handelChangeInputSearch}
-          />
-        </Box>
+      <div className="like">
+        <FormControl variant="standard" sx={{ m: 1, minWidth: 150 }}>
+          <InputLabel id="demo-simple-select-standard-label">
+            Number Of Likes
+          </InputLabel>
+          <Select
+            labelId="demo-simple-select-standard-label"
+            id="demo-simple-select-standard"
+            //value={age}
+            onChange={handleChangeLike}
+            label="Likes"
+          >
+            <MenuItem value={"Most Liked"}>Most Liked</MenuItem>
+            <MenuItem value={"Worse Liked"}>Worse Liked</MenuItem>
+          </Select>
+        </FormControl>
+      </div>
+      <form
+        onSubmit={handelSbmit}
+        style={{ display: "flex", marginLeft: "275px", marginTop: "-66px" }}
+      >
+        <TextField
+          id="standard-basic"
+          label="Standard"
+          variant="standard"
+          name="search"
+          onChange={handelChangeInputSearch}
+        />
+
         <button type="button" type="submit" class="btn btn-secondary">
           <i class="bi-search"></i>
         </button>
       </form>
       {/* <button onClick={handleChangeLike}>Most Liked</button>
       <button onClick={handleChangeLike}>Worse Liked</button> */}
-      <div className="body_item">{blog}</div>
-      <Paginations count={page} page={pageValue} handleChange={handleChange} />
+      <div className="body_item">
+        {loading ? (
+          blog
+        ) : (
+          <Box sx={{ width: "100%" }}>
+            <LinearProgress />
+          </Box>
+        )}
+      </div>
+      <Paginations
+        count={dataPage}
+        pageValue={pageValue}
+        handleChange={handleChange}
+      />
     </div>
   );
 };

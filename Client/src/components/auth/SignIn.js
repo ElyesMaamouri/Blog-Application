@@ -19,6 +19,7 @@ const useStyles = makeStyles({
   },
   buttonSubmit: {
     "&.MuiButton-root": {
+      marginTop: 25,
       paddingTop: 10,
       paddingBottom: 10,
       paddingRight: 50,
@@ -141,7 +142,7 @@ const SignIn = (operation) => {
             color="success"
             disabled={!user.email || user.password.length < 8}
           >
-            Signup
+            Signin
           </Button>
         </div>
       </form>

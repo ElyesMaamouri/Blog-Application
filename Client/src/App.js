@@ -18,7 +18,34 @@ import ClientDashbord from "./components/Dashboard/ClientDashbord";
 import ArticleDashboard from "./components/Dashboard/ArticleDashboard";
 import CategoryDashbord from "./components/Dashboard/CategoryDashbord";
 import Layout from "./components/layout/Layout";
+import NotFound from "./components/not-found/NotFound";
+import decodeTokens from "./helpers/decodeToken";
 import { Redirect } from "react-router";
+
+// Route admin
+const PrivateRoute = ({ component: Component, ...rest }) => (
+  <Route
+    {...rest}
+    render={(props) => {
+      const currentUser = decodeTokens();
+      if (!localStorage.getItem("userDetails")) {
+        // not logged in so redirect to 404 page
+        return <Route component={NotFound} />;
+      }
+      // check if route is restricted by role
+      if (currentUser.isAdmin === false) {
+        // role not authorised so redirect to 404 page
+        return <Route component={NotFound} />;
+      }
+      // authorised so return component
+      return (
+        <Layout>
+          <Component {...props} />
+        </Layout>
+      );
+    }}
+  />
+);
 
 const DashboardLayoutRoute = ({ component: Component, ...rest }) => {
   return (
@@ -79,28 +106,30 @@ class App extends Component {
               <Route path="/" component={Home} />
             </Layout> */}
 
-            <DashboardLayoutRoute
-              path="/dashbord/admin"
+            {/* <PrivateRoute
+              path={["/dashbord/admin", "/dashbord/client-article"]}
               component={Dashboard}
-            />
+            /> */}
+            <PrivateRoute path="/dashbord/admin" component={Dashboard} />
 
-            <DashboardLayoutRoute
+            <PrivateRoute
               path="/dashbord/client-article"
               component={ArticleDashboard}
             />
 
-            <DashboardLayoutRoute
+            <PrivateRoute
               path="/dashbord/client-comment"
               component={CommentDashbord}
             />
-            <DashboardLayoutRoute
+            <PrivateRoute
               path="/dashbord/list-clients"
               component={ClientDashbord}
             />
-            <DashboardLayoutRoute
+            <PrivateRoute
               path="/dashbord/list-category"
               component={CategoryDashbord}
             />
+
             <SignOutLayoutRoute
               exact
               path="/"
@@ -135,7 +164,11 @@ class App extends Component {
               path="/category/:id"
               component={ListeArticlesPerCategory}
             />
-
+            <SignOutLayoutRoute
+              exact
+              path="/category/:id"
+              component={ListeArticlesPerCategory}
+            />
             {/* <Route exact path="/dashbord/admin" >
               <Layout>
                 <Dashboard />
@@ -158,15 +191,20 @@ class App extends Component {
       */}
             {/* <Route path="/sigin" component={SignUp} /> 
             {/* <Route path="/sigin" component={SignIn} /> */}
-            <Route
-              path={[
-                "/signup",
-                "/signin",
-                "/recover-password",
-                "/reset-password/:token",
-              ]}
-              component={AuthScreen}
-            />
+            {/* <Route exact path="/signup">
+              {localStorage.getItem("userDetails") ? (
+                <Redirect to="/" />
+              ) : (
+                <AuthScreen />
+              )}
+            </Route> */}
+            <Route path={["/signup", "/signin"]}>
+              {localStorage.getItem("userDetails") ? (
+                <Redirect to="/" />
+              ) : (
+                <Route path={["/signup", "/signin"]} component={AuthScreen} />
+              )}
+            </Route>
 
             <>
               {/* <Route path="/:token" component={ResetPassword} /> */}
@@ -180,6 +218,11 @@ class App extends Component {
                 path="/category/:id"
                 component={ListeArticlesPerCategory}
               />
+              <Route
+                path={["/recover-password", "/reset-password/:token"]}
+                component={AuthScreen}
+              />
+              <Route component={NotFound} />
             </>
           </Switch>
         </Router>

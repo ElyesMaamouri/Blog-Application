@@ -3,11 +3,11 @@ import Typography from "@mui/material/Typography";
 import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
 
-const Paginations = ({ count, page, handleChange }) => {
+const Paginations = ({ count, pageValue, handleChange }) => {
   return (
-    <div>
+    <div style={{ marginBottom: "18px" }}>
       <Stack spacing={2}>
-        <Typography>Page: {page}</Typography>
+        <Typography>Page: {pageValue}</Typography>
         <Pagination count={count} onChange={handleChange} />
       </Stack>
     </div>
