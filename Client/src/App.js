@@ -1,11 +1,9 @@
 import React, { Component, Fragment } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import SignUp from "./components/auth/SingUp";
-import SignIn from "./components/auth/SignIn";
+
 import AuthScreen from "./components/screen/AuthScreen";
 import Home from "./components/home/Home";
-import RecoverPassword from "./components/auth/RecoverPassword";
-import ResetPassword from "./components/auth/ResetPassword";
+
 import CreateArticle from "./components/articles/CreateArticle";
 import Navbar from "./components/navbar/Navbar";
 import UpdateProfile from "./components/profile/UpdateProfile";
@@ -47,18 +45,18 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
   />
 );
 
-const DashboardLayoutRoute = ({ component: Component, ...rest }) => {
-  return (
-    <Route
-      {...rest}
-      render={(props) => (
-        <Layout>
-          <Component {...props} />
-        </Layout>
-      )}
-    />
-  );
-};
+// const DashboardLayoutRoute = ({ component: Component, ...rest }) => {
+//   return (
+//     <Route
+//       {...rest}
+//       render={(props) => (
+//         <Layout>
+//           <Component {...props} />
+//         </Layout>
+//       )}
+//     />
+//   );
+// };
 
 const SignOutLayoutRoute = ({ component: Component, secure, ...rest }) => {
   return (

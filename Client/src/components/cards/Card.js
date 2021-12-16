@@ -41,9 +41,14 @@ const Card = () => {
   const [filedSearch, setFiledSerach] = useState("");
 
   const [loading, setloading] = useState(false);
+  console.log("pages ===>", pageValue);
   useEffect(() => {
-    dispatch(listArticlePerPage(pageValue));
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    if (listOfArticleSearched) {
+      dispatch(listArticleSearched(filedSearch.search, pageValue));
+    } else {
+      dispatch(listArticlePerPage(pageValue));
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
   }, [pageValue]);
 
   useEffect(() => {
@@ -77,6 +82,7 @@ const Card = () => {
 
   useEffect(() => {
     articleSearched();
+
     // setPage(
     //   listOfArticleSearched &&
     //     listOfArticleSearched.resultOfSearched[0].totalRecords[0].total
@@ -84,6 +90,7 @@ const Card = () => {
   }, [listOfArticleSearched]);
 
   const handleChange = (event, value) => {
+    console.log("value", value);
     setPageValue(value);
   };
 
@@ -224,7 +231,7 @@ const Card = () => {
   const handelSbmit = (e) => {
     console.log("object", filedSearch);
     e.preventDefault();
-    dispatch(listArticleSearched(filedSearch.search));
+    dispatch(listArticleSearched(filedSearch.search, pageValue));
   };
   return (
     <div>
@@ -237,7 +244,7 @@ const Card = () => {
           <Select
             labelId="demo-simple-select-standard-label"
             id="demo-simple-select-standard"
-            //value={age}
+            defaultValue={"Number Of Likes "}
             onChange={handleChangeLike}
             label="Likes"
           >
@@ -258,21 +265,13 @@ const Card = () => {
           onChange={handelChangeInputSearch}
         />
 
-        <button type="button" type="submit" class="btn btn-secondary">
-          <i class="bi-search"></i>
+        <button type="button" type="submit" className="btn btn-secondary">
+          <i className="bi-search"></i>
         </button>
       </form>
       {/* <button onClick={handleChangeLike}>Most Liked</button>
       <button onClick={handleChangeLike}>Worse Liked</button> */}
-      <div className="body_item">
-        {loading ? (
-          blog
-        ) : (
-          <Box sx={{ width: "100%" }}>
-            <LinearProgress />
-          </Box>
-        )}
-      </div>
+      <div className="body_item">{blog}</div>
       <Paginations
         count={dataPage}
         pageValue={pageValue}

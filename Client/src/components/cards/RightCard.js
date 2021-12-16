@@ -27,37 +27,37 @@ const RightCard = (props) => {
 
   return (
     <div className="right-card">
-      <div class="card">
-        <div class="card-header">
-          <i class="bi bi-card-list icon-category"> Category</i>
+      <div className="card">
+        <div className="card-header">
+          <i className="bi bi-card-list icon-category"> Category</i>
         </div>
-        <ul class="list-group list-group-flush">
+        <ul className="list-group list-group-flush">
           {categoryInfo &&
-            categoryInfo.categoryDetails.map((item, index) => (
-              <Link
-                class="list-group-item item-card"
-                to={"/category/" + item.id}
-                key={item.id}
-              >
-                {item.nameCategory} ({item.numberOfArticle})
-              </Link>
-            ))}
-        </ul>
-      </div>
-      <div class="card card-style">
-        <div class="card-header">
-          <i class="bi bi-book-half icon-category"> Last Article</i>
-        </div>
-        <ul class="list-group list-group-flush">
-          {listOfArticlePerPage &&
-            listOfArticlePerPage.articles.map((item) => {
-              {
-              }
+            categoryInfo.categoryDetails.map((item) => {
               return (
                 <Link
-                  class="list-group-item item-card"
-                  to={"/article/" + item._id}
+                  key={item.id}
+                  className="list-group-item item-card"
+                  to={"/category/" + item.id}
+                >
+                  {item.nameCategory} ({item.numberOfArticle})
+                </Link>
+              );
+            })}
+        </ul>
+      </div>
+      <div className="card card-style">
+        <div className="card-header">
+          <i className="bi bi-book-half icon-category"> Last Article</i>
+        </div>
+        <ul className="list-group list-group-flush">
+          {listOfArticlePerPage &&
+            listOfArticlePerPage.articles.map((item) => {
+              return (
+                <Link
                   key={item._id}
+                  className="list-group-item item-card"
+                  to={"/article/" + item._id}
                 >
                   {item.title}
                 </Link>
@@ -66,15 +66,15 @@ const RightCard = (props) => {
         </ul>
       </div>
 
-      <div class="card card-style">
-        <div class="card-header">
-          <i class="bi bi-chat-left-dots icon-category"> Last Comment</i>
+      <div className="card card-style">
+        <div className="card-header">
+          <i className="bi bi-chat-left-dots icon-category"> Last Comment</i>
         </div>
-        <ul class="list-group list-group-flush">
+        <ul className="list-group list-group-flush">
           {listCommentsInfo &&
             listCommentsInfo.comments.map((item) => {
               return (
-                <li class="list-group-item item-card">
+                <li className="list-group-item item-card" key={item._id}>
                   {item.content} By : {item.author.userName}
                 </li>
               );

@@ -46,9 +46,9 @@ const SignedOutLinks = () => {
                 className="nav-item dropdown"
                 aria-labelledby="navbarDropdown"
               >
-                <li class="nav-item dropdown">
+                <li className="nav-item dropdown">
                   <a
-                    class="nav-link dropdown-toggle"
+                    className="nav-link dropdown-toggle"
                     href="#"
                     id="navbarDropdown"
                     role="button"
@@ -58,15 +58,18 @@ const SignedOutLinks = () => {
                   >
                     Category
                   </a>
-                  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="#">
+                  <div
+                    className="dropdown-menu"
+                    aria-labelledby="navbarDropdown"
+                  >
+                    <a className="dropdown-item" href="#">
                       Action
                     </a>
-                    <a class="dropdown-item" href="#">
+                    <a className="dropdown-item" href="#">
                       Another action
                     </a>
 
-                    <a class="dropdown-item" href="#">
+                    <a className="dropdown-item" href="#">
                       Something else here
                     </a>
                   </div>
@@ -119,7 +122,7 @@ const SignedOutLinks = () => {
                   style={{ textDecoration: "none" }}
                 >
                   <a className="dropdown-item">
-                    <i class="bi bi-plus-circle"></i> Add Article
+                    <i className="bi bi-plus-circle"></i> Add Article
                   </a>
                 </NavLink>
                 <a href="#" className="dropdown-item">
@@ -127,7 +130,7 @@ const SignedOutLinks = () => {
                 </a>
                 <div className="dropdown-divider"></div>
                 <a className="dropdown-item" onClick={logoutHandler}>
-                  <i class="bi bi-box-arrow-right"></i> Logout
+                  <i className="bi bi-box-arrow-right"></i> Logout
                 </a>
               </div>
             </div>

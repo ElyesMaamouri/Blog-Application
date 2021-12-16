@@ -68,17 +68,17 @@ const ArticleDetails = () => {
   const articleSummury = () => {
     if (articleDetails) {
       let data = (
-        <div class="card card-details">
+        <div className="card card-details">
           <img
             src={`http://localhost:4000/${articleDetails.article.author.directoryPath}/${articleDetails.article.picture}`}
-            class="card-img-top"
+            className="card-img-top"
             alt="..."
           />
-          <div class="card-body">
-            <h5 class="card-title">{articleDetails.article.title} </h5>
-            <p class="card-text">{articleDetails.article.content}</p>
-            <p class="card-text">
-              <small class="text-muted">
+          <div className="card-body">
+            <h5 className="card-title">{articleDetails.article.title} </h5>
+            <p className="card-text">{articleDetails.article.content}</p>
+            <p className="card-text">
+              <small className="text-muted">
                 Posted By : {articleDetails.article.author.userName} At{" "}
                 {dayjs(articleDetails.article.createAt).format(
                   " MM/DD/YY H:mm:ss A Z"
@@ -94,17 +94,19 @@ const ArticleDetails = () => {
         articleDetails &&
         articleDetails.article.comments.map((item) => {
           return (
-            <div class="media">
-              <p class="pull-right">
+            <div className="media">
+              <p className="pull-right">
                 <small>
                   {dayjs(item.createAt).format(" MM/DD/YY H:mm:ss A Z")}
                 </small>
               </p>
-              <a class="media-left" href="#">
+              <a className="media-left" href="#">
                 <img src={`http://localhost:4000/${item.author.avatar}`} />
               </a>
-              <div class="media-body">
-                <h4 class="media-heading user_name">{item.author.userName}</h4>
+              <div className="media-body">
+                <h4 className="media-heading user_name">
+                  {item.author.userName}
+                </h4>
                 {item.content}
                 <p>
                   <small>
@@ -122,18 +124,18 @@ const ArticleDetails = () => {
 
   return (
     <>
-      <div className="details">
+      <div classNameName="details">
         {articleData}
         <RightCard />
       </div>
 
-      <div class="col-md-8 section-comment">
+      <div className="col-md-8 section-comment">
         <form onSubmit={handleSubmit}>
-          <div class="form-group">
+          <div className="form-group">
             <label for="comment">Your Comment</label>
             <textarea
               name="comment"
-              class="form-control"
+              className="form-control"
               rows="5"
               onChange={handleChange}
               required
@@ -157,11 +159,11 @@ const ArticleDetails = () => {
           autoHideDuration={2000}
         /> */}
 
-        <div class="page-header">
-          <h3 class="pull-right">{numberComments} comments</h3>
+        <div className="page-header">
+          <h3 className="pull-right">{numberComments} comments</h3>
           <h3>Comments</h3>
         </div>
-        <div class="comments-list">{commentData}</div>
+        <div className="comments-list">{commentData}</div>
       </div>
     </>
   );

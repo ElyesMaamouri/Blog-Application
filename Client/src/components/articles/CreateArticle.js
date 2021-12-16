@@ -177,7 +177,7 @@ const CreateArticle = () => {
 
           <input
             type="submit"
-            class="btn main-btn pull-right"
+            className="btn main-btn pull-right"
             value="Add article"
           />
         </form>

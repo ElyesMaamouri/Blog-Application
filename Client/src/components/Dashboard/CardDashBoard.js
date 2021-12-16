@@ -1,10 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Card from "@mui/material/Card";
-import CardHeader from "@mui/material/CardHeader";
-import CommentIcon from "@mui/icons-material/Comment";
-import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
-import ArticleIcon from "@mui/icons-material/Article";
-import CardContent from "@mui/material/CardContent";
+
 import { displayCommentsPerPage } from "../store/actions/commentActions";
 import { listArticlePerPage } from "../store/actions/articleActions";
 import { getListClient } from "../store/actions/clientActions";
@@ -27,7 +22,7 @@ const CardDashBoard = () => {
     dispatch(listArticlePerPage(1));
     dispatch(displayCommentsPerPage(1));
     dispatch(getListClient(1));
-  }, []);
+  }, [dispatch]);
 
   // Wait reponse from api
   useEffect(() => {
@@ -38,7 +33,7 @@ const CardDashBoard = () => {
   }, [listOfArticlePerPage, displayComments, listOfUser]);
 
   return (
-    // <div className="card-dashboard">
+    // <div classNameName="card-dashboard">
     //   <Card>
     //     <CardHeader
     //       title={articles}
@@ -60,65 +55,65 @@ const CardDashBoard = () => {
     //   </Card>
     // </div>
 
-    <div class="main-part">
-      <div class="cpanel">
-        <div class="icon-part">
-          <i class="fa fa-users" aria-hidden="true"></i>
+    <div className="main-part">
+      <div className="cpanel">
+        <div className="icon-part">
+          <i className="fa fa-users" aria-hidden="true"></i>
           <small>Members</small>
           <p>{users}</p>
         </div>
-        <div class="card-content-part">
-          <a href="#">More Details </a>
+        <div className="card-content-part">
+          <a href="http://localhost:3000/dashbord/list-clients">More Details</a>
         </div>
       </div>
-      <div class="cpanel cpanel-green">
-        <div class="icon-part">
-          <i class="fa fa-money" aria-hidden="true"></i>
+      <div className="cpanel cpanel-green">
+        <div className="icon-part">
+          <i className="fa fa-money" aria-hidden="true"></i>
           <small>Account</small>
           <p>$ 9200000 </p>
         </div>
-        <div class="card-content-part">
-          <a href="#">More Details </a>
+        <div className="card-content-part">
+          <a href="http://localhost:3000/">More Details </a>
         </div>
       </div>
-      <div class="cpanel cpanel-orange">
-        <div class="icon-part">
-          <i class="fa fa-bell" aria-hidden="true"></i>
+      <div className="cpanel cpanel-orange">
+        <div className="icon-part">
+          <i className="fa fa-bell" aria-hidden="true"></i>
           <small>Alert</small>
           <p>11 New</p>
         </div>
-        <div class="card-content-part">
-          <a href="#">More Details </a>
+        <div className="card-content-part">
+          <a href="http://localhost:3000/">More Details </a>
         </div>
       </div>
-      <div class="cpanel cpanel-blue">
-        <div class="icon-part">
-          <i class="fa fa-tasks" aria-hidden="true"></i>
+      <div className="cpanel cpanel-blue">
+        <div className="icon-part">
+          <i className="fa fa-tasks" aria-hidden="true"></i>
           <small>Article</small>
           <p>{articles}</p>
         </div>
-        <div class="card-content-part">
-          <a href="#">More Details </a>
+        <div className="card-content-part">
+          <a href="http://localhost:3000/">More Details </a>
         </div>
       </div>
-      <div class="cpanel cpanel-red">
-        <div class="icon-part">
-          <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+      <div className="cpanel cpanel-red">
+        <div className="icon-part">
+          <i className="fa fa-shopping-cart" aria-hidden="true"></i>
           <small>Cart</small>
           <p>$ 45</p>
         </div>
-        <div class="card-content-part">
-          <a href="#">More Details </a>
+        <div className="card-content-part">
+          <a href="http://localhost:3000/">More Details </a>
         </div>
       </div>
-      <div class="cpanel cpanel-skyblue">
-        <div class="icon-part">
-          <i class="fa fa-comments" aria-hidden="true"></i>
+      <div className="cpanel cpanel-skyblue">
+        <div className="icon-part">
+          <i className="fa fa-comments" aria-hidden="true"></i>
           <small>Mentions</small>
           <p>{comments}</p>
         </div>
-        <div class="card-content-part">
-          <a href="#">More Details </a>
+        <div className="card-content-part">
+          <a href="http://localhost:3000/">More Details </a>
         </div>
       </div>
     </div>

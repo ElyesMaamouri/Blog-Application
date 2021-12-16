@@ -62,7 +62,7 @@ const ListeArticlesPerCategory = () => {
   const itemCategory = () => {
     const category =
       categoryArticleInfo && categoryArticleInfo[0].category.category;
-    console.log("categ", category);
+
     setNameCategory(category);
   };
   return (

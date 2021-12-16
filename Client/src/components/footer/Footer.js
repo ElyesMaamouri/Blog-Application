@@ -76,11 +76,8 @@ const Footer = () => {
                 <a href="#">Back to top</a>
               </p>
               <p className="text-right text-muted">
-                created with <i className="fa fa-heart"></i> by{" "}
-                <a>
-                  <i>t-php</i>
-                </a>
-                | <span>v. 1.0</span>
+                created with <i className="fa fa-heart"></i> by <i>t-php</i>|{" "}
+                <span>v. 1.0</span>
               </p>
             </div>
           </div>

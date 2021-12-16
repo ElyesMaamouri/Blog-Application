@@ -123,10 +123,10 @@ export const listArticlePerLike = (vote, page) => {
   };
 };
 
-export const listArticleSearched = (search) => {
+export const listArticleSearched = (search, page) => {
   return (dispatch, getState) => {
     axios
-      .get(baseURL + "/blogs/?search=" + search)
+      .get(baseURL + "/blogs/?search=" + search + "&page=" + page)
       .then((res) => {
         console.log("ress search", res.data);
         dispatch({

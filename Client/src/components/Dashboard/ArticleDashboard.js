@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { DataGrid } from "@mui/x-data-grid";
-import { makeStyles } from "@mui/styles";
+//import { makeStyles } from "@mui/styles";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { useDispatch, useSelector } from "react-redux";
@@ -12,13 +12,13 @@ import ModalAlertAdmin from "../Modal/ModalAlertAdmin";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
 import "./articleDashbord.css";
-const useStyles = makeStyles({
-  tableArticle: {
-    "&.MuiDataGrid-root": {
-      marginTop: "150%",
-    },
-  },
-});
+// const useStyles = makeStyles({
+//   tableArticle: {
+//     "&.MuiDataGrid-root": {
+//       marginTop: "150%",
+//     },
+//   },
+// });
 
 const ArticleDashboard = () => {
   // Position Snackbar
@@ -75,7 +75,7 @@ const ArticleDashboard = () => {
       },
     },
   ];
-  const classes = useStyles();
+  // const classes = useStyles();
   const dispatch = useDispatch();
   const listOfArticlePerPage = useSelector(
     (state) => state.blog.listArticlePerPage
@@ -94,12 +94,12 @@ const ArticleDashboard = () => {
   // First call api
   useEffect(() => {
     dispatch(listArticlePerPage(1));
-  }, []);
+  }, [dispatch]);
 
   // Refresh array after delete article
   useEffect(() => {
     dispatch(listArticlePerPage(1));
-  }, [deleteArticleInfo]);
+  }, [deleteArticleInfo, dispatch]);
 
   // Wait reponse from api
   useEffect(() => {
@@ -121,9 +121,9 @@ const ArticleDashboard = () => {
   // Update data in row without call api
   const updateData = (item) => {
     let idRow = item._id;
-    const tt = (rows.filter((x) => {
+    rows.filter((x) => {
       return x.id === idRow;
-    })[0].title = item.title);
+    })[0].title = item.title;
   };
 
   // Close snackbar
