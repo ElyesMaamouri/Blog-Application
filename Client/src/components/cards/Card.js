@@ -32,43 +32,60 @@ const Card = () => {
   const listOfArticleSearched = useSelector(
     (state) => state.blog.listArticleSearchedInfo
   );
-  console.log("listOfArticleSearched", listOfArticleSearched);
 
   const [dataPage, setDataPage] = useState(1);
-  const [blog, setBlog] = useState();
-  const [pageValue, setPageValue] = useState(1);
+  const [blog, setBlog] = useState("");
+  const initialState = {
+    pageValue: 1,
+  };
+
+  const [pageValue, setPageValue] = useState(initialState.pageValue);
   const [voteValue, setVoteValue] = useState("");
   const [filedSearch, setFiledSerach] = useState("");
 
-  const [loading, setloading] = useState(false);
+  const [loading, setLoading] = useState(false);
   console.log("pages ===>", pageValue);
+
   useEffect(() => {
-    if (listOfArticleSearched) {
+    if (filedSearch) {
       dispatch(listArticleSearched(filedSearch.search, pageValue));
     } else {
+      console.log("fire 1 ..");
       dispatch(listArticlePerPage(pageValue));
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
   }, [pageValue]);
 
   useEffect(() => {
+    console.log("fire 4 ..");
     listOfArticlesByNumberOfLikes();
   }, [listOfArticleByLikes]);
 
   useEffect(() => {
+    console.log("fire 2 ..");
     if (voteValue) {
       dispatch(listArticlePerLike(voteValue, pageValue));
       window.scrollTo({ top: 200, behavior: "smooth" });
       // setPage(listOfArticleByLikes && listOfArticleByLikes.totalPage);
-    } else if (listOfArticleSearched) {
+    } else if (
+      listOfArticleSearched &&
+      listOfArticleSearched.message === "Result of search"
+    ) {
+      console.log("fire 2 -- 1 ..");
+      // setPageValue(1);
       setDataPage(
-        listOfArticleSearched &&
-          Math.ceil(
-            listOfArticleSearched.resultOfSearched[0].totalRecords[0].total /
-              listOfArticleSearched.size
-          )
+        listOfArticleSearched && listOfArticleSearched.numberOfRecords
       );
+      articleSearched();
+    } else if (
+      listOfArticleSearched &&
+      listOfArticleSearched.message === "Sorry ! No result of your search"
+    ) {
+      console.log("fire 2 -- 3 ..", listOfArticleSearched.message);
+      setBlog("Sorry ! No result of your search");
+      setDataPage(0);
     } else {
+      console.log("fire 2 -- 2..");
       listOfArticles();
       setDataPage(listOfArticlePerPage && listOfArticlePerPage.totalPage);
     }
@@ -77,17 +94,18 @@ const Card = () => {
     voteValue,
     dataPage,
     listOfArticleSearched,
-    pageValue,
+    // pageValue,
   ]);
 
-  useEffect(() => {
-    articleSearched();
+  // useEffect(() => {
+  //   console.log("fire 3 ..");
+  //   articleSearched();
 
-    // setPage(
-    //   listOfArticleSearched &&
-    //     listOfArticleSearched.resultOfSearched[0].totalRecords[0].total
-    // );
-  }, [listOfArticleSearched]);
+  //   // setPage(
+  //   //   listOfArticleSearched &&
+  //   //     listOfArticleSearched.resultOfSearched[0].totalRecords[0].total
+  //   // );
+  // }, [listOfArticleSearched]);
 
   const handleChange = (event, value) => {
     console.log("value", value);
@@ -141,7 +159,7 @@ const Card = () => {
         );
       });
     setBlog(data);
-    //setloading(true);
+    setLoading(true);
   };
 
   const listOfArticlesByNumberOfLikes = () => {
@@ -222,15 +240,15 @@ const Card = () => {
       });
 
     setBlog(data);
-    setPageValue(1);
-    setloading(true);
+    //setPageValue(initialState.pageValue);
+    setLoading(true);
   };
   const handelChangeInputSearch = (e) => {
     setFiledSerach({ ...filedSearch, [e.target.name]: e.target.value });
   };
   const handelSbmit = (e) => {
-    console.log("object", filedSearch);
     e.preventDefault();
+    setPageValue(1);
     dispatch(listArticleSearched(filedSearch.search, pageValue));
   };
   return (
@@ -271,7 +289,9 @@ const Card = () => {
       </form>
       {/* <button onClick={handleChangeLike}>Most Liked</button>
       <button onClick={handleChangeLike}>Worse Liked</button> */}
-      <div className="body_item">{blog}</div>
+      <div className="body_item">
+        <h1>{blog}</h1>
+      </div>
       <Paginations
         count={dataPage}
         pageValue={pageValue}

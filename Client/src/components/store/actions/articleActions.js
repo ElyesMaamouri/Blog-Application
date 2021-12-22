@@ -128,7 +128,6 @@ export const listArticleSearched = (search, page) => {
     axios
       .get(baseURL + "/blogs/?search=" + search + "&page=" + page)
       .then((res) => {
-        console.log("ress search", res.data);
         dispatch({
           type: "LIST_ARTICLE_BY_SEARCH_SUCCESS",
           payload: res.data,

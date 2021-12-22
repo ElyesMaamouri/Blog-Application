@@ -545,6 +545,7 @@ exports.filtreArticles_post = async (req, res) => {
         },
       },
     ]);
+    //let numberOfRecords = article.totalRecords[0].total;
     // const article = await Article.find({
     //   title: { $regex: searchedField, $options: "$i" },
     // })
@@ -552,17 +553,23 @@ exports.filtreArticles_post = async (req, res) => {
     //   .limit(pageSize)
     //   .sort({ createAt: -1 })
     //   .populate("author");
-    if (!article || article.length === 0) {
+    if (
+      !article ||
+      article[0].totalRecords[0] === undefined ||
+      article[0].totalRecords[0] === 0
+    ) {
       return res.status(200).send({
-        message: "Sorry ! No result of your search : " + searchedField,
+        message: "Sorry ! No result of your search",
         success: false,
       });
     }
+    console.log("article.size", article[0].pageSize);
     return res.status(200).send({
       message: "Result of search",
       success: true,
       page: page,
       size: pageSize,
+      numberOfRecords: Math.ceil(article[0].totalRecords[0].total / pageSize),
       resultOfSearched: article,
     });
   } catch (err) {

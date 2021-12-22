@@ -124,7 +124,7 @@ const ArticleDetails = () => {
 
   return (
     <>
-      <div classNameName="details">
+      <div className="details">
         {articleData}
         <RightCard />
       </div>
